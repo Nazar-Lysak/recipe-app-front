@@ -1,0 +1,13 @@
+@use "@/styles/variables" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.buttonWrapper {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+}

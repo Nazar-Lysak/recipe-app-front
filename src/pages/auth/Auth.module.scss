@@ -1,0 +1,21 @@
+@use "@/styles/variables" as *;
+
+.links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+
+    a {
+        color: $shade-900;
+        text-transform: capitalize;
+        font-weight: 600;
+        font-size: 14px;
+        text-align: center;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: $shade-400;
+        }
+    }
+}
