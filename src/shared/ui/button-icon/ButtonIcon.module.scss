@@ -1,0 +1,39 @@
+@use "@/styles/variables" as *;
+
+.button {
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $shade-200;
+    stroke: $shade-400;
+    transition: background-color 0.2s, stroke 0.2s;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background-color: $shade-300;
+        stroke: $shade-900;
+    }
+}
+.whiteIcon {
+    padding: 5px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    stroke: $shade-100;
+
+    &:hover,
+    &:focus {
+        border-color: $shade-100;
+    }
+}

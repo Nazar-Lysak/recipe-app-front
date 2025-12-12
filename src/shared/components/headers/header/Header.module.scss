@@ -1,0 +1,29 @@
+@use "@/styles/variables" as *;
+
+.wrapper {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 24px 15px;
+}
+
+.title {
+    font-family: $font-primary;
+    font-weight: 400;
+    font-size: 25px;
+    color: $shade-400;
+    margin: 0 0 5px 0;
+}
+
+.subtitle {
+    font-weight: 400;
+    font-size: 13px;
+    color: $shade-900;
+    margin: 0;
+    font-family: $font-secondary;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
