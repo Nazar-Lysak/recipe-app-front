@@ -7,8 +7,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $shade-400;
   height: 100vh;
   width: 100vw;
   z-index: 9999;
+}
+
+.preloaderFilled {
+  background-color: $shade-400;
+}
+
+.preloaderTransparent {
+  background-color: rgba($shade-900, 0.25);
 }

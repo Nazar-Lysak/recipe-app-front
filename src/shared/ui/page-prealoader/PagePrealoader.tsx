@@ -5,10 +5,15 @@ import style from "./PagePreloader.module.scss";
 
 import type { FC } from "react";
 
-const PagePrealoader: FC = () => {
+const PagePrealoader: FC<{ variant?: "filled" | "transparent" }> = ({
+  variant = "filled",
+}) => {
+  const preloaderClass =
+    variant === "filled" ? style.preloaderFilled : style.preloaderTransparent;
+
   return (
     <motion.div
-      className={style.preloader}
+      className={`${style.preloader} ${preloaderClass}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

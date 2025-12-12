@@ -1,0 +1,11 @@
+.wrapper {
+  padding: 0 15px;
+  max-height: 100vh;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.wrapperAuthenticated {
+  @extend .wrapper;
+  padding-bottom: 200px;
+}

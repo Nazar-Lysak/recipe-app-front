@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../../ui/button/Button";
 import InputText from "../../ui/input-text/InputText";
-import style from './form.module.scss'
+import style from "./form.module.scss";
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");

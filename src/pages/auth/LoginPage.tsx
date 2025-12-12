@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import AuthLayout from "../../shared/components/auth/AuthLayout";
 import LoginForm from "../../shared/components/auth/LoginForm";
-import style from './Auth.module.scss'
+import style from "./Auth.module.scss";
 
 export default function LoginPage() {
   return (
@@ -11,7 +11,6 @@ export default function LoginPage() {
         <NavLink to="/signup">Sign Up</NavLink>
         <NavLink to="/forgot-password">Forgot Password?</NavLink>
       </div>
-      
     </AuthLayout>
   );
 }
