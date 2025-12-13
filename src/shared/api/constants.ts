@@ -3,6 +3,7 @@ const API_URL = {
     login: "/user/login",
     signup: "/user",
     users: "/user",
+    forgotPassword: "/user/forgot-password",
   },
   user: {
     current: "/user/current",
