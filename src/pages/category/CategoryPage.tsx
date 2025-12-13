@@ -1,15 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { getAllCategories } from "../../shared/api/get-data";
+import { useCategories } from "../../shared/hooks/queries/useCategories";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 
 import CategoriesGrid from "../../shared/components/categories-grid/CategoriesGrid";
 
 const CategoryPage = () => {
 
-  const categoriesQuery = useQuery({
-    queryKey: ["categories"],
-    queryFn: getAllCategories
-  });
+  const categoriesQuery = useCategories();
 
   return (
     <div>

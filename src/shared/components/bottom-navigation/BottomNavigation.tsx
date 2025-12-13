@@ -10,7 +10,7 @@ import { Link, useLocation } from "react-router";
 
 const BottomNavigation: FC = () => {
   const location = useLocation();
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => location.pathname.startsWith(path);
 
   return (
     <motion.div

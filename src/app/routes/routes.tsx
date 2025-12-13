@@ -15,6 +15,7 @@ const HomePage = lazy(() => import("../../pages/home/HomePage"));
 const ProfilePage = lazy(() => import("../../pages/profile/ProfilePage"));
 const CommunityPage = lazy(() => import("../../pages/community/CommunityPage"));
 const CategoryPage = lazy(() => import("../../pages/category/CategoryPage"));
+const CategoryRecipesPage = lazy(() => import("../../pages/category-recipes/CategoryRecipesPage"));
 
 export const routes: RouteObject[] = [
   {
@@ -39,6 +40,7 @@ export const routes: RouteObject[] = [
               { path: "/profile", Component: ProfilePage },
               { path: "community", Component: CommunityPage },
               { path: "categories", Component: CategoryPage },
+              { path: "categories/:categoryId", Component: CategoryRecipesPage },
             ],
           },
         ],

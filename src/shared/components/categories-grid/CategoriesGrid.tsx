@@ -37,7 +37,7 @@ const CategoriesGrid = ({categories}: CategoriesGridProps) => {
                         {...animation(index)}
                         key={category.id}
                     >
-                        <Link to={`/category/${category.id}`}>
+                        <Link to={`/categories/${category.id}`}>
                         <CategoryCard name={category.name} image={category.image} /> 
                         </Link>
                     </motion.li>

@@ -15,8 +15,7 @@
     stroke 0.2s;
   cursor: pointer;
 
-  &:hover,
-  &:focus {
+  &:hover{
     background-color: $shade-300;
     stroke: $shade-900;
   }
@@ -36,8 +35,7 @@
   stroke: $shade-100;
   outline: none;
 
-  &:hover,
-  &:focus {
+  &:hover {
     border-color: $shade-100;
   }
 }
