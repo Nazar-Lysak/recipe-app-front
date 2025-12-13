@@ -3,9 +3,14 @@ import API_URL from "./constants";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
-interface Category {
+interface CategoryItem {
   id: string;
   name: string;
+  image: string;
+}
+
+interface CategoriesResponse {
+  categories: CategoryItem[];
 }
 
 interface ProfileResponse {
@@ -16,8 +21,9 @@ interface ProfileResponse {
   };
 }
 
-export const getAllCategories = async (): Promise<Category[]> => {
-  const response = await axios.get<Category[]>(
+export const getAllCategories = async (): Promise<CategoriesResponse> => {
+  await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
+  const response = await axios.get<CategoriesResponse>(
     `${BASE_URL}${API_URL.categories.list}`,
   );
   return response.data;

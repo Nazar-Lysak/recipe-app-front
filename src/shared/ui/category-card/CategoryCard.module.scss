@@ -1,0 +1,21 @@
+@use "@/styles/variables" as *;
+
+.img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+.title {
+    font-family: $font-primary;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    color: $shade-900;
+    text-decoration: none;
+    margin: 0;
+    padding: 5px 0;
+}
