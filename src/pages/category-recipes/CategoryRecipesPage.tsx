@@ -16,9 +16,7 @@ const CategoryRecipesPage = () => {
         throw new Error("Network response was not ok");
       }
       return response.json();
-    },
-    staleTime: 5 * 60 * 1000,
-    refetchOnWindowFocus: false,
+    }
   });
 
   console.log("Recipes data:", recipes.data);
