@@ -28,8 +28,6 @@ const ForgotPasswordForm = () => {
     forgotEmailMutation.mutate(email);
   };
 
-  
-
   return (
     <form className={style.container} onSubmit={submit}>
       <InputText
@@ -45,17 +43,17 @@ const ForgotPasswordForm = () => {
             "Password reset failed. Please try again."}
         </p>
       )}
-      {successMessage && (
-        <p className={style.success}>{successMessage}</p>
-      )}
+      {successMessage && <p className={style.success}>{successMessage}</p>}
       <div className={style.buttonWrapper}>
         <Button type="submit" disabled={forgotEmailMutation.isPending}>
           {forgotEmailMutation.isPending ? "Sending..." : "Send Reset Link"}
         </Button>
       </div>
 
-        <AnimatePresence>
-        {forgotEmailMutation.isPending && <PagePrealoader variant={"transparent"} />}
+      <AnimatePresence>
+        {forgotEmailMutation.isPending && (
+          <PagePrealoader variant={"transparent"} />
+        )}
       </AnimatePresence>
     </form>
   );

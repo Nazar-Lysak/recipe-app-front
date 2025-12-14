@@ -1,0 +1,76 @@
+@use "@/styles/variables" as *;
+
+.card {
+    position: relative;
+  border: solid 1px $shade-300;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.image {
+  border-radius: 14px;
+  object-fit: cover;
+  transform: scale(1.05);
+  aspect-ratio: 1;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  width: 100%;
+}
+
+.title {
+  font-family: $font-primary;
+  font-weight: 400;
+  font-size: 16px;
+  color: $shade-900;
+  padding: 0 12px;
+}
+
+.description {
+  font-family: $font-secondary;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.15;
+  color: $shade-900;
+  padding: 0 12px;
+}
+
+.favorite {
+    position: absolute;
+    padding: 0;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    top: 7px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px 12px;
+  color: $shade-300;
+
+  span {
+    font-family: $font-primary;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .rating {
+    fill: $shade-300;
+  }
+
+  .time {
+    stroke: $shade-300;
+  }
+}

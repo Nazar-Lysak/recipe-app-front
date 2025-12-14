@@ -27,25 +27,20 @@ const animation = (index: number) => {
   };
 };
 
-const CategoriesGrid = ({categories}: CategoriesGridProps) => {
-
-    return (
-        <ul className={style.list}>
-            <AnimatePresence>
-                {categories.map((category, index) => (
-                    <motion.li 
-                        {...animation(index)}
-                        key={category.id}
-                    >
-                        <Link to={`/categories/${category.id}`}>
-                        <CategoryCard name={category.name} image={category.image} /> 
-                        </Link>
-                    </motion.li>
-                ))}
-            </AnimatePresence>
-            
-        </ul>
-    )
-}
+const CategoriesGrid = ({ categories }: CategoriesGridProps) => {
+  return (
+    <ul className={style.list}>
+      <AnimatePresence>
+        {categories.map((category, index) => (
+          <motion.li {...animation(index)} key={category.id}>
+            <Link to={`/categories/${category.id}`}>
+              <CategoryCard name={category.name} image={category.image} />
+            </Link>
+          </motion.li>
+        ))}
+      </AnimatePresence>
+    </ul>
+  );
+};
 
 export default CategoriesGrid;

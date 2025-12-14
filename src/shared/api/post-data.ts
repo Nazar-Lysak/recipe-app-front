@@ -57,7 +57,9 @@ interface ForgotPasswordResponse {
   message: string;
 }
 
-export const forgotPassword = async (email: string): Promise<ForgotPasswordResponse> => {
+export const forgotPassword = async (
+  email: string,
+): Promise<ForgotPasswordResponse> => {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.post<ForgotPasswordResponse>(
     `${BASE_URL}${API_URL.auth.forgotPassword}`,
@@ -65,4 +67,3 @@ export const forgotPassword = async (email: string): Promise<ForgotPasswordRespo
   );
   return response.data;
 };
-

@@ -36,7 +36,7 @@ const Header: FC = () => {
 
   const getCurrentRoute = () => {
     return Object.keys(ROUTE_TITLES).find((path) =>
-      location.pathname.startsWith(path)
+      location.pathname.startsWith(path),
     );
   };
 
@@ -53,9 +53,9 @@ const Header: FC = () => {
       <AnimatePresence mode="wait">
         {showSearch && (
           <motion.div {...backButtonAnimation}>
-            <ButtonIcon 
+            <ButtonIcon
               onClick={stepBack}
-              style={{backgroundColor: 'transparent'}}
+              style={{ backgroundColor: "transparent" }}
             >
               <ArrowBackIcon />
             </ButtonIcon>
@@ -66,11 +66,15 @@ const Header: FC = () => {
         <motion.div key={currentRoute} {...titleAnimation}>
           {isHome ? (
             <>
-              <h1 className={style.title}>Привіт! {fullUserData?.profile?.username}</h1>
+              <h1 className={style.title}>
+                Привіт! {fullUserData?.profile?.username}
+              </h1>
               <p className={style.subtitle}>Що ти сьогодні готуєш?</p>
             </>
           ) : (
-            currentRoute && <h1 className={style.title}>{ROUTE_TITLES[currentRoute]}</h1>
+            currentRoute && (
+              <h1 className={style.title}>{ROUTE_TITLES[currentRoute]}</h1>
+            )
           )}
         </motion.div>
       </AnimatePresence>
