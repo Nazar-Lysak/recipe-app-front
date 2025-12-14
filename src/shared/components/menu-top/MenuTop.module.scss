@@ -1,0 +1,45 @@
+@use "@/styles/variables" as *;
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 7px 0;
+  margin-bottom: 20px;
+  overflow: auto;
+  width: 100%;
+
+  li {
+    flex-shrink: 0;
+  }
+}
+
+.item {
+  border-radius: 18px;
+  padding: 4px 9px;
+  font-family: $font-secondary;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: $shade-400;
+  background-color: transparent;
+  outline: none;
+  border: solid 1px transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+
+  &:hover,
+  &:focus {
+    border-color: $shade-400;
+  }
+
+  &.active {
+    background-color: $shade-400;
+    color: $shade-100;
+    border-color: $shade-400;
+  }
+}

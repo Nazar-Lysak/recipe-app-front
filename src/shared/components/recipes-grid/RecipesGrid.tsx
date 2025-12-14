@@ -8,7 +8,6 @@ interface RecipesGridProps {
 }
 
 const RecipesGrid = ({ recipes }: RecipesGridProps) => {
-  console.log("Rendering RecipesGrid with recipes:", recipes);
   return (
     <div className={style.list}>
       {recipes.map((recipe) => (
