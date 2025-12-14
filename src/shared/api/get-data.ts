@@ -21,6 +21,19 @@ interface ProfileResponse {
   };
 }
 
+interface RecipeItem {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  rating: number;
+  time: number;
+}
+
+interface RecipesResponse {
+  recipesList: RecipeItem[];
+}
+
 export const getAllCategories = async (): Promise<CategoriesResponse> => {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.get<CategoriesResponse>(
@@ -40,6 +53,15 @@ export const getProfileData = async (
         Authorization: `Bearer ${token}`,
       },
     },
+  );
+  return response.data;
+};
+
+export const getRecipesByCategory = async (
+  categoryId: string,
+): Promise<RecipesResponse> => {
+  const response = await axios.get<RecipesResponse>(
+    `${BASE_URL}${API_URL.recipes.byCategory}?category=${categoryId}`,
   );
   return response.data;
 };

@@ -11,6 +11,9 @@ const API_URL = {
   categories: {
     list: "/category",
   },
+  recipes: {
+    byCategory: "/recipe",
+  },
 } as const;
 
 export default API_URL;

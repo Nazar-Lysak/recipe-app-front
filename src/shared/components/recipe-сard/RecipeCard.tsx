@@ -17,9 +17,9 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
   const { image, name, description, rating, time } = recipe;
   return (
     <div className={style.card}>
-        <button className={style.favorite}>
-            <HeartIcon favourited={false} />
-        </button>
+      <button className={style.favorite}>
+        <HeartIcon favourited={false} />
+      </button>
       <img
         className={style.image}
         src={image || "/src/assets/img/onboarding/onboarding-1.jpg"}
