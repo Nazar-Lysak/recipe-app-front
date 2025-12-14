@@ -5,7 +5,5 @@ export const useCategories = () => {
   return useQuery({
     queryKey: ["categories"],
     queryFn: getAllCategories,
-    staleTime: 5 * 60 * 1000, // 5 хвилин
-    refetchOnWindowFocus: false,
   });
 };

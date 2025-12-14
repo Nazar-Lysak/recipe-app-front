@@ -1,16 +1,11 @@
 import axios from "axios";
 import API_URL from "./constants";
+import type { Category, Recipe } from "../types/recipe.types";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
-interface CategoryItem {
-  id: string;
-  name: string;
-  image: string;
-}
-
 interface CategoriesResponse {
-  categories: CategoryItem[];
+  categories: Category[];
 }
 
 interface ProfileResponse {
@@ -21,17 +16,8 @@ interface ProfileResponse {
   };
 }
 
-interface RecipeItem {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  rating: number;
-  time: number;
-}
-
 interface RecipesResponse {
-  recipesList: RecipeItem[];
+  recipesList: Recipe[];
 }
 
 export const getAllCategories = async (): Promise<CategoriesResponse> => {
@@ -60,6 +46,7 @@ export const getProfileData = async (
 export const getRecipesByCategory = async (
   categoryId: string,
 ): Promise<RecipesResponse> => {
+  await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.get<RecipesResponse>(
     `${BASE_URL}${API_URL.recipes.byCategory}?category=${categoryId}`,
   );

@@ -2,15 +2,10 @@ import ClockIcon from "../../../assets/img/svg/ClockIcon";
 import HeartIcon from "../../../assets/img/svg/HeartIcon";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import style from "./RecipeCard.module.scss";
+import type { Recipe } from "../../types/recipe.types";
 
 interface RecipeCardProps {
-  recipe: {
-    image: string;
-    name: string;
-    description: string;
-    rating: number;
-    time: number;
-  };
+  recipe: Recipe;
 }
 
 const RecipeCard = ({ recipe }: RecipeCardProps) => {

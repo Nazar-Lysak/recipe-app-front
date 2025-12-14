@@ -13,6 +13,7 @@ const ROUTE_TITLES: Record<string, string> = {
   "/categories": "Категорії",
   "/community": "Спільнота",
   "/profile": "Профіль",
+  "/recipe": "Рецепт",
 };
 
 const backButtonAnimation = {

@@ -18,6 +18,7 @@ const CategoryPage = lazy(() => import("../../pages/category/CategoryPage"));
 const CategoryRecipesPage = lazy(
   () => import("../../pages/category-recipes/CategoryRecipesPage"),
 );
+const RecipePage = lazy(() => import("../../pages/recipe/RecipePage"));
 
 export const routes: RouteObject[] = [
   {
@@ -45,6 +46,10 @@ export const routes: RouteObject[] = [
               {
                 path: "categories/:categoryId",
                 Component: CategoryRecipesPage,
+              },
+              {
+                path: "recipe/:recipeId",
+                Component: RecipePage,
               },
             ],
           },
