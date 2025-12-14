@@ -10,7 +10,6 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <h2>Profile</h2>
       <Button onClick={handleLogout}>Log out</Button>
     </div>
   );

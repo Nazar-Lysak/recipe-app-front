@@ -9,7 +9,6 @@ const CategoryPage = () => {
 
   return (
     <div>
-      <h2>Categories</h2>
       {categoriesQuery.isLoading && (
         <PagePrealoader variant="transparent" />
       )}

@@ -23,7 +23,6 @@ const LoginForm = () => {
       navigate("/home");
     },
     onError: (error: any) => {
-      // error.response.data - тут буде відповідь з бекенду
       console.log(error.response?.data);
     },
   });
