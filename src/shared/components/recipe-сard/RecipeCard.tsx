@@ -8,8 +8,15 @@ interface RecipeCardProps {
   recipe: Recipe;
 }
 
+const FALLBACK_IMAGE =
+  "/src/assets/img/fallback-images/general-recipe-image.png";
+
 const RecipeCard = ({ recipe }: RecipeCardProps) => {
   const { image, name, description, rating, time } = recipe;
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = FALLBACK_IMAGE;
+  };
   return (
     <div className={style.card}>
       <button className={style.favorite}>
@@ -17,8 +24,9 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
       </button>
       <img
         className={style.image}
-        src={image || "/src/assets/img/onboarding/onboarding-1.jpg"}
+        src={image || FALLBACK_IMAGE}
         alt={name}
+        onError={handleImageError}
       />
       <h3 className={style.title}>{name}</h3>
       <p className={style.description}>{description}</p>

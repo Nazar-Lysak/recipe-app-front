@@ -52,3 +52,17 @@ export const getRecipesByCategory = async (
   );
   return response.data;
 };
+
+export const getRecipeById = async (recipeId: string): Promise<Recipe> => {
+  const response = await axios.get<Recipe>(
+    `${BASE_URL}${API_URL.recipes.byId}/${recipeId}`,
+  );
+  return response.data;
+};
+
+export const getUserById = async (userId: string): Promise<ProfileResponse> => {
+  const response = await axios.get<ProfileResponse>(
+    `${BASE_URL}${API_URL.user.byId}/${userId}`,
+  );
+  return response.data;
+};

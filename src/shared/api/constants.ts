@@ -7,12 +7,14 @@ const API_URL = {
   },
   user: {
     current: "/user/current",
+    byId: "/user",
   },
   categories: {
     list: "/category",
   },
   recipes: {
     byCategory: "/recipe",
+    byId: "/recipe",
   },
 } as const;
 

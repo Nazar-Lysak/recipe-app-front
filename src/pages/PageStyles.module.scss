@@ -1,0 +1,10 @@
+@use "@/styles/variables" as *;
+
+.emptyData {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 22px;
+  color: $shade-400;
+  text-align: center;
+  margin-top: 50px;
+}

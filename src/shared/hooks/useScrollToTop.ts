@@ -6,13 +6,13 @@ export const useScrollToTop = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     const scrollableElements = document.querySelectorAll('[style*="overflow"]');
     scrollableElements.forEach((element) => {
       element.scrollTop = 0;
     });
-    
-    const mainElement = document.querySelector('main');
+
+    const mainElement = document.querySelector("main");
     if (mainElement) {
       mainElement.scrollTop = 0;
     }

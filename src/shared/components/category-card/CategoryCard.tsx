@@ -6,7 +6,8 @@ interface CategoryCardProps {
   image?: string;
 }
 
-const FALLBACK_IMAGE = "/src/assets/img/fallback-images/general-category-image.png";
+const FALLBACK_IMAGE =
+  "/src/assets/img/fallback-images/general-category-image.png";
 
 const CategoryCard: FC<CategoryCardProps> = ({ name, image }) => {
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -15,10 +16,10 @@ const CategoryCard: FC<CategoryCardProps> = ({ name, image }) => {
 
   return (
     <div>
-      <img 
-        className={style.img} 
-        src={image || FALLBACK_IMAGE} 
-        alt={name} 
+      <img
+        className={style.img}
+        src={image || FALLBACK_IMAGE}
+        alt={name}
         width={100}
         onError={handleImageError}
       />

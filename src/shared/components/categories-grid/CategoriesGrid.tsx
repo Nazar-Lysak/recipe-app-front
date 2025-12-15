@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router";
-import CategoryCard from "../../ui/category-card/CategoryCard";
+import CategoryCard from "../category-card/CategoryCard";
 import style from "./CategoriesGrid.module.scss";
 
 interface Category {
