@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import ClockIcon from "../../../assets/img/svg/ClockIcon";
 import CommentsIcon from "../../../assets/img/svg/CommentsIcon";
-import type { RecipeInterface } from "../../types/UI.types";
+import type { FullUserDataInterface, RecipeInterface } from "../../types/UI.types";
 
 const FALLBACK_AVATAR =
   "/src/assets/img/fallback-images/general-category-image.png";
@@ -14,10 +14,11 @@ const FALLBACK_IMAGE =
 
 interface RecipeCardExpandedProps {
   recipe: RecipeInterface;
+  author?: FullUserDataInterface
 }
 
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
-  const { id, name, description, image, author, createdAt, rating, time } = recipe;
+  const { id, name, description, image, createdAt, rating, time } = recipe;
 
   var date = new DateObject(createdAt);
     const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -28,18 +29,20 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
     e.currentTarget.src = FALLBACK_AVATAR;
   };
 
+  const authorData = (recipe.author as any)?.profile || recipe.author;
+
   return (
     <Link to={`/recipe/${id}`}>
       <div className={style.recipeCardExpanded} key={id}>
         <div className={style.recipeHeader}>
           <img
-            src={recipe.author.avatar_url || FALLBACK_AVATAR}
-            alt={recipe.author?.username || "User"}
+            src={authorData?.avatar_url || FALLBACK_AVATAR}
+            alt={authorData?.username || "User"}
             className={style.authorAvatar}
             onError={handleAvatarError}
           />
           <div>
-            <p className={style.authorUsername}>{author?.username}</p>
+            <p className={style.authorUsername}>{authorData?.username}</p>
             <p className={style.createdAt}>{date.format("DD/MM/YYYY")}</p>
           </div>
         </div>
