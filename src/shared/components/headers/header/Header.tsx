@@ -45,7 +45,7 @@ const Header: FC = () => {
   const stepBack = () => {
     navigate(-1);
   };
-  
+
   const currentRoute = getCurrentRoute();
   const isHome = currentRoute === "/home";
   const showSearch = currentRoute && currentRoute !== "/home";

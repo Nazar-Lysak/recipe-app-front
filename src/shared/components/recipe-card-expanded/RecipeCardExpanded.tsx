@@ -37,12 +37,12 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
         <div className={style.recipeHeader}>
           <img
             src={authorData?.avatar_url || FALLBACK_AVATAR}
-            alt={authorData?.username || "User"}
+            alt={recipe.author.username || "User"}
             className={style.authorAvatar}
             onError={handleAvatarError}
           />
           <div>
-            <p className={style.authorUsername}>{authorData?.username}</p>
+            <p className={style.authorUsername}>{recipe.author.username}</p>
             <p className={style.createdAt}>{date.format("DD/MM/YYYY")}</p>
           </div>
         </div>
