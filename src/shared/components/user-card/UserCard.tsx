@@ -8,10 +8,10 @@ interface UserCardProps {
 }
 
 interface RecipeCardProps {
-    recipe?: {
-        authorId: string;
-    };
-} 
+  recipe?: {
+    authorId: string;
+  };
+}
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-category-image.png";
@@ -29,18 +29,18 @@ function UserCard({ user, recipe }: UserCardProps & RecipeCardProps) {
     <div className={style.wrapper}>
       <Link to={`/user/${authorId}`}>
         <div className={style.userInfo}>
-            <img
+          <img
             src={avatar_url || FALLBACK_IMAGE}
             alt={email}
             width={60}
             height={60}
             className={style.avatar}
             onError={handleImageError}
-            />
-            <div>
+          />
+          <div>
             <h3 className={style.username}>{username}</h3>
             {first_name && <p className={style.name}>{first_name}</p>}
-            </div>
+          </div>
         </div>
       </Link>
       <div className={style.actions}>

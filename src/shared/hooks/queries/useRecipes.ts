@@ -26,7 +26,7 @@ export const useRecipes = ({
         params.append("oldest", "true");
       }
 
-      if(username) {
+      if (username) {
         params.append("author", username);
       }
 

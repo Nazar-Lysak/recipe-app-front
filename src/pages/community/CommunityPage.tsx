@@ -38,11 +38,15 @@ const CommunityPage = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !recipes.isLoading && recipes.data?.recipesList?.length === limit) {
+        if (
+          entries[0].isIntersecting &&
+          !recipes.isLoading &&
+          recipes.data?.recipesList?.length === limit
+        ) {
           setOffset((prev) => prev + limit);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (observerTarget.current) {

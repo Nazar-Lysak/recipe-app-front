@@ -1,6 +1,10 @@
 import axios from "axios";
 import API_URL from "./constants";
-import type { CategoryInterface, FullUserDataInterface, RecipeInterface } from "../types/UI.types";
+import type {
+  CategoryInterface,
+  FullUserDataInterface,
+  RecipeInterface,
+} from "../types/UI.types";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -45,14 +49,18 @@ export const getRecipesByCategory = async (
   return response.data;
 };
 
-export const getRecipeById = async (recipeId: string): Promise<RecipeInterface> => {
+export const getRecipeById = async (
+  recipeId: string,
+): Promise<RecipeInterface> => {
   const response = await axios.get<RecipeInterface>(
     `${BASE_URL}${API_URL.recipes.byId}/${recipeId}`,
   );
   return response.data;
 };
 
-export const getUserById = async (userId: string): Promise<FullUserDataInterface> => {
+export const getUserById = async (
+  userId: string,
+): Promise<FullUserDataInterface> => {
   const response = await axios.get<FullUserDataInterface>(
     `${BASE_URL}${API_URL.user.byId}/${userId}`,
   );

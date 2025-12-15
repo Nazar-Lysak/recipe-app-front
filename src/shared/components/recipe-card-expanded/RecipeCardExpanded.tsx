@@ -5,7 +5,10 @@ import { Link } from "react-router";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import ClockIcon from "../../../assets/img/svg/ClockIcon";
 import CommentsIcon from "../../../assets/img/svg/CommentsIcon";
-import type { FullUserDataInterface, RecipeInterface } from "../../types/UI.types";
+import type {
+  FullUserDataInterface,
+  RecipeInterface,
+} from "../../types/UI.types";
 
 const FALLBACK_AVATAR =
   "/src/assets/img/fallback-images/general-category-image.png";
@@ -14,14 +17,14 @@ const FALLBACK_IMAGE =
 
 interface RecipeCardExpandedProps {
   recipe: RecipeInterface;
-  author?: FullUserDataInterface
+  author?: FullUserDataInterface;
 }
 
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
   const { id, name, description, image, createdAt, rating, time } = recipe;
 
   var date = new DateObject(createdAt);
-    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
   };
 
@@ -58,16 +61,21 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
           />
           <div className={style.recipeDetails}>
             <div>
-                <h2 className={style.recipeName}>{name}</h2>
-                <p className={style.recipeDescription}>{description}</p>
-
+              <h2 className={style.recipeName}>{name}</h2>
+              <p className={style.recipeDescription}>{description}</p>
             </div>
             <div className={style.recipeStats}>
-                <p className={style.rating}><RatingStarIcon />{" "} {rating}</p>
-                <p className={style.time}> <ClockIcon /> {time} хв</p>
-                <p className={style.comments}><CommentsIcon /> 121</p>
+              <p className={style.rating}>
+                <RatingStarIcon /> {rating}
+              </p>
+              <p className={style.time}>
+                {" "}
+                <ClockIcon /> {time} хв
+              </p>
+              <p className={style.comments}>
+                <CommentsIcon /> 121
+              </p>
             </div>
-            
           </div>
         </div>
       </div>

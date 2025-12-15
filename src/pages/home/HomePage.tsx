@@ -1,5 +1,11 @@
+import TopChef from "../../shared/components/top-chef/TopChef";
+
 const HomePage = () => {
-  return <div></div>;
+  return (
+    <>
+      <TopChef />
+    </>
+  );
 };
 
 export default HomePage;

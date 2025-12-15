@@ -1,0 +1,38 @@
+@use "@/styles/variables" as *;
+
+.title {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: capitalize;
+  color: $shade-400;
+}
+
+.chefs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.chefLink {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+}
+
+.username {
+  font-family: $font-secondary;
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  color: $shade-900;
+}

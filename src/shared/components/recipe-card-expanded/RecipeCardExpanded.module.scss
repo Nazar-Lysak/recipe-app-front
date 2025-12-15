@@ -118,27 +118,27 @@
 }
 
 .recipeStats {
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 
-    p {
-        margin: 0;
-        font-weight: 400;
-        font-size: 12px;
-        font-family: $font-primary;
-    }
+  p {
+    margin: 0;
+    font-weight: 400;
+    font-size: 12px;
+    font-family: $font-primary;
+  }
 
-    .rating {
-        fill: $shade-100;
-    }
+  .rating {
+    fill: $shade-100;
+  }
 
-    .time {
-        stroke: $shade-100;
-    }
+  .time {
+    stroke: $shade-100;
+  }
 
-    .comments {
-        stroke: $shade-100;
-    }
+  .comments {
+    stroke: $shade-100;
+  }
 }

@@ -46,7 +46,7 @@ export interface FullUserDataInterface {
   tiktok: string | null;
   youtube: string | null;
   language: string;
-  theme: 'light' | 'dark';
+  theme: "light" | "dark";
   is_private: boolean;
   followers_count: number;
   following_count: number;

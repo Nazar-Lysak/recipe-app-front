@@ -68,9 +68,7 @@ const Header: FC = () => {
         <motion.div key={currentRoute} {...titleAnimation}>
           {isHome ? (
             <>
-              <h1 className={style.title}>
-                Привіт! {fullUserData?.username}
-              </h1>
+              <h1 className={style.title}>Привіт! {fullUserData?.username}</h1>
               <p className={style.subtitle}>Що ти сьогодні готуєш?</p>
             </>
           ) : (

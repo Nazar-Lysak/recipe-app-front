@@ -19,7 +19,9 @@ const CategoryRecipesPage = lazy(
   () => import("../../pages/category-recipes/CategoryRecipesPage"),
 );
 const RecipePage = lazy(() => import("../../pages/recipe/RecipePage"));
-const UserProfilePage = lazy(() => import("../../pages/user-profile/UserProfile"));
+const UserProfilePage = lazy(
+  () => import("../../pages/user-profile/UserProfile"),
+);
 
 export const routes: RouteObject[] = [
   {
@@ -53,8 +55,9 @@ export const routes: RouteObject[] = [
                 Component: RecipePage,
               },
               {
-                path: "user/:userId", Component: UserProfilePage,
-              }
+                path: "user/:userId",
+                Component: UserProfilePage,
+              },
             ],
           },
         ],
