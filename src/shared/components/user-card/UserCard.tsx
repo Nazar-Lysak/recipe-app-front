@@ -1,16 +1,22 @@
 import MoreVerticalIcon from "../../../assets/img/svg/MoreVerticalIcon";
 import style from "./UserCard.module.scss";
-import type { User } from "../../types/recipe.types";
 import { Link } from "react-router";
+import type { UserInterface } from "../../types/UI.types";
 
 interface UserCardProps {
-  user?: User;
+  user?: UserInterface;
 }
+
+interface RecipeCardProps {
+    recipe?: {
+        authorId: string;
+    };
+} 
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-category-image.png";
 
-function UserCard({ user, recipe }: UserCardProps) {
+function UserCard({ user, recipe }: UserCardProps & RecipeCardProps) {
   const { avatar_url, email, first_name, username } = user || {};
 
   const authorId = recipe?.authorId;

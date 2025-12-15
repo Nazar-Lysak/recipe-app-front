@@ -45,7 +45,7 @@ const Header: FC = () => {
   const stepBack = () => {
     navigate(-1);
   };
-
+  
   const currentRoute = getCurrentRoute();
   const isHome = currentRoute === "/home";
   const showSearch = currentRoute && currentRoute !== "/home";
@@ -69,7 +69,7 @@ const Header: FC = () => {
           {isHome ? (
             <>
               <h1 className={style.title}>
-                Привіт! {fullUserData?.profile?.username}
+                Привіт! {fullUserData?.username}
               </h1>
               <p className={style.subtitle}>Що ти сьогодні готуєш?</p>
             </>

@@ -2,10 +2,10 @@ import ClockIcon from "../../../assets/img/svg/ClockIcon";
 import HeartIcon from "../../../assets/img/svg/HeartIcon";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import style from "./RecipeCard.module.scss";
-import type { Recipe } from "../../types/recipe.types";
+import type { RecipeInterface } from "../../types/UI.types";
 
 interface RecipeCardProps {
-  recipe: Recipe;
+  recipe: RecipeInterface;
 }
 
 const FALLBACK_IMAGE =

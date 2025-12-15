@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import ClockIcon from "../../../assets/img/svg/ClockIcon";
 import CommentsIcon from "../../../assets/img/svg/CommentsIcon";
-import type { Recipe } from "../../types/recipe.types";
+import type { RecipeInterface } from "../../types/UI.types";
 
 const FALLBACK_AVATAR =
   "/src/assets/img/fallback-images/general-category-image.png";
@@ -13,7 +13,7 @@ const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
 
 interface RecipeCardExpandedProps {
-  recipe: Recipe;
+  recipe: RecipeInterface;
 }
 
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
@@ -33,8 +33,8 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
       <div className={style.recipeCardExpanded} key={id}>
         <div className={style.recipeHeader}>
           <img
-            src={author.profile.avatar_url || FALLBACK_AVATAR}
-            alt={author?.username || "User"}
+            src={recipe.author.avatar_url || FALLBACK_AVATAR}
+            alt={recipe.author?.username || "User"}
             className={style.authorAvatar}
             onError={handleAvatarError}
           />

@@ -1,19 +1,15 @@
 import axios from "axios";
 import API_URL from "./constants";
-import type { Category, Recipe, User } from "../types/recipe.types";
+import type { CategoryInterface, FullUserDataInterface, RecipeInterface } from "../types/UI.types";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 interface CategoriesResponse {
-  categories: Category[];
-}
-
-interface ProfileResponse {
-  profile: User;
+  categories: CategoryInterface[];
 }
 
 interface RecipesResponse {
-  recipesList: Recipe[];
+  recipesList: RecipeInterface[];
 }
 
 export const getAllCategories = async (): Promise<CategoriesResponse> => {
@@ -26,9 +22,9 @@ export const getAllCategories = async (): Promise<CategoriesResponse> => {
 
 export const getProfileData = async (
   token: string,
-): Promise<ProfileResponse> => {
+): Promise<FullUserDataInterface> => {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
-  const response = await axios.get<ProfileResponse>(
+  const response = await axios.get<FullUserDataInterface>(
     `${BASE_URL}${API_URL.user.current}`,
     {
       headers: {
@@ -49,15 +45,15 @@ export const getRecipesByCategory = async (
   return response.data;
 };
 
-export const getRecipeById = async (recipeId: string): Promise<Recipe> => {
-  const response = await axios.get<Recipe>(
+export const getRecipeById = async (recipeId: string): Promise<RecipeInterface> => {
+  const response = await axios.get<RecipeInterface>(
     `${BASE_URL}${API_URL.recipes.byId}/${recipeId}`,
   );
   return response.data;
 };
 
-export const getUserById = async (userId: string): Promise<ProfileResponse> => {
-  const response = await axios.get<ProfileResponse>(
+export const getUserById = async (userId: string): Promise<FullUserDataInterface> => {
+  const response = await axios.get<FullUserDataInterface>(
     `${BASE_URL}${API_URL.user.byId}/${userId}`,
   );
   return response.data;

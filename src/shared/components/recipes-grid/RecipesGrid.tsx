@@ -1,10 +1,10 @@
 import RecipeCard from "../../../shared/components/recipe-сard/RecipeCard";
 import { Link } from "react-router-dom";
 import style from "./RecipesGrid.module.scss";
-import type { Recipe } from "../../types/recipe.types";
+import type { RecipeInterface } from "../../types/UI.types";
 
 interface RecipesGridProps {
-  recipes: Recipe[];
+  recipes: RecipeInterface[];
 }
 
 const RecipesGrid = ({ recipes }: RecipesGridProps) => {
