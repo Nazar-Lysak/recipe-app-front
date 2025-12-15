@@ -1,88 +1,84 @@
-import axios from "axios";
-import { useState } from "react";
+import MenuTop from "../../shared/components/menu-top/MenuTop";
+import { useState, useEffect, useRef } from "react";
+import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
+import RecipeCardExpanded from "../../shared/components/recipe-card-expanded/RecipeCardExpanded";
+import { useRecipes } from "../../shared/hooks/queries/useRecipes";
+
+const elements = [
+  { id: "1", name: "Топ рецепти" },
+  { id: "2", name: "Найновіші" },
+  { id: "3", name: "Найстаріші" },
+];
 
 const CommunityPage = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [imgPreview, setImgPreview] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("1");
+  const [limit] = useState<number>(10);
+  const [offset, setOffset] = useState<number>(0);
+  const [allRecipes, setAllRecipes] = useState<any[]>([]);
+  const observerTarget = useRef<HTMLDivElement>(null);
 
-  const previewFile = (file: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const base64data = reader.result as string;
-      setImgPreview(base64data);
-    };
+  const handleCategoryClick = (categoryId: string) => {
+    setActiveCategory(categoryId);
+    setOffset(0);
+    setAllRecipes([]);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : null;
+  const recipes = useRecipes({ activeCategory, limit, offset });
 
-    if (!file) return;
+  useEffect(() => {
+    if (recipes.data?.recipesList) {
+      if (offset === 0) {
+        setAllRecipes(recipes.data.recipesList);
+      } else {
+        setAllRecipes((prev) => [...prev, ...recipes.data.recipesList]);
+      }
+    }
+  }, [recipes.data, offset]);
 
-    previewFile(file);
-    setFile(file);
-  };
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (!file || !imgPreview) return;
-
-    const recipeData = {
-      recipe: {
-        image: imgPreview,
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !recipes.isLoading && recipes.data?.recipesList?.length === limit) {
+          setOffset((prev) => prev + limit);
+        }
       },
+      { threshold: 0.1 }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
     };
-
-    const result = await axios
-      .put(
-        "http://localhost:3000/recipe/6a54452f-87c6-47ed-b199-254ec9515ae0",
-        recipeData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljNjA5ODc3LWIyZDEtNGI5MC1hMjFlLTQ0NDEyNTY1YTQ0NCIsImVtYWlsIjoibWFyaWEua292YWxAZ21haWwuY29tIiwidXNlcm5hbWUiOiJNYXJpYUsiLCJpYXQiOjE3NjU3MjA3NTYsImV4cCI6MTc2NjMyNTU1Nn0.cc9L3YQxUxQYOIwTTdHzDobS7W4G_IKX0wA3yxm-QZY",
-          },
-        },
-      )
-      .then((response) => {
-        console.log("File uploaded successfully", response.data);
-      })
-      .catch((error) => {
-        console.error("Error uploading file", error);
-      });
-
-    console.log(result);
-  };
+  }, [recipes.isLoading, recipes.data, limit]);
 
   return (
     <div>
-      {imgPreview && (
+      <MenuTop
+        elements={elements}
+        handleCategoryClick={handleCategoryClick}
+        activeCategory={activeCategory}
+      />
+
+      {allRecipes.length > 0 && (
         <div>
-          <button
-            onClick={() => {
-              setImgPreview(null);
-              setFile(null);
-            }}
-          >
-            remove
-          </button>
-          <img
-            src={imgPreview}
-            alt="Preview"
-            style={{ width: "200px", height: "auto" }}
-          />
+          {allRecipes.map((recipe: any) => (
+            <RecipeCardExpanded key={recipe.id} recipe={recipe} />
+          ))}
         </div>
       )}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="file"
-          onChange={handleChange}
-          accept="image/jpeg, image/png, image/webp"
-        />
-        <button type="submit">Submit</button>
-      </form>
+
+      <div ref={observerTarget} style={{ height: "20px" }} />
+
+      {recipes.isLoading && <PagePrealoader variant="transparent" />}
+
+      {!recipes.isLoading && allRecipes.length === 0 && (
+        <p>Рецепти не знайдено в цій категорії.</p>
+      )}
     </div>
   );
 };

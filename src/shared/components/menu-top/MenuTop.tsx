@@ -1,10 +1,12 @@
 import type { FC } from "react";
 import { useEffect, useRef } from "react";
 import style from "./MenuTop.module.scss";
-import type { Category } from "../../types/recipe.types";
 
 interface MenuTopProps {
-  elements: Category[];
+  elements: {
+    id: string;
+    name: string;
+  }[];
   handleCategoryClick: (category: string) => void;
   activeCategory: string | null;
 }

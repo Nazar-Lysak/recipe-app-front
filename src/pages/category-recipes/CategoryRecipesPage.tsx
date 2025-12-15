@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 
@@ -10,6 +10,7 @@ import pageStyles from "../PageStyles.module.scss";
 
 const CategoryRecipesPage = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<string>(
     categoryId || "",
   );
@@ -19,6 +20,7 @@ const CategoryRecipesPage = () => {
 
   const handleCategoryClick = (category: string) => {
     setActiveCategory(category);
+    navigate(`/categories/${category}`);
   };
 
   return (

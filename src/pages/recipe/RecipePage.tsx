@@ -6,6 +6,7 @@ import RatingStarIcon from "../../assets/img/svg/RatingStarIcon";
 import { useRecipe } from "../../shared/hooks/queries/useRecipe";
 import UserCard from "../../shared/components/user-card/UserCard";
 import { useUser } from "../../shared/hooks/queries/useUser";
+import ClockIcon from "../../assets/img/svg/ClockIcon";
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
@@ -31,7 +32,7 @@ const RecipePage = () => {
     return <div>Рецепт не знайдено</div>;
   }
 
-  const { name, description, image, rating, time, ingredients, steps, author } =
+  const { name, description, image, rating, time, ingredients, steps } =
     recipe.data;
 
   return (
@@ -54,27 +55,36 @@ const RecipePage = () => {
         </div>
       </div>
       <UserCard user={authorRecipe.data} />
+      <div className={styles.detailsSection}>
+        <p className={styles.detailsTitle}>Details</p>
+        <p className={styles.time}>
+          <ClockIcon />
+          {time} хвилин
+        </p>
+      </div>
 
-      <p>{description}</p>
+      <p className={styles.description}>{description}</p>
 
-      <span>{time}</span>
-      {author && <p>Автор: {author.username}</p>}
       <div>
-        <h2>Інгредієнти</h2>
+        <h2 className={styles.detailsTitle}>Інгредієнти</h2>
         <ul>
           {ingredients?.map((ingredient: string, index: number) => (
-            <li key={index}>{ingredient}</li>
+            <li key={index} className={styles.ingredients}>
+              {ingredient}
+            </li>
           ))}
         </ul>
       </div>
 
       <div>
-        <h2>Кроки</h2>
-        <ol>
+        <h2 className={styles.detailsTitle}>Кроки</h2>
+        <ul className={styles.stepsList}>
           {steps?.map((step: string, index: number) => (
-            <li key={index}>{step}</li>
+            <li key={index} className={styles.steps}>
+              {step}
+            </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </div>
   );

@@ -2,6 +2,8 @@ export interface User {
   id: string;
   email: string;
   username: string;
+  first_name?: string;
+  avatarUrl?: string;
 }
 
 export interface Category {

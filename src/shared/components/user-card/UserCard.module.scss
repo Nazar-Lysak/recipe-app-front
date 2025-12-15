@@ -38,8 +38,8 @@
 }
 
 .actions {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .followButton {
@@ -79,7 +79,7 @@
   transition: fill 0.2s ease;
 
   &:hover,
-    &:focus {
-        fill: $shade-900;
-    }
-}   
+  &:focus {
+    fill: $shade-900;
+  }
+}

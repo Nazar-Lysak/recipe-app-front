@@ -1,6 +1,6 @@
 import axios from "axios";
 import API_URL from "./constants";
-import type { Category, Recipe } from "../types/recipe.types";
+import type { Category, Recipe, User } from "../types/recipe.types";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -9,11 +9,7 @@ interface CategoriesResponse {
 }
 
 interface ProfileResponse {
-  profile: {
-    id: string;
-    email: string;
-    username: string;
-  };
+  profile: User;
 }
 
 interface RecipesResponse {
