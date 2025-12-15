@@ -1,18 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 
 interface UseRecipesProps {
-  activeCategory: string;
-  limit: number;
-  offset: number;
+  activeCategory?: string;
+  limit?: number;
+  offset?: number;
+  username?: string;
 }
 
 export const useRecipes = ({
   activeCategory,
   limit,
   offset,
+  username,
 }: UseRecipesProps) => {
   return useQuery({
-    queryKey: ["community", activeCategory, offset],
+    queryKey: ["recipes", activeCategory, offset, username],
     queryFn: async () => {
       const params = new URLSearchParams();
 
@@ -24,8 +26,16 @@ export const useRecipes = ({
         params.append("oldest", "true");
       }
 
-      params.append("limit", limit.toString());
-      params.append("offset", offset.toString());
+      if(username) {
+        params.append("author", username);
+      }
+
+      if (limit !== undefined) {
+        params.append("limit", limit.toString());
+      }
+      if (offset !== undefined) {
+        params.append("offset", offset.toString());
+      }
 
       const response = await fetch(
         `http://localhost:3000/recipe?${params.toString()}`,

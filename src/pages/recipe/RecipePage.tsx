@@ -54,7 +54,7 @@ const RecipePage = () => {
           </span>
         </div>
       </div>
-      <UserCard user={authorRecipe.data} />
+      <UserCard user={authorRecipe.data} recipe={recipe.data} />
       <div className={styles.detailsSection}>
         <p className={styles.detailsTitle}>Details</p>
         <p className={styles.time}>

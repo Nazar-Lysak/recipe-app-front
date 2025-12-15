@@ -19,6 +19,4 @@ const RecipesGrid = ({ recipes }: RecipesGridProps) => {
   );
 };
 
-// recipes.data && <p>No recipes found in this category.</p>
-
 export default RecipesGrid;
