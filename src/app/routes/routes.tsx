@@ -62,9 +62,9 @@ export const routes: RouteObject[] = [
                 Component: UserProfilePage,
               },
               {
-                path: "create-recipe", 
+                path: "create-recipe",
                 Component: CreateRecipePage,
-              }
+              },
             ],
           },
         ],

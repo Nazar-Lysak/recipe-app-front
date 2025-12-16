@@ -17,7 +17,8 @@ const onboardingSteps: OnboardingStep[] = [
   {
     id: 1,
     title: "Отримайте натхнення",
-    description: "Отримуйте натхнення з нашими щоденними рекомендаціями рецептів.",
+    description:
+      "Отримуйте натхнення з нашими щоденними рекомендаціями рецептів.",
     image: "/src/assets/img/onboarding/onboarding-1.jpg",
     buttonText: "Продовжити",
   },
