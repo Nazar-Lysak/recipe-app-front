@@ -14,7 +14,7 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
 };
 
 const RecipeCardMinimal = ({ recipe }: RecipeCardMinimalProps) => {
-  const { time, rating, name, image } = recipe;
+  const { time, favouriteCount, name, image } = recipe;
 
   return (
     <div className={styles.wrapper}>
@@ -29,7 +29,7 @@ const RecipeCardMinimal = ({ recipe }: RecipeCardMinimalProps) => {
           <h3 className={styles.title}>{name}</h3>
           <div className={styles.stats}>
             <p className={styles.rating}>
-              {rating} <RatingStarIcon />
+              {favouriteCount} <RatingStarIcon />
             </p>
             <p className={styles.time}>{time} хв</p>
           </div>

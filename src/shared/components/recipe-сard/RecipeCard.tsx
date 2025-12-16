@@ -12,7 +12,7 @@ const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
 
 const RecipeCard = ({ recipe }: RecipeCardProps) => {
-  const { image, name, description, rating, time } = recipe;
+  const { image, name, description, favouriteCount, time } = recipe;
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
@@ -32,7 +32,7 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
       <p className={style.description}>{description}</p>
       <div className={style.info}>
         <span className={style.rating}>
-          {rating}
+          {favouriteCount}
           <RatingStarIcon />
         </span>
         <span className={style.time}>

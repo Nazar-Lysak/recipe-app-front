@@ -6,6 +6,8 @@ import style from "./TopChef.module.scss";
 const TopChef = () => {
   const recipes = useRecipes({ limit: 4, activeCategory: "1", uniqueAuthors: true });
 
+  console.log(recipes.data);
+
   return (
     <>
       <h2 className={style.title}>Рейтинг кухарів</h2>

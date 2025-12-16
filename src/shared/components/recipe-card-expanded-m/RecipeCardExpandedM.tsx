@@ -16,7 +16,7 @@ interface RecipeCardExpandedProps {
 }
 
 const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
-  const { id, name, description, image, rating, time } = recipe;
+  const { id, name, description, image, favouriteCount, time } = recipe;
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
@@ -41,7 +41,7 @@ const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
           </div>
           <div className={style.recipeStats}>
             <p className={style.rating}>
-              <RatingStarIcon /> {rating}
+              <RatingStarIcon /> {favouriteCount}
             </p>
             <p className={style.time}>
               {" "}

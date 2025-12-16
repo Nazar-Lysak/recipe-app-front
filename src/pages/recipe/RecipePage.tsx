@@ -32,7 +32,7 @@ const RecipePage = () => {
     return <div>Рецепт не знайдено</div>;
   }
 
-  const { name, description, image, rating, time, ingredients, steps } =
+  const { name, description, image, favouriteCount, time, ingredients, steps } =
     recipe.data;
 
   return (
@@ -47,7 +47,7 @@ const RecipePage = () => {
         <div className={styles.details}>
           <h1 className={styles.title}>{name}</h1>
           <span className={styles.rating}>
-            <RatingStarIcon /> {rating}
+            <RatingStarIcon /> {favouriteCount}
           </span>
           <span className={styles.comments}>
             <CommentsIcon /> 199
