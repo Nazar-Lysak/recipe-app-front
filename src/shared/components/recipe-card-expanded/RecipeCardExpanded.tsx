@@ -23,7 +23,7 @@ interface RecipeCardExpandedProps {
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
   const { id, name, description, image, createdAt, rating, time } = recipe;
 
-  var date = new DateObject(createdAt);
+  const date = new DateObject(createdAt);
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
   };

@@ -16,26 +16,26 @@ interface OnboardingStep {
 const onboardingSteps: OnboardingStep[] = [
   {
     id: 1,
-    title: "Get Inspired",
-    description: "Get inspired with our daily recipe recommendations.",
+    title: "Отримайте натхнення",
+    description: "Отримуйте натхнення з нашими щоденними рекомендаціями рецептів.",
     image: "/src/assets/img/onboarding/onboarding-1.jpg",
-    buttonText: "Continue",
+    buttonText: "Продовжити",
   },
   {
     id: 2,
-    title: "Get An Increase Your Skills",
-    description: "Learn essential cooking techniques on your own pace.",
+    title: "Підвищуйте свої навички",
+    description: "Вивчайте основні кулінарні техніки у власному темпі.",
     image: "/src/assets/img/onboarding/onboarding-2.jpg",
-    buttonText: "Continue",
+    buttonText: "Продовжити",
   },
   {
     id: 3,
-    title: "Welcome",
+    title: "Ласкаво просимо",
     description:
-      "Find the best recipes that the world can provide you also with good community to increase your cooking skills",
+      "Знайдіть найкращі рецепти, які може запропонувати світ, а також чудову спільноту для підвищення ваших кулінарних навичок",
     image: "/src/assets/img/onboarding/onboarding-3.jpg",
-    buttonText: "I'm New",
-    secondaryButton: "I've Been Here",
+    buttonText: "Я новачок",
+    secondaryButton: "Я вже тут був",
   },
 ];
 

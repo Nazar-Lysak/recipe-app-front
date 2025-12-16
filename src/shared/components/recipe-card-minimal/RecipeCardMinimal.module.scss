@@ -1,0 +1,58 @@
+@use "@/styles/variables" as *;
+
+.wrapper {
+  padding-bottom: 24px;
+  .image {
+    aspect-ratio: 1;
+    width: 100%;
+    border-radius: 14px;
+    display: block;
+  }
+
+  .card {
+    position: relative;
+  }
+
+  .info {
+    background-color: $shade-100;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    padding: 5px 10px;
+    position: absolute;
+    width: 100%;
+    bottom: -14px;
+  }
+
+  .title {
+    margin: 0;
+    margin-bottom: 4px;
+    font-family: $font-primary;
+    font-weight: 400;
+    font-size: 12px;
+    color: $shade-900;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .stats {
+    display: flex;
+    gap: 14px;
+    padding-bottom: 4px;
+  }
+
+  .rating,
+  .time {
+    font-family: $font-primary;
+    font-weight: 400;
+    font-size: 12px;
+    color: $shade-300;
+    margin: 0;
+  }
+
+  .rating {
+    fill: $shade-300;
+  }
+}

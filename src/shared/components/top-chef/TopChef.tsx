@@ -8,7 +8,7 @@ const TopChef = () => {
 
   return (
     <>
-      <h2 className={style.title}>Найкращий кухар</h2>
+      <h2 className={style.title}>Рейтинг кухарів</h2>
       <div className={style.chefs}>
         {recipes.data?.recipesList.map((recipe: RecipeInterface, i: number) => {
           const authorData = (recipe.author as any)?.profile || recipe.author;

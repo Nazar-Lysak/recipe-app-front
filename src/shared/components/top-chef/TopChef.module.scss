@@ -4,6 +4,7 @@
   font-family: $font-primary;
   font-weight: 500;
   font-size: 15px;
+  margin: 0 0 10px;
   text-transform: capitalize;
   color: $shade-400;
 }
@@ -26,6 +27,7 @@
     width: 100%;
     height: auto;
     aspect-ratio: 1;
+    border-radius: 8px;
   }
 }
 
