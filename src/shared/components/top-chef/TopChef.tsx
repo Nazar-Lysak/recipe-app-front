@@ -4,7 +4,7 @@ import type { RecipeInterface } from "../../types/UI.types";
 import style from "./TopChef.module.scss";
 
 const TopChef = () => {
-  const recipes = useRecipes({ limit: 4, activeCategory: "1" });
+  const recipes = useRecipes({ limit: 4, activeCategory: "1", uniqueAuthors: true });
 
   return (
     <>

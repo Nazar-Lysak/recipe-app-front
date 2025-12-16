@@ -5,6 +5,7 @@ interface UseRecipesProps {
   limit?: number;
   offset?: number;
   username?: string;
+  uniqueAuthors?: boolean;
 }
 
 export const useRecipes = ({
@@ -12,6 +13,7 @@ export const useRecipes = ({
   limit,
   offset,
   username,
+  uniqueAuthors
 }: UseRecipesProps) => {
   return useQuery({
     queryKey: ["recipes", activeCategory, offset, username],
@@ -35,6 +37,10 @@ export const useRecipes = ({
       }
       if (offset !== undefined) {
         params.append("offset", offset.toString());
+      }
+
+      if (uniqueAuthors) {
+        params.append("uniqueAuthors", "true");
       }
 
       const response = await fetch(
