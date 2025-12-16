@@ -1,9 +1,7 @@
-import DateObject from "react-date-object";
 import style from "./RecipeCardExpandedM.module.scss";
 import HeartIcon from "../../../assets/img/svg/HeartIcon";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import ClockIcon from "../../../assets/img/svg/ClockIcon";
-import CommentsIcon from "../../../assets/img/svg/CommentsIcon";
 import type {
   FullUserDataInterface,
   RecipeInterface,
@@ -25,7 +23,7 @@ const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
   };
 
   return (
-    <div className={style.recipeCardExpanded} key={id}>
+    <div key={id}>
       <div className={style.recipeContent}>
         <button className={style.likeButton}>
           <HeartIcon favourited={false} />
