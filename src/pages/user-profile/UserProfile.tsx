@@ -12,6 +12,8 @@ const UserProfile = () => {
     username: userData.data?.username,
   });
 
+  console.log("User Data:", userData.data);
+
   return (
     <div>
       <h1>{userData.data?.username}</h1>
