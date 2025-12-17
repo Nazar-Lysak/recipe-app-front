@@ -16,6 +16,8 @@ const MyRecipesGallery = () => {
     username: fullUserData?.username,
   });
 
+  console.log(fullUserData)
+
   return (
     <div className={style.wrapper}>
       <h2 className={style.title}>Ваші рецепти</h2>

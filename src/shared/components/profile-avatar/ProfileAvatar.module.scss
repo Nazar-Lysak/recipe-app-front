@@ -4,6 +4,7 @@
   display: flex;
   align-items: flex-start;
   gap: 13px;
+  margin-bottom: 10px;
 }
 
 .avatar {
@@ -76,6 +77,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  color: $shade-900;
 
   &:nth-child(odd) {
     &::after {
