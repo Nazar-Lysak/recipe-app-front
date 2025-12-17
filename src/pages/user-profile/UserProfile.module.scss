@@ -1,0 +1,44 @@
+@use "@/styles/variables" as *;
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    height: 2px;
+    width: calc((100% - 32px) / 2);
+    background-color: $shade-400;
+    transition: transform 0.3s ease;
+  }
+
+  &[data-active="0"]::after {
+    transform: translateX(0);
+  }
+
+  &[data-active="1"]::after {
+    transform: translateX(calc(100% + 32px));
+  }
+
+  .button {
+    flex-grow: 1;
+    font-family: $font-primary;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+    color: $shade-900;
+    background-color: transparent;
+    outline: none;
+    border: solid 1px transparent;
+    padding: 4px 9px;
+    cursor: pointer;
+    position: relative;
+  }
+}
