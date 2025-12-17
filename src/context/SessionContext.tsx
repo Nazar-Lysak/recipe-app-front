@@ -45,6 +45,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     try {
       const data = await getProfileData(userToken);
       setFullUserData(data);
+      setUser(data);
     } catch (error) {
       console.error("Failed to load profile:", error);
       localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
@@ -70,7 +71,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
   const signIn = useCallback(
     (userData: UserInterface, userToken: string) => {
       setLoggedIn(true);
-      setUser(userData);
+      // setUser(userData);
       setToken(userToken);
       localStorage.setItem(LOCAL_STORAGE_KEYS.TOKEN, userToken);
       // ????

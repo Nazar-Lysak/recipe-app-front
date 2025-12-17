@@ -20,11 +20,26 @@
   .rating,
   .comments {
     display: flex;
+    justify-content: flex-end;
     gap: 4px;
+    padding: 5px 0;
+    min-width: 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
   }
 
   .rating {
-    fill: $shade-100;
+      fill: $shade-300;
+      stroke-width: 0.7;
+      stroke: $shade-100;
+
+    &.liked {
+      stroke: transparent;
+      fill: $shade-100;
+      transform: scale(1.2);
+    }
   }
 
   .comments {

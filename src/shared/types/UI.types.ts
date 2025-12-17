@@ -4,6 +4,7 @@ export interface UserInterface {
   username: string;
   first_name?: string;
   avatar_url?: string | null;
+  liked_recipes?: string[];
 }
 
 export interface CategoryInterface {
@@ -28,6 +29,7 @@ export interface RecipeInterface {
   category: CategoryInterface;
   createdAt: string;
   updatedAt: string;
+  likedByUserIds: string[];
 }
 
 export interface FullUserDataInterface {
