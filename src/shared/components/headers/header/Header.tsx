@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import NotificationIcon from "../../../../assets/img/svg/NotificationIcon";
 import SearchIcon from "../../../../assets/img/svg/SearchIcon";
@@ -16,6 +16,7 @@ const ROUTE_TITLES: Record<string, string> = {
   "/recipe": "Рецепт",
   "/user": "Користувач",
   "/create-recipe": "Створити рецепт",
+  "/notifications": "Сповіщення",
 };
 
 const backButtonAnimation = {
@@ -80,9 +81,11 @@ const Header: FC = () => {
         </motion.div>
       </AnimatePresence>
       <div className={style.buttons}>
-        <ButtonIcon>
-          <NotificationIcon />
-        </ButtonIcon>
+        <Link to="/notifications">
+          <ButtonIcon>
+            <NotificationIcon />
+          </ButtonIcon>
+        </Link>
         <ButtonIcon>
           <SearchIcon />
         </ButtonIcon>

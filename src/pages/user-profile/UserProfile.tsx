@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { useUser } from "../../shared/hooks/queries/useUser";
 import { useRecipes } from "../../shared/hooks/queries/useRecipes";
 import RecipesGrid from "../../shared/components/recipes-grid/RecipesGrid";
+import ProfileAvatar from "../../shared/components/profile-avatar/ProfileAvatar";
 
 const UserProfile = () => {
   const userId = useParams().userId;
@@ -12,12 +13,17 @@ const UserProfile = () => {
     username: userData.data?.username,
   });
 
-  console.log("User Data:", userData.data);
+  if (userData.isLoading || recipes.isLoading) {
+    return <div>Завантаження...</div>;
+  }
+
+  if (userData.isError) {
+    return <div>Помилка завантаження профілю користувача.</div>;
+  }
 
   return (
     <div>
-      <h1>{userData.data?.username}</h1>
-      <h2>{userData.data?.email}</h2>
+      {userData.data && <ProfileAvatar userData={userData.data} />}
       <RecipesGrid recipes={recipes.data?.recipesList || []} />
     </div>
   );

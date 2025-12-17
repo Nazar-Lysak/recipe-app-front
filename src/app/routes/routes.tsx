@@ -25,6 +25,9 @@ const UserProfilePage = lazy(
 const CreateRecipePage = lazy(
   () => import("../../pages/create-recipe/CreateRecipePage"),
 );
+const NotificationPage = lazy(
+  () => import("../../pages/notification/NotificationPage"),
+);
 
 export const routes: RouteObject[] = [
   {
@@ -64,6 +67,10 @@ export const routes: RouteObject[] = [
               {
                 path: "create-recipe",
                 Component: CreateRecipePage,
+              },
+              {
+                path: "notifications",
+                Component: NotificationPage,
               },
             ],
           },
