@@ -40,13 +40,13 @@ const ForgotPasswordForm = () => {
       {forgotEmailMutation.isError && (
         <p className={style.error}>
           {forgotEmailMutation.error?.response?.data?.message ||
-            "Password reset failed. Please try again."}
+            "Не вдалося скинути пароль. Спробуйте ще раз."}
         </p>
       )}
       {successMessage && <p className={style.success}>{successMessage}</p>}
       <div className={style.buttonWrapper}>
         <Button type="submit" disabled={forgotEmailMutation.isPending}>
-          {forgotEmailMutation.isPending ? "Sending..." : "Send Reset Link"}
+          {forgotEmailMutation.isPending ? "Відправляємо..." : "Відправити"}
         </Button>
       </div>
 

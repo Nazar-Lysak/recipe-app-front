@@ -50,10 +50,10 @@ const SignupForm = () => {
   return (
     <form className={style.container} onSubmit={submit}>
       <InputText
-        label="Username"
+        label="Ім'я користувача"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        placeholder="John Doe"
+        placeholder="Іван Іваненко"
         type="text"
         required
       />
@@ -66,30 +66,30 @@ const SignupForm = () => {
         required
       />
       <InputText
-        label="Password"
+        label="Пароль"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter your password"
+        placeholder="Введіть ваш пароль"
         type="password"
         required
       />
       <InputText
-        label="Confirm Password"
+        label="Підтвердіть пароль"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-        placeholder="Repeat your password"
+        placeholder="Повторіть ваш пароль"
         type="password"
         required
       />
       {signupMutation.isError && (
         <div className={style.error}>
           {signupMutation.error?.response?.data?.message ||
-            "Signup failed. Please try again."}
+            "Не вдалося зареєструватися. Спробуйте ще раз."}
         </div>
       )}
       <div className={style.buttonWrapper}>
         <Button type="submit" disabled={!buttonSubmitValidate()}>
-          {signupMutation.isPending ? "Loading..." : "Sign Up"}
+          {signupMutation.isPending ? "Завантаження..." : "Зареєструватися"}
         </Button>
       </div>
 

@@ -46,21 +46,21 @@ const LoginForm = () => {
         type="email"
       />
       <InputText
-        label="Password"
+        label="Пароль"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter your password"
+        placeholder="Введіть ваш пароль"
       />
       {loginMutation.isError && (
         <p className={style.error}>
           {loginMutation.error?.response?.data?.message ||
-            "Login failed. Please try again."}
+            "Не вдалося увійти. Спробуйте ще раз."}
         </p>
       )}
       <div className={style.buttonWrapper}>
         <Button type="submit" disabled={!buttonSubmitValidate()}>
-          {loginMutation.isPending ? "Loading..." : "Log in"}
+          {loginMutation.isPending ? "Завантаження..." : "Увійти"}
         </Button>
       </div>
 

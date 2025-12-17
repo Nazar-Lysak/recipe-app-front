@@ -5,11 +5,11 @@ import style from "./Auth.module.scss";
 
 export default function ForgotPasswordPage() {
   return (
-    <AuthLayout title="Forgot Password">
+    <AuthLayout title="Відновлення паролю">
       <ForgotPasswordForm />
       <div className={style.links}>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/login">Увійти</NavLink>
+        <NavLink to="/signup">Зареєструватися</NavLink>
       </div>
     </AuthLayout>
   );
