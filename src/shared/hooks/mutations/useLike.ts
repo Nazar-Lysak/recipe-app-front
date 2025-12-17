@@ -10,7 +10,7 @@ export const useLike = (recipeId: string, initialLikes: number) => {
 
   const [optimisticLikes, setOptimisticLikes] = useOptimistic(
     initialLikes,
-    (_, newValue: number) => newValue
+    (_, newValue: number) => newValue,
   );
 
   const mutation = useMutation({

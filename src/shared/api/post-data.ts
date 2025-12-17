@@ -76,7 +76,7 @@ export const likeRecipe = async (recipeId: string, token: string) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
   return response.data;
 };

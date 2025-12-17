@@ -7,7 +7,10 @@ import {
   type ReactNode,
 } from "react";
 import { getProfileData, getCurrentUser } from "../shared/api/get-data";
-import type { UserInterface } from "../shared/types/UI.types";
+import type {
+  FullUserDataInterface,
+  UserInterface,
+} from "../shared/types/UI.types";
 
 const LOCAL_STORAGE_KEYS = {
   TOKEN: "recipeApp_token",
@@ -16,7 +19,7 @@ const LOCAL_STORAGE_KEYS = {
 interface SessionContextType {
   loggedIn: boolean;
   user: UserInterface | null;
-  fullUserData: UserInterface | null;
+  fullUserData: FullUserDataInterface | null;
   token: string | null;
   isLoading: boolean;
   signIn: (userData: UserInterface, token: string) => void;
@@ -36,7 +39,8 @@ export const useSession = () => {
 export const SessionProvider = ({ children }: { children: ReactNode }) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<UserInterface | null>(null);
-  const [fullUserData, setFullUserData] = useState<UserInterface | null>(null);
+  const [fullUserData, setFullUserData] =
+    useState<FullUserDataInterface | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -87,7 +91,6 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     },
     [getFullUserData, fetchCurrentUser],
   );
-
 
   const signOut = useCallback(() => {
     setLoggedIn(false);

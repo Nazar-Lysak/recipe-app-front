@@ -9,6 +9,9 @@ import type {
   FullUserDataInterface,
   RecipeInterface,
 } from "../../types/UI.types";
+import { useSession } from "../../../context/SessionContext";
+import classNames from "classnames";
+import OwnRecipeIcon from "../../../assets/img/svg/OwnRecipeIcon";
 
 const FALLBACK_AVATAR =
   "/src/assets/img/fallback-images/general-category-image.png";
@@ -23,7 +26,7 @@ interface RecipeCardExpandedProps {
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
   const { id, name, description, image, createdAt, favouriteCount, time } =
     recipe;
-
+  const { user } = useSession();
   const date = new DateObject(createdAt);
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
@@ -34,6 +37,9 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
   };
 
   const authorData = (recipe.author as any)?.profile || recipe.author;
+
+  const isLiked = recipe.likedByUserIds.includes(user ? user.id : "");
+  const isOwnRecipe = user?.id === recipe.author.id;
 
   return (
     <Link to={`/recipe/${id}`}>
@@ -68,8 +74,15 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
               <p className={style.recipeDescription}>{description}</p>
             </div>
             <div className={style.recipeStats}>
-              <p className={style.rating}>
-                <RatingStarIcon /> {favouriteCount}
+              <p
+                className={classNames(
+                  style.rating,
+                  { [style.liked]: isLiked },
+                  { [style.isOwnRecipe]: isOwnRecipe },
+                )}
+              >
+                {isOwnRecipe ? <OwnRecipeIcon /> : <RatingStarIcon />}{" "}
+                {favouriteCount}
               </p>
               <p className={style.time}>
                 {" "}

@@ -30,7 +30,7 @@ export const getProfileData = async (
 ): Promise<FullUserDataInterface> => {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.get<FullUserDataInterface>(
-    `${BASE_URL}${API_URL.user.current}`,
+    `${BASE_URL}${API_URL.profile.current}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -40,9 +40,7 @@ export const getProfileData = async (
   return response.data;
 };
 
-export const getCurrentUser = async (
-  token: string,
-): Promise<UserInterface> => {
+export const getCurrentUser = async (token: string): Promise<UserInterface> => {
   const response = await axios.get<UserInterface>(
     `${BASE_URL}${API_URL.user.current}`,
     {

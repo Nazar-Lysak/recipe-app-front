@@ -31,14 +31,24 @@
   }
 
   .rating {
-      fill: $shade-300;
-      stroke-width: 0.7;
-      stroke: $shade-100;
+    fill: $shade-300;
+    stroke-width: 0.7;
+    stroke: $shade-100;
 
     &.liked {
       stroke: transparent;
       fill: $shade-100;
       transform: scale(1.2);
+    }
+
+    &.ownRecipe {
+      stroke: $shade-100;
+      fill: $shade-300;
+      stroke-width: 1.5;
+    }
+
+    &:disabled {
+      color: inherit;
     }
   }
 

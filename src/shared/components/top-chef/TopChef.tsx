@@ -5,7 +5,6 @@ import { useProfiles } from "../../hooks/queries/useProfiles";
 const TopChef = () => {
   const allProfiles = useProfiles({ top: true, limit: 4, offset: 0 });
 
-  console.log("Top Chefs Profiles:", allProfiles.data);
   return (
     <>
       <h2 className={style.title}>Рейтинг кухарів</h2>

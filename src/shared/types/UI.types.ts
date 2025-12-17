@@ -4,7 +4,8 @@ export interface UserInterface {
   username: string;
   first_name?: string;
   avatar_url?: string | null;
-  liked_recipes?: string[];
+  // liked_recipes?: string[];
+  profile?: FullUserDataInterface;
 }
 
 export interface CategoryInterface {
@@ -57,4 +58,5 @@ export interface FullUserDataInterface {
   rating: number;
   created_at: string;
   updated_at: string;
+  liked_recipes: string[];
 }

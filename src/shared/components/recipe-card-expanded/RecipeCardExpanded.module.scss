@@ -131,7 +131,26 @@
   }
 
   .rating {
+    fill: $shade-400;
+    stroke-width: 0.7;
+    stroke: $shade-100;
+  }
+
+  .liked {
     fill: $shade-100;
+    stroke: transparent;
+    transform: scale(1.2);
+  }
+
+  .isOwnRecipe {
+    stroke: $shade-100;
+    fill: $shade-400;
+    stroke-width: 2;
+
+    svg {
+      position: relative;
+      bottom: -3px;
+    }
   }
 
   .time {

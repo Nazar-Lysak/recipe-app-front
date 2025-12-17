@@ -60,8 +60,6 @@ const CommunityPage = () => {
     };
   }, [recipes.isLoading, recipes.data, limit]);
 
-  console.log(allRecipes);
-
   return (
     <div>
       <MenuTop

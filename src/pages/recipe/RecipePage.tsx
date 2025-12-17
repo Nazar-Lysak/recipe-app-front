@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import classNames from 'classnames';
+import classNames from "classnames";
 import { useParams } from "react-router-dom";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import styles from "./RecipePage.module.scss";
@@ -11,6 +11,7 @@ import ClockIcon from "../../assets/img/svg/ClockIcon";
 import { useSession } from "../../context/SessionContext";
 import { useRecipe } from "../../shared/hooks/queries/useRecipe";
 import { useLike } from "../../shared/hooks/mutations/useLike";
+import OwnRecipeIcon from "../../assets/img/svg/OwnRecipeIcon";
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
@@ -22,7 +23,7 @@ const RecipePage = () => {
   const { user } = useSession();
   const { optimisticLikes, handleLike } = useLike(
     recipeId || "",
-    recipe.data?.favouriteCount || 0
+    recipe.data?.favouriteCount || 0,
   );
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -44,8 +45,8 @@ const RecipePage = () => {
   }
 
   const { name, description, image, time, ingredients, steps } = recipe.data;
-
   const isLiked = recipe.data.likedByUserIds.includes(user?.id || "");
+  const isOwnRecipe = user?.id === recipe.data.authorId;
 
   return (
     <div>
@@ -58,14 +59,16 @@ const RecipePage = () => {
         />
         <div className={styles.details}>
           <h1 className={styles.title}>{name}</h1>
-          <button 
+          <button
             className={classNames(
               styles.rating,
-              { [styles.liked]: isLiked }
+              { [styles.liked]: isLiked },
+              { [styles.ownRecipe]: isOwnRecipe },
             )}
+            disabled={isOwnRecipe}
             onClick={handleLike}
           >
-            <RatingStarIcon />
+            {isOwnRecipe ? <OwnRecipeIcon /> : <RatingStarIcon />}
             <AnimatePresence mode="wait">
               <motion.span
                 key={optimisticLikes}

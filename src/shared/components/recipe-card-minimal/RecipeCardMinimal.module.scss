@@ -55,4 +55,19 @@
   .rating {
     fill: $shade-300;
   }
+
+  .isOwnRecipe {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    svg {
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  .time {
+    stroke: $shade-400;
+  }
 }

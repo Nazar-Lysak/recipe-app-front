@@ -101,6 +101,13 @@
     fill: $shade-300;
   }
 
+  .isOwnRecipe {
+    svg {
+      position: relative;
+      bottom: -2.5px;
+    }
+  }
+
   .time {
     stroke: $shade-300;
   }

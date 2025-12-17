@@ -74,6 +74,19 @@
   }
 
   .rating {
+    stroke: transparent;
+    fill: $shade-100;
+    stroke-width: 0.7;
+    stroke: $shade-400;
+  }
+
+  .isLiked {
+    fill: $shade-300;
+    stroke: transparent;
+    transform: scale(1.2);
+  }
+
+  .isOwnRecipe {
     fill: $shade-300;
   }
 
