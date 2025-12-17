@@ -5,7 +5,6 @@ import RecipesGrid from "../../shared/components/recipes-grid/RecipesGrid";
 
 const UserProfile = () => {
   const userId = useParams().userId;
-
   const userData = useUser(userId);
 
   const recipes = useRecipes({

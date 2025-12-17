@@ -21,7 +21,8 @@ interface RecipeCardExpandedProps {
 }
 
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
-  const { id, name, description, image, createdAt, favouriteCount, time } = recipe;
+  const { id, name, description, image, createdAt, favouriteCount, time } =
+    recipe;
 
   const date = new DateObject(createdAt);
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -46,7 +47,9 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
           />
           <div>
             <p className={style.authorUsername}>{recipe.author.username}</p>
-            <p className={style.createdAt}>{date.format("DD/MM/YYYY")}</p>
+            <p className={style.createdAt}>
+              {date.format("DD/MM/YYYY - HH:mm")}
+            </p>
           </div>
         </div>
         <div className={style.recipeContent}>
