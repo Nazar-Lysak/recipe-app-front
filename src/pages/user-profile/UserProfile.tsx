@@ -1,5 +1,4 @@
 import { useState } from "react";
-import classNames from "classnames";
 import { useParams } from "react-router";
 import { useUser } from "../../shared/hooks/queries/useUser";
 import { useRecipes } from "../../shared/hooks/queries/useRecipes";
