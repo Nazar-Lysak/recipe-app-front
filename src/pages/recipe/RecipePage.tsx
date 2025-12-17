@@ -1,9 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import classNames from 'classnames';
-import { useOptimistic, startTransition } from "react";
 import { useParams } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import styles from "./RecipePage.module.scss";
 import CommentsIcon from "../../assets/img/svg/CommentsIcon";
@@ -13,28 +10,26 @@ import { useUser } from "../../shared/hooks/queries/useUser";
 import ClockIcon from "../../assets/img/svg/ClockIcon";
 import { useSession } from "../../context/SessionContext";
 import { useRecipe } from "../../shared/hooks/queries/useRecipe";
+import { useLike } from "../../shared/hooks/mutations/useLike";
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
 
 const RecipePage = () => {
   const { recipeId } = useParams<{ recipeId: string }>();
-  const { token } = useSession();
-  const queryClient = useQueryClient();
 
   const recipe = useRecipe(recipeId || "");
   const { user } = useSession();
+  const { optimisticLikes, handleLike } = useLike(
+    recipeId || "",
+    recipe.data?.favouriteCount || 0
+  );
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
   };
 
   const authorRecipe = useUser(recipe.data?.authorId);
-
-  const [optimisticLikes, setOptimisticLikes] = useOptimistic(
-    recipe.data?.favouriteCount || 0,
-    (_, newValue: number) => newValue
-  );
 
   if (recipe.isLoading) {
     return <PagePrealoader variant="transparent" />;
@@ -49,30 +44,6 @@ const RecipePage = () => {
   }
 
   const { name, description, image, time, ingredients, steps } = recipe.data;
-
-  const handleLike = async () => {
-    startTransition(() => {
-      setOptimisticLikes(optimisticLikes + 1);
-    });
-
-    try {
-      await axios.post(
-        `http://localhost:3000/recipe/${recipeId}/like`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      queryClient.invalidateQueries({ queryKey: ["recipe", recipeId] });
-      queryClient.invalidateQueries({ queryKey: ["recipes"] });
-      queryClient.invalidateQueries({ queryKey: ["user-profile"] });
-    } catch (error) {
-      console.error("Failed to like:", error);
-    }
-  };
 
   const isLiked = recipe.data.likedByUserIds.includes(user?.id || "");
 

@@ -32,6 +32,10 @@ interface SignupResponse {
   };
 }
 
+interface ForgotPasswordResponse {
+  message: string;
+}
+
 export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.post<LoginResponse>(
@@ -53,10 +57,6 @@ export const signup = async (
   return response.data;
 };
 
-interface ForgotPasswordResponse {
-  message: string;
-}
-
 export const forgotPassword = async (
   email: string,
 ): Promise<ForgotPasswordResponse> => {
@@ -64,6 +64,19 @@ export const forgotPassword = async (
   const response = await axios.post<ForgotPasswordResponse>(
     `${BASE_URL}${API_URL.auth.forgotPassword}`,
     { email },
+  );
+  return response.data;
+};
+
+export const likeRecipe = async (recipeId: string, token: string) => {
+  const response = await axios.post(
+    `${BASE_URL}/recipe/${recipeId}/like`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response.data;
 };
