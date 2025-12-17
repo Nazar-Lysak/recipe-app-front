@@ -5,9 +5,12 @@ const API_URL = {
     users: "/user",
     forgotPassword: "/user/forgot-password",
   },
+  profile: {
+    current: "/user/profile/current",
+    byId: "/user",
+  },
   user: {
     current: "/user/current",
-    byId: "/user",
   },
   categories: {
     list: "/category",

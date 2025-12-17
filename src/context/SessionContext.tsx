@@ -6,7 +6,7 @@ import {
   useCallback,
   type ReactNode,
 } from "react";
-import { getProfileData } from "../shared/api/get-data";
+import { getProfileData, getCurrentUser } from "../shared/api/get-data";
 import type { UserInterface } from "../shared/types/UI.types";
 
 const LOCAL_STORAGE_KEYS = {
@@ -45,7 +45,6 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     try {
       const data = await getProfileData(userToken);
       setFullUserData(data);
-      setUser(data);
     } catch (error) {
       console.error("Failed to load profile:", error);
       localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
@@ -56,6 +55,15 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  const fetchCurrentUser = useCallback(async (userToken: string) => {
+    try {
+      const userData = await getCurrentUser(userToken);
+      setUser(userData);
+    } catch (error) {
+      console.error("Failed to load user:", error);
+    }
+  }, []);
+
   useEffect(() => {
     const storedToken = localStorage.getItem(LOCAL_STORAGE_KEYS.TOKEN);
 
@@ -63,22 +71,23 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
       setToken(storedToken);
       setLoggedIn(true);
       getFullUserData(storedToken);
+      fetchCurrentUser(storedToken);
     } else {
       setIsLoading(false);
     }
-  }, [getFullUserData]);
+  }, [getFullUserData, fetchCurrentUser]);
 
   const signIn = useCallback(
-    (userData: UserInterface, userToken: string) => {
+    (_: UserInterface, userToken: string) => {
       setLoggedIn(true);
-      // setUser(userData);
       setToken(userToken);
       localStorage.setItem(LOCAL_STORAGE_KEYS.TOKEN, userToken);
-      // ????
       getFullUserData(userToken);
+      fetchCurrentUser(userToken);
     },
-    [getFullUserData],
+    [getFullUserData, fetchCurrentUser],
   );
+
 
   const signOut = useCallback(() => {
     setLoggedIn(false);

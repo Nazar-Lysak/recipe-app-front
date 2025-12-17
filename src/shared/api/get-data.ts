@@ -4,6 +4,7 @@ import type {
   CategoryInterface,
   FullUserDataInterface,
   RecipeInterface,
+  UserInterface,
 } from "../types/UI.types";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -39,6 +40,20 @@ export const getProfileData = async (
   return response.data;
 };
 
+export const getCurrentUser = async (
+  token: string,
+): Promise<UserInterface> => {
+  const response = await axios.get<UserInterface>(
+    `${BASE_URL}${API_URL.user.current}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  return response.data;
+};
+
 export const getRecipesByCategory = async (
   categoryId: string,
 ): Promise<RecipesResponse> => {
@@ -62,7 +77,7 @@ export const getUserById = async (
   userId: string,
 ): Promise<FullUserDataInterface> => {
   const response = await axios.get<FullUserDataInterface>(
-    `${BASE_URL}${API_URL.user.byId}/${userId}`,
+    `${BASE_URL}${API_URL.profile.byId}/${userId}`,
   );
   return response.data;
 };

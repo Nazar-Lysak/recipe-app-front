@@ -23,7 +23,7 @@ const RecipePage = () => {
   const queryClient = useQueryClient();
 
   const recipe = useRecipe(recipeId || "");
-  const { fullUserData, user } = useSession();
+  const { user } = useSession();
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
@@ -67,23 +67,14 @@ const RecipePage = () => {
       );
 
       queryClient.invalidateQueries({ queryKey: ["recipe", recipeId] });
+      queryClient.invalidateQueries({ queryKey: ["recipes"] });
+      queryClient.invalidateQueries({ queryKey: ["user-profile"] });
     } catch (error) {
       console.error("Failed to like:", error);
     }
   };
 
-  const isLiked = fullUserData?.liked_recipes?.includes(recipeId || "");
-  console.log("+++++++++++++++++++++++++++++++++++");
-
-  console.log("RecipeId:", recipe.data.likedByUserIds);
-  console.log("User:", user);
-  console.log("FullUserData:", fullUserData);
-
-  console.log("+++++++++++++++++++++++++++++++++++");
-  
-  // console.log("Recipe:", recipe.data.likedByUserIds.includes(user?.id || ""));
-
-  // console.log("Is liked:", isLiked);
+  const isLiked = recipe.data.likedByUserIds.includes(user?.id || "");
 
   return (
     <div>
