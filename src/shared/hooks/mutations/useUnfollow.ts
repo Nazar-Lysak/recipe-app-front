@@ -1,18 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { followUser } from "../../api/post-data";
+import { unfollowUser } from "../../api/post-data";
 import type { FullUserDataInterface } from "../../types/UI.types";
 
-interface UseFollowProps {
+interface UseUnfollowProps {
   userId: string;
   token: string;
 }
 
-export const useFollow = ({ userId, token }: UseFollowProps) => {
+export const useUnfollow = ({ userId, token }: UseUnfollowProps) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async () => {
-      return followUser(userId, token);
+      return unfollowUser(userId, token);
     },
     onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: ["user", userId] });
@@ -30,17 +30,17 @@ export const useFollow = ({ userId, token }: UseFollowProps) => {
           if (!old) return old;
           return {
             ...old,
-            followers_count: old.followers_count + 1,
+            followers_count: old.followers_count - 1,
           };
         },
       );
 
-      queryClient.setQueryData(["isFollowing", userId], true);
+      queryClient.setQueryData(["isFollowing", userId], false);
 
       return { previousData, previousIsFollowing };
     },
     onError: (err, _, context) => {
-      console.error("Follow error:", err);
+      console.error("Unfollow error:", err);
 
       if (context?.previousData) {
         queryClient.setQueryData(["user", userId], context.previousData);

@@ -107,9 +107,8 @@ export const followUser = async (userId: string, token: string) => {
 };
 
 export const unfollowUser = async (userId: string, token: string) => {
-  const response = await axios.post(
-    `${BASE_URL}${API_URL.profile.unfollow(userId)}`,
-    {},
+  const response = await axios.delete(
+    `${BASE_URL}${API_URL.profile.follow(userId)}`,
     {
       headers: {
         Authorization: `Token ${token}`,

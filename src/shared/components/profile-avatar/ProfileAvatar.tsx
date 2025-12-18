@@ -7,6 +7,7 @@ import { useSession } from "../../../context/useSession";
 import { useParams } from "react-router";
 import { useFollow } from "../../hooks/mutations/useFollow";
 import { useIsFollowing } from "../../hooks/queries/useIsFollowing";
+import { useUnfollow } from "../../hooks/mutations/useUnfollow";
 
 const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
   userData,
@@ -26,22 +27,25 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
   } = userData || {};
 
   const isFollowing = useIsFollowing(userId, token);
-
   const isOwnProfile = userId === user?.id;
 
-  const mutation = useFollow({
+  const mutationFollow = useFollow({
     userId: userId || "",
     token: token || "",
-    isFollowing: isFollowing.data || false,
+  });
+
+  const mutateUnfollow = useUnfollow({
+    userId: userId || "",
+    token: token || "",
   });
 
   const handleFollowClick = () => {
     if (isFollowing.data) {
-      console.log("Unfollow user");
+      mutateUnfollow.mutate();
       return;
     }
 
-    mutation.mutate();
+    mutationFollow.mutate();
   };
 
   return (
@@ -58,7 +62,7 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
                 [style.following]: isFollowing.data,
               })}
               onClick={handleFollowClick}
-              disabled={mutation.isPending}
+              disabled={mutationFollow.isPending}
               whileTap={{ scale: 0.9 }}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
