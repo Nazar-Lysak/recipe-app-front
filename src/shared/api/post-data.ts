@@ -37,7 +37,7 @@ interface ForgotPasswordResponse {
 }
 
 export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
+  //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.post<LoginResponse>(
     `${BASE_URL}${API_URL.auth.login}`,
     payload,
@@ -48,8 +48,7 @@ export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
 export const signup = async (
   payload: SignupPayload,
 ): Promise<SignupResponse> => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
-  console.log("Signup payload:", payload);
+  //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.post<SignupResponse>(
     `${BASE_URL}${API_URL.auth.signup}`,
     payload,
@@ -60,7 +59,7 @@ export const signup = async (
 export const forgotPassword = async (
   email: string,
 ): Promise<ForgotPasswordResponse> => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
+  //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.post<ForgotPasswordResponse>(
     `${BASE_URL}${API_URL.auth.forgotPassword}`,
     { email },
@@ -70,7 +69,7 @@ export const forgotPassword = async (
 
 export const likeRecipe = async (recipeId: string, token: string) => {
   const response = await axios.post(
-    `${BASE_URL}/recipe/${recipeId}/like`,
+    `${BASE_URL}${API_URL.recipes.like(recipeId)}`,
     {},
     {
       headers: {
@@ -83,7 +82,7 @@ export const likeRecipe = async (recipeId: string, token: string) => {
 
 export const unlikeRecipe = async (recipeId: string, token: string) => {
   const response = await axios.post(
-    `${BASE_URL}/recipe/${recipeId}/unlike`,
+    `${BASE_URL}${API_URL.recipes.unlike(recipeId)}`,
     {},
     {
       headers: {

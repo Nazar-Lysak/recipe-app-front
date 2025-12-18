@@ -7,7 +7,8 @@ const API_URL = {
   },
   profile: {
     current: "/user/profile/current",
-    byId: "/user",
+    byId: (id: string) => `/user/${id}`,
+    follow: (id: string) => `/user/${id}/follow`,
   },
   user: {
     current: "/user/current",
@@ -17,7 +18,9 @@ const API_URL = {
   },
   recipes: {
     byCategory: "/recipe",
-    byId: "/recipe",
+    byId: (id: string) => `/recipe/${id}`,
+    like: (id: string) => `/recipe/${id}/like`,
+    unlike: (id: string) => `/recipe/${id}/unlike`,
   },
 } as const;
 

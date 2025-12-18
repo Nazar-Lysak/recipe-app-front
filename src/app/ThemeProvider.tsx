@@ -1,5 +1,5 @@
 import { useEffect, type ReactNode } from "react";
-import { useSession } from "../context/SessionContext";
+import { useSession } from "../context/useSession";
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const { fullUserData } = useSession();

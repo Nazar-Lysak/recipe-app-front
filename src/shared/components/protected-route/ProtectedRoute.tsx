@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useSession } from "../../../context/SessionContext";
+import { useSession } from "../../../context/useSession";
 
 const ProtectedRoutes: FC = () => {
   const { loggedIn } = useSession();

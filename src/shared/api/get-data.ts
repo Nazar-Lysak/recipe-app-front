@@ -18,7 +18,7 @@ interface RecipesResponse {
 }
 
 export const getAllCategories = async (): Promise<CategoriesResponse> => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
+  //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.get<CategoriesResponse>(
     `${BASE_URL}${API_URL.categories.list}`,
   );
@@ -28,7 +28,7 @@ export const getAllCategories = async (): Promise<CategoriesResponse> => {
 export const getProfileData = async (
   token: string,
 ): Promise<FullUserDataInterface> => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
+  //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.get<FullUserDataInterface>(
     `${BASE_URL}${API_URL.profile.current}`,
     {
@@ -55,7 +55,7 @@ export const getCurrentUser = async (token: string): Promise<UserInterface> => {
 export const getRecipesByCategory = async (
   categoryId: string,
 ): Promise<RecipesResponse> => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
+  //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.get<RecipesResponse>(
     `${BASE_URL}${API_URL.recipes.byCategory}?category=${categoryId}`,
   );
@@ -66,7 +66,7 @@ export const getRecipeById = async (
   recipeId: string,
 ): Promise<RecipeInterface> => {
   const response = await axios.get<RecipeInterface>(
-    `${BASE_URL}${API_URL.recipes.byId}/${recipeId}`,
+    `${BASE_URL}${API_URL.recipes.byId(recipeId)}`,
   );
   return response.data;
 };
@@ -75,7 +75,7 @@ export const getUserById = async (
   userId: string,
 ): Promise<FullUserDataInterface> => {
   const response = await axios.get<FullUserDataInterface>(
-    `${BASE_URL}${API_URL.profile.byId}/${userId}`,
+    `${BASE_URL}${API_URL.profile.byId(userId)}`,
   );
   return response.data;
 };

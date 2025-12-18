@@ -5,7 +5,7 @@ import NotificationIcon from "../../../../assets/img/svg/NotificationIcon";
 import SearchIcon from "../../../../assets/img/svg/SearchIcon";
 import ButtonIcon from "../../../ui/button-icon/ButtonIcon";
 import style from "./Header.module.scss";
-import { useSession } from "../../../../context/SessionContext";
+import { useSession } from "../../../../context/useSession";
 import ArrowBackIcon from "../../../../assets/img/svg/ArrowBackIcon";
 
 const ROUTE_TITLES: Record<string, string> = {

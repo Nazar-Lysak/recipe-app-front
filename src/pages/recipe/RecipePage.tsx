@@ -8,7 +8,7 @@ import RatingStarIcon from "../../assets/img/svg/RatingStarIcon";
 import UserCard from "../../shared/components/user-card/UserCard";
 import { useUser } from "../../shared/hooks/queries/useUser";
 import ClockIcon from "../../assets/img/svg/ClockIcon";
-import { useSession } from "../../context/SessionContext";
+import { useSession } from "../../context/useSession";
 import { useRecipe } from "../../shared/hooks/queries/useRecipe";
 import { useLike } from "../../shared/hooks/mutations/useLike";
 import OwnRecipeIcon from "../../assets/img/svg/OwnRecipeIcon";

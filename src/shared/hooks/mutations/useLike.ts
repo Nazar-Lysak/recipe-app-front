@@ -1,7 +1,7 @@
 import { useOptimistic, startTransition } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useSession } from "../../../context/SessionContext";
+import { useSession } from "../../../context/useSession";
 import { likeRecipe, unlikeRecipe } from "../../api/post-data";
 
 export const useLike = (recipeId: string, initialLikes: number) => {

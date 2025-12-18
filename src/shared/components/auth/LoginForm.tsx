@@ -7,7 +7,7 @@ import style from "./form.module.scss";
 import { login } from "../../api/post-data";
 import PagePrealoader from "../../ui/page-prealoader/PagePrealoader";
 import { useNavigate } from "react-router";
-import { useSession } from "../../../context/SessionContext";
+import { useSession } from "../../../context/useSession";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");

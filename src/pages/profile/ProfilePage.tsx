@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useSession } from "../../context/SessionContext";
+import { useSession } from "../../context/useSession";
 import Button from "../../shared/ui/button/Button";
 
 const ProfilePage = () => {
