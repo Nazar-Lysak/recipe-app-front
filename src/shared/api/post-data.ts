@@ -74,9 +74,22 @@ export const likeRecipe = async (recipeId: string, token: string) => {
     {},
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Token ${token}`,
       },
     },
   );
   return response.data;
 };
+
+export const unlikeRecipe = async (recipeId: string, token: string) => {
+  const response = await axios.post(
+    `${BASE_URL}/recipe/${recipeId}/unlike`,
+    {},
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    },
+  );
+  return response.data;
+}

@@ -66,7 +66,7 @@ const RecipePage = () => {
               { [styles.ownRecipe]: isOwnRecipe },
             )}
             disabled={isOwnRecipe}
-            onClick={handleLike}
+            onClick={() => handleLike(isLiked)}
           >
             {isOwnRecipe ? <OwnRecipeIcon /> : <RatingStarIcon />}
             <AnimatePresence mode="wait">
