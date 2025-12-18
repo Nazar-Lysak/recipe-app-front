@@ -1,8 +1,8 @@
 import { useOptimistic, startTransition } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useSession } from "../../../context/SessionContext";
-import { likeRecipe } from "../../api/post-data";
+import { useSession } from "../../../context/useSession";
+import { likeRecipe, unlikeRecipe } from "../../api/post-data";
 
 export const useLike = (recipeId: string, initialLikes: number) => {
   const { token } = useSession();
@@ -14,8 +14,12 @@ export const useLike = (recipeId: string, initialLikes: number) => {
   );
 
   const mutation = useMutation({
-    mutationFn: async () => {
-      return await likeRecipe(recipeId, token || "");
+    mutationFn: async (isLiked: boolean) => {
+      if (isLiked) {
+        return await unlikeRecipe(recipeId, token || "");
+      } else {
+        return await likeRecipe(recipeId, token || "");
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["recipe", recipeId] });
@@ -31,17 +35,23 @@ export const useLike = (recipeId: string, initialLikes: number) => {
     },
   });
 
-  const handleLike = () => {
+  const handleLike = (isLiked = false) => {
     startTransition(() => {
-      setOptimisticLikes(optimisticLikes + 1);
+      if (isLiked) {
+        setOptimisticLikes(optimisticLikes - 1);
+      } else {
+        setOptimisticLikes(optimisticLikes + 1);
+      }
     });
 
-    mutation.mutate();
+    mutation.mutate(isLiked);
   };
 
   return {
     optimisticLikes,
-    handleLike,
+    handleLike(isLiked: boolean) {
+      handleLike(isLiked);
+    },
     isLoading: mutation.isPending,
     error: mutation.error,
   };

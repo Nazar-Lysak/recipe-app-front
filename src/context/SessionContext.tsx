@@ -1,42 +1,16 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  type ReactNode,
-} from "react";
+import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { getProfileData, getCurrentUser } from "../shared/api/get-data";
 import type {
   FullUserDataInterface,
   UserInterface,
 } from "../shared/types/UI.types";
+import { SessionContext } from "./useSession";
 
 const LOCAL_STORAGE_KEYS = {
   TOKEN: "recipeApp_token",
 } as const;
 
-interface SessionContextType {
-  loggedIn: boolean;
-  user: UserInterface | null;
-  fullUserData: FullUserDataInterface | null;
-  token: string | null;
-  isLoading: boolean;
-  signIn: (userData: UserInterface, token: string) => void;
-  signOut: () => void;
-}
-
-const SessionContext = createContext<SessionContextType | undefined>(undefined);
-
-export const useSession = () => {
-  const context = useContext(SessionContext);
-  if (!context) {
-    throw new Error("useSession must be used within SessionProvider");
-  }
-  return context;
-};
-
-export const SessionProvider = ({ children }: { children: ReactNode }) => {
+export function SessionProvider({ children }: { children: ReactNode }) {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<UserInterface | null>(null);
   const [fullUserData, setFullUserData] =
@@ -115,4 +89,4 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </SessionContext.Provider>
   );
-};
+}

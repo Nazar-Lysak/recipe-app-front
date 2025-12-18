@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
-import { useSession } from "../../../context/SessionContext";
+import { useSession } from "../../../context/useSession";
 import type { RecipeInterface } from "../../types/UI.types";
 import styles from "./RecipeCardMinimal.module.scss";
 import OwnRecipeIcon from "../../../assets/img/svg/OwnRecipeIcon";

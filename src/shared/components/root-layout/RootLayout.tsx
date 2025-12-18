@@ -4,7 +4,7 @@ import { type FC } from "react";
 import BottomNavigation from "../bottom-navigation/BottomNavigation";
 import Header from "../headers/header/Header";
 import style from "./RootLayout.module.scss";
-import { useSession } from "../../../context/SessionContext";
+import { useSession } from "../../../context/useSession";
 import PagePrealoader from "../../ui/page-prealoader/PagePrealoader";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
 

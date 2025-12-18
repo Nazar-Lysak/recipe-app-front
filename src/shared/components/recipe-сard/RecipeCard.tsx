@@ -3,7 +3,7 @@ import HeartIcon from "../../../assets/img/svg/HeartIcon";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import style from "./RecipeCard.module.scss";
 import type { RecipeInterface } from "../../types/UI.types";
-import { useSession } from "../../../context/SessionContext";
+import { useSession } from "../../../context/useSession";
 import classNames from "classnames";
 import OwnRecipeIcon from "../../../assets/img/svg/OwnRecipeIcon";
 

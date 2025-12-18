@@ -9,7 +9,7 @@ import type {
   FullUserDataInterface,
   RecipeInterface,
 } from "../../types/UI.types";
-import { useSession } from "../../../context/SessionContext";
+import { useSession } from "../../../context/useSession";
 import classNames from "classnames";
 import OwnRecipeIcon from "../../../assets/img/svg/OwnRecipeIcon";
 

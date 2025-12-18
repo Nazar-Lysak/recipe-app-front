@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 import style from "./MyRecipesGallery.module.scss";
 import { useRecipes } from "../../hooks/queries/useRecipes";
-import { useSession } from "../../../context/SessionContext";
+import { useSession } from "../../../context/useSession";
 import RecipeCardMinimal from "../recipe-card-minimal/RecipeCardMinimal";
 import type { RecipeInterface } from "../../types/UI.types";
 
@@ -15,8 +15,6 @@ const MyRecipesGallery = () => {
     activeCategory: "2",
     username: fullUserData?.username,
   });
-
-  console.log(fullUserData)
 
   return (
     <div className={style.wrapper}>

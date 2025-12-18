@@ -13,7 +13,7 @@ export const useRecipes = ({
   limit,
   offset,
   username,
-  uniqueAuthors
+  uniqueAuthors,
 }: UseRecipesProps) => {
   return useQuery({
     queryKey: ["recipes", activeCategory, offset, username],
