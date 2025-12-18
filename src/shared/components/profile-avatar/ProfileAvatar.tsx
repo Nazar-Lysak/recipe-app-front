@@ -44,7 +44,6 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
       mutateUnfollow.mutate();
       return;
     }
-
     mutationFollow.mutate();
   };
 

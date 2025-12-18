@@ -74,6 +74,13 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
   }, []);
 
+  const refreshUserData = useCallback(async () => {
+    const currentToken = token || localStorage.getItem(LOCAL_STORAGE_KEYS.TOKEN);
+    if (currentToken) {
+      await getFullUserData(currentToken);
+    }
+  }, [token, getFullUserData]);
+
   return (
     <SessionContext.Provider
       value={{
@@ -84,6 +91,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         isLoading,
         signIn,
         signOut,
+        refreshUserData,
       }}
     >
       {children}

@@ -1,14 +1,18 @@
-import axios from "axios";
 import { useState } from "react";
 import { useSession } from "../../context/useSession";
-import Button from "../../shared/ui/button/Button";
+import { useUpdateProfile } from "../../shared/hooks/mutations/useUpdateProfile";
+import LogOutIcon from "../../assets/img/svg/LogOutIcon";
+import TurnThemeIcon from "../../assets/img/svg/TurnThemeIcon";
+import LanguageIcon from "../../assets/img/svg/LanguageIcon";
+import PrivacyIcon from "../../assets/img/svg/PrivacyIcon";
+import HelpCenterIcon from "../../assets/img/svg/HelpCenterIcon";
+import NotificationIcon from "../../assets/img/svg/NotificationIcon";
+import PlayArrowIcon from "../../assets/img/svg/PlayArrowIcon";
+import axios from "axios";
+import style from "./ProfilePage.module.scss";
 
 const ProfilePage = () => {
-  const { signOut } = useSession();
 
-  const handleLogout = () => {
-    signOut();
-  };
 
   const [file, setFile] = useState<File | null>(null);
   const [imgPreview, setImgPreview] = useState<string | null>(null);
@@ -64,10 +68,37 @@ const ProfilePage = () => {
     console.log(result);
   };
 
+
+
+
+
+
+  //================== Settings Menu Handlers =================//
+
+  const { token, fullUserData, refreshUserData, signOut} = useSession();
+  const {theme} = fullUserData || {};
+
+  const updateProfileMutation = useUpdateProfile({
+    token: token || "",
+    onSuccess: async () => {
+      await refreshUserData();
+    },
+  });
+
+  const handleLogout = () => {
+    // signOut();
+  };
+
+  const handleThemeToggle = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    updateProfileMutation.mutate({ theme: newTheme});
+  };
+
+  console.log(fullUserData);
+
   return (
     <div>
-      <Button onClick={handleLogout}>Log out</Button>
-      <div>
+      {/* <div>
         {imgPreview && (
           <div>
             <button
@@ -93,7 +124,52 @@ const ProfilePage = () => {
           />
           <button type="submit">Submit</button>
         </form>
-      </div>
+      </div> */}
+
+
+        <div className={style.settingsMenu}>
+          <button className={style.menuButton}>
+            <span className={style.menuIcon}><NotificationIcon /></span>
+            <span className={style.menuTitle}>Сповіщення</span>
+            <PlayArrowIcon />
+          </button>
+
+          <button className={style.menuButton}>
+            <span className={style.menuIcon}><HelpCenterIcon /></span>
+            <span className={style.menuTitle}>Центр допомоги</span>
+            <PlayArrowIcon />
+          </button>
+
+          <button className={style.menuButton}>
+            <span className={style.menuIcon}><PrivacyIcon /></span>
+            <span className={style.menuTitle}>Конфіденційність</span>
+            <PlayArrowIcon />
+          </button>
+
+          <button className={style.menuButton}>
+            <span className={style.menuIcon}>
+            <LanguageIcon />
+            </span>
+            <span className={style.menuTitle}>Мова</span> 
+            <PlayArrowIcon />
+          </button>
+
+          <button className={style.menuButton} onClick={handleThemeToggle}>
+            <span className={style.menuIcon}>
+            <TurnThemeIcon />
+            </span>
+            <span className={style.menuTitle}>Тема</span>
+          </button>
+
+          <button onClick={handleLogout} className={style.menuButton}>
+            <span className={style.menuIcon}><LogOutIcon /></span> 
+            <span className={style.menuTitle}>Вийти</span>             
+          </button>
+
+        </div>
+        
+        
+        
     </div>
   );
 };

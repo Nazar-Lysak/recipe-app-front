@@ -12,6 +12,7 @@ interface SessionContextType {
   isLoading: boolean;
   signIn: (userData: UserInterface, token: string) => void;
   signOut: () => void;
+  refreshUserData: () => Promise<void>;
 }
 
 export const SessionContext = createContext<SessionContextType | undefined>(
