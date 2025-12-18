@@ -17,6 +17,10 @@ const ROUTE_TITLES: Record<string, string> = {
   "/user": "Користувач",
   "/create-recipe": "Створити рецепт",
   "/notifications": "Сповіщення",
+  "/notification-settings": "Налаштування",
+  "/help-center": "Центр допомоги",
+  "/privacy-policy": "Конфіденційність",
+  "/theme-settings": "Тема",
 };
 
 const backButtonAnimation = {

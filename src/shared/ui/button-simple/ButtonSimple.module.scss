@@ -1,0 +1,16 @@
+@use "@/styles/variables" as *;
+
+.buttonSimple {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 15px;
+  min-width: 120px;
+  text-transform: capitalize;
+  text-align: center;
+  color: $shade-100;
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border: solid 1px transparent;
+  background-color: $shade-400;
+}

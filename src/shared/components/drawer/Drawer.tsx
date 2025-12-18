@@ -10,7 +10,12 @@ interface DrawerProps {
   direction?: "bottom" | "top";
 }
 
-const Drawer: FC<DrawerProps> = ({ children, isOpen, onClose, direction = "bottom" }) => {
+const Drawer: FC<DrawerProps> = ({
+  children,
+  isOpen,
+  onClose,
+  direction = "bottom",
+}) => {
   const variants = {
     hidden: {
       y: direction === "bottom" ? "100%" : "-100%",

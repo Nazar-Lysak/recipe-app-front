@@ -1,55 +1,56 @@
 @use "@/styles/variables" as *;
 
 .settingsMenu {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 15px;
-    padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 10px 0;
 }
 
 .menuButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 0;
+  stroke: $shade-400;
+  fill: transparent;
+  border: solid 1px transparent;
+  border-radius: 4px;
+  outline: none;
+  background-color: transparent;
+
+  &:hover,
+  &:focus {
+    border-color: $shade-400;
+  }
+
+  svg:first-child {
+    stroke: $shade-100;
+  }
+
+  &:nth-last-child(1) {
+    margin-top: auto;
+  }
+
+  .menuIcon {
+    background-color: $shade-400;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 15px;
-    stroke: $shade-400;
-    fill: transparent;
-    border: solid 1px transparent;
-    border-radius: 4px;
-    outline: none;
-    background-color: transparent;
-
-    &:hover,
-    &:focus {
-        border-color: $shade-400;
-    }
-
-    svg:first-child {
-        stroke: $shade-100;
-    }  
-
-    &:nth-last-child(1) {
-        margin-top: auto;
-    }
-
-    .menuIcon {
-        background-color: $shade-400;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 35px;
-        width: 35px;
-    }
+    height: 35px;
+    width: 35px;
+  }
 }
 
 .menuTitle {
-    flex-grow: 1;
-    text-align: start;
-    font-family: $font-primary;
-    font-weight: 500;
-    font-size: 15px;
-    text-transform: capitalize;
-    color: $shade-900;
+  flex-grow: 1;
+  text-align: start;
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: capitalize;
+  color: $shade-900;
 }

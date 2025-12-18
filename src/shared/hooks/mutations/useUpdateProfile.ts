@@ -7,7 +7,7 @@ interface UseUpdateProfileProps {
 }
 
 interface UpdateProfileData {
-  theme?: "light" | "dark";
+  theme?: "light" | "dark" | "ocean" | "sunset";
   language?: string;
   first_name?: string;
   last_name?: string;
@@ -23,7 +23,10 @@ interface UpdateProfileData {
   banner_url?: string;
 }
 
-export const useUpdateProfile = ({ token, onSuccess }: UseUpdateProfileProps) => {
+export const useUpdateProfile = ({
+  token,
+  onSuccess,
+}: UseUpdateProfileProps) => {
   return useMutation({
     mutationFn: async (data: UpdateProfileData) => {
       const response = await axios.put(
@@ -33,7 +36,7 @@ export const useUpdateProfile = ({ token, onSuccess }: UseUpdateProfileProps) =>
           headers: {
             Authorization: `Token ${token}`,
           },
-        }
+        },
       );
       return response.data;
     },

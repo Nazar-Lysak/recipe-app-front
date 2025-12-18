@@ -75,7 +75,8 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const refreshUserData = useCallback(async () => {
-    const currentToken = token || localStorage.getItem(LOCAL_STORAGE_KEYS.TOKEN);
+    const currentToken =
+      token || localStorage.getItem(LOCAL_STORAGE_KEYS.TOKEN);
     if (currentToken) {
       await getFullUserData(currentToken);
     }

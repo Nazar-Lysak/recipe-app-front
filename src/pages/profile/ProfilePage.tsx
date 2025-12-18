@@ -11,10 +11,10 @@ import PlayArrowIcon from "../../assets/img/svg/PlayArrowIcon";
 import axios from "axios";
 import style from "./ProfilePage.module.scss";
 import Drawer from "../../shared/components/drawer/Drawer";
+import ButtonSimple from "../../shared/ui/button-simple/ButtonSimple";
+import { Link, useNavigate } from "react-router";
 
 const ProfilePage = () => {
-
-
   const [file, setFile] = useState<File | null>(null);
   const [imgPreview, setImgPreview] = useState<string | null>(null);
 
@@ -69,16 +69,13 @@ const ProfilePage = () => {
     console.log(result);
   };
 
-
-
-
-
-
   //================== Settings Menu Handlers =================//
 
-  const [showPopup, setShowPopup] = useState(false);
-  const { token, fullUserData, refreshUserData, signOut} = useSession();
-  const {theme} = fullUserData || {};
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+  const [showThemePopup, setShowThemePopup] = useState(false);
+  const { token, fullUserData, refreshUserData, signOut } = useSession();
+  const { theme } = fullUserData || {};
+  const navigate = useNavigate();
 
   const updateProfileMutation = useUpdateProfile({
     token: token || "",
@@ -88,17 +85,19 @@ const ProfilePage = () => {
   });
 
   const handleLogout = () => {
-    setShowPopup(!showPopup);
-    // signOut();
+    setShowLogoutPopup(true);
   };
 
   const handleThemeToggle = () => {
-    
-    const newTheme = theme === "dark" ? "light" : "dark";
-    updateProfileMutation.mutate({ theme: newTheme});
+    setShowThemePopup(true);
   };
 
-  console.log(fullUserData);
+  const handleThemeSelect = (
+    newTheme: "light" | "dark" | "ocean" | "sunset",
+  ) => {
+    updateProfileMutation.mutate({ theme: newTheme });
+    setShowThemePopup(false);
+  };
 
   return (
     <div>
@@ -130,57 +129,104 @@ const ProfilePage = () => {
         </form>
       </div> */}
 
+      <div className={style.settingsMenu}>
+        <Link className={style.menuButton} to={"/notification-settings"}>
+          <span className={style.menuIcon}>
+            <NotificationIcon />
+          </span>
+          <span className={style.menuTitle}>Сповіщення</span>
+          <PlayArrowIcon />
+        </Link>
 
-        <div className={style.settingsMenu}>
-          <button className={style.menuButton}>
-            <span className={style.menuIcon}><NotificationIcon /></span>
-            <span className={style.menuTitle}>Сповіщення</span>
-            <PlayArrowIcon />
-          </button>
+        <Link className={style.menuButton} to={"/help-center"}>
+          <span className={style.menuIcon}>
+            <HelpCenterIcon />
+          </span>
+          <span className={style.menuTitle}>Центр допомоги</span>
+          <PlayArrowIcon />
+        </Link>
 
-          <button className={style.menuButton}>
-            <span className={style.menuIcon}><HelpCenterIcon /></span>
-            <span className={style.menuTitle}>Центр допомоги</span>
-            <PlayArrowIcon />
-          </button>
+        <Link className={style.menuButton} to={"/privacy-policy"}>
+          <span className={style.menuIcon}>
+            <PrivacyIcon />
+          </span>
+          <span className={style.menuTitle}>Конфіденційність</span>
+          <PlayArrowIcon />
+        </Link>
 
-          <button className={style.menuButton}>
-            <span className={style.menuIcon}><PrivacyIcon /></span>
-            <span className={style.menuTitle}>Конфіденційність</span>
-            <PlayArrowIcon />
-          </button>
-
-          <button className={style.menuButton}>
-            <span className={style.menuIcon}>
+        <Link className={style.menuButton} to={"/language-selection"}>
+          <span className={style.menuIcon}>
             <LanguageIcon />
-            </span>
-            <span className={style.menuTitle}>Мова</span> 
-            <PlayArrowIcon />
-          </button>
+          </span>
+          <span className={style.menuTitle}>Мова</span>
+          <PlayArrowIcon />
+        </Link>
 
-          <button className={style.menuButton} onClick={handleThemeToggle}>
-            <span className={style.menuIcon}>
+        <Link className={style.menuButton} to={"/theme-settings"}>
+          <span className={style.menuIcon}>
             <TurnThemeIcon />
-            </span>
-            <span className={style.menuTitle}>Тема</span>
-          </button>
+          </span>
+          <span className={style.menuTitle}>Тема</span>
+          <PlayArrowIcon />
+        </Link>
 
-          <button onClick={handleLogout} className={style.menuButton}>
-            <span className={style.menuIcon}><LogOutIcon /></span> 
-            <span className={style.menuTitle}>Вийти</span>             
-          </button>
+        <button onClick={handleLogout} className={style.menuButton}>
+          <span className={style.menuIcon}>
+            <LogOutIcon />
+          </span>
+          <span className={style.menuTitle}>Вийти</span>
+        </button>
+      </div>
 
+      <Drawer
+        direction="bottom"
+        isOpen={showLogoutPopup}
+        onClose={() => setShowLogoutPopup(false)}
+      >
+        <h3>Підтвердження виходу</h3>
+        <p>Ви впевнені, що хочете вийти?</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            gap: "16px",
+          }}
+        >
+          <ButtonSimple onClick={signOut}>Так</ButtonSimple>
+          <ButtonSimple onClick={() => setShowLogoutPopup(false)}>
+            Ні
+          </ButtonSimple>
         </div>
-        
-        
-        <Drawer direction="bottom" isOpen={showPopup} onClose={() => setShowPopup(false)}>
-          <div>Test Drawer Content</div>
-          <p>Are you sure you want to log out?</p>
-          <div>
-            <button>Yes</button>
-            <button>No</button>
-          </div>
-        </Drawer>
+      </Drawer>
+
+      <Drawer
+        direction="bottom"
+        isOpen={showThemePopup}
+        onClose={() => setShowThemePopup(false)}
+      >
+        <h3>Оберіть тему</h3>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            marginTop: "16px",
+          }}
+        >
+          <ButtonSimple onClick={() => handleThemeSelect("light")}>
+            ☀️ Світла
+          </ButtonSimple>
+          <ButtonSimple onClick={() => handleThemeSelect("dark")}>
+            🌙 Темна
+          </ButtonSimple>
+          <ButtonSimple onClick={() => handleThemeSelect("ocean")}>
+            🌊 Океан
+          </ButtonSimple>
+          <ButtonSimple onClick={() => handleThemeSelect("sunset")}>
+            🌅 Захід сонця
+          </ButtonSimple>
+        </div>
+      </Drawer>
     </div>
   );
 };

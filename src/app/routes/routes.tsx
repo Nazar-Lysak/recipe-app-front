@@ -28,6 +28,14 @@ const CreateRecipePage = lazy(
 const NotificationPage = lazy(
   () => import("../../pages/notification/NotificationPage"),
 );
+const NotificationSettingsPage = lazy(
+  () => import("../../pages/notification-settings/NotificationSettings"),
+);
+const HelpCenter = lazy(() => import("../../pages/help-center/HelpCenter"));
+const PrivacyPolicy = lazy(
+  () => import("../../pages/privacy-policy/PrivacyPolicy"),
+);
+const ThemePage = lazy(() => import("../../pages/theme/ThemePage"));
 
 export const routes: RouteObject[] = [
   {
@@ -49,7 +57,17 @@ export const routes: RouteObject[] = [
             element: <ProtectedRoutes />,
             children: [
               { path: "/home", Component: HomePage },
-              { path: "/profile", Component: ProfilePage },
+              {
+                path: "/profile",
+                Component: ProfilePage,
+              },
+              {
+                path: "notification-settings",
+                Component: NotificationSettingsPage,
+              },
+              { path: "help-center", Component: HelpCenter },
+              { path: "privacy-policy", Component: PrivacyPolicy },
+              { path: "theme-settings", Component: ThemePage },
               { path: "community", Component: CommunityPage },
               { path: "categories", Component: CategoryPage },
               {
