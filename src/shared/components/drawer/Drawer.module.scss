@@ -1,0 +1,30 @@
+@use "@/styles/variables" as *;
+
+.drawerBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+}
+
+.drawerContent {
+    padding: 45px 56px;
+    background-color: $shade-100;
+    width: 100%;
+    position: relative;
+
+    &.bottom {
+        align-self: flex-end;
+        border-radius: 50px 50px 0 0;
+    }
+
+    &.top {
+        align-self: flex-start;
+        border-radius: 0 0 50px 50px;
+    }
+}

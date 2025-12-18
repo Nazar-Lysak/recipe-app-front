@@ -10,6 +10,7 @@ import NotificationIcon from "../../assets/img/svg/NotificationIcon";
 import PlayArrowIcon from "../../assets/img/svg/PlayArrowIcon";
 import axios from "axios";
 import style from "./ProfilePage.module.scss";
+import Drawer from "../../shared/components/drawer/Drawer";
 
 const ProfilePage = () => {
 
@@ -75,6 +76,7 @@ const ProfilePage = () => {
 
   //================== Settings Menu Handlers =================//
 
+  const [showPopup, setShowPopup] = useState(false);
   const { token, fullUserData, refreshUserData, signOut} = useSession();
   const {theme} = fullUserData || {};
 
@@ -86,10 +88,12 @@ const ProfilePage = () => {
   });
 
   const handleLogout = () => {
+    setShowPopup(!showPopup);
     // signOut();
   };
 
   const handleThemeToggle = () => {
+    
     const newTheme = theme === "dark" ? "light" : "dark";
     updateProfileMutation.mutate({ theme: newTheme});
   };
@@ -169,7 +173,14 @@ const ProfilePage = () => {
         </div>
         
         
-        
+        <Drawer direction="bottom" isOpen={showPopup} onClose={() => setShowPopup(false)}>
+          <div>Test Drawer Content</div>
+          <p>Are you sure you want to log out?</p>
+          <div>
+            <button>Yes</button>
+            <button>No</button>
+          </div>
+        </Drawer>
     </div>
   );
 };
