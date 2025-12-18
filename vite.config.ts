@@ -10,6 +10,4 @@ export default defineConfig({
       "@styles": path.resolve(__dirname, "src/shared/styles"),
     },
   },
-  // Копіюємо service worker
-  publicDir: "public",
 });

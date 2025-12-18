@@ -6,6 +6,7 @@ import type { FullUserDataInterface } from "../../types/UI.types";
 import { useSession } from "../../../context/useSession";
 import { useParams } from "react-router";
 import { useFollow } from "../../hooks/mutations/useFollow";
+import { useIsFollowing } from "../../hooks/queries/useIsFollowing";
 
 const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
   userData,
@@ -24,15 +25,24 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
     following_count,
   } = userData || {};
 
-  const isOwnProfile = userId === user?.id;
-  const isFollowing = false;
+  const isFollowing = useIsFollowing(userId, token);
 
-  const mutation = useFollow({ userId: userId || "", token: token || "", isFollowing });
+  const isOwnProfile = userId === user?.id;
+
+  const mutation = useFollow({
+    userId: userId || "",
+    token: token || "",
+    isFollowing: isFollowing.data || false,
+  });
 
   const handleFollowClick = () => {
+    if (isFollowing.data) {
+      console.log("Unfollow user");
+      return;
+    }
+
     mutation.mutate();
   };
-  
 
   return (
     <div className={style.wrapper}>
@@ -45,7 +55,7 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
             <motion.button
               className={classNames({
                 [style.followButton]: true,
-                [style.following]: isFollowing,
+                [style.following]: isFollowing.data,
               })}
               onClick={handleFollowClick}
               disabled={mutation.isPending}
@@ -53,11 +63,7 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              {mutation.isPending 
-                ? "..." 
-                : isFollowing 
-                  ? "Відписатись" 
-                  : "Підписатись"}
+              {isFollowing.data ? "Відписатись" : "Підписатиись"}
             </motion.button>
           )}
         </div>

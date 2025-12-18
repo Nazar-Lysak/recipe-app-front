@@ -37,11 +37,11 @@ export const useLike = (recipeId: string, initialLikes: number) => {
 
   const handleLike = (isLiked = false) => {
     startTransition(() => {
-        if (isLiked) {
-            setOptimisticLikes(optimisticLikes - 1);
-        } else {
-            setOptimisticLikes(optimisticLikes + 1);
-        }
+      if (isLiked) {
+        setOptimisticLikes(optimisticLikes - 1);
+      } else {
+        setOptimisticLikes(optimisticLikes + 1);
+      }
     });
 
     mutation.mutate(isLiked);

@@ -91,4 +91,30 @@ export const unlikeRecipe = async (recipeId: string, token: string) => {
     },
   );
   return response.data;
-}
+};
+
+export const followUser = async (userId: string, token: string) => {
+  const response = await axios.post(
+    `${BASE_URL}${API_URL.profile.follow(userId)}`,
+    {},
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    },
+  );
+  return response.data;
+};
+
+export const unfollowUser = async (userId: string, token: string) => {
+  const response = await axios.post(
+    `${BASE_URL}${API_URL.profile.unfollow(userId)}`,
+    {},
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    },
+  );
+  return response.data;
+};

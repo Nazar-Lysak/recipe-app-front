@@ -79,3 +79,18 @@ export const getUserById = async (
   );
   return response.data;
 };
+
+export const getIsFollowing = async (
+  userId: string,
+  token: string,
+): Promise<boolean> => {
+  const response = await axios.get<{ isFollowing: boolean }>(
+    `${BASE_URL}${API_URL.profile.isFollowing(userId)}`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    },
+  );
+  return response.data.isFollowing;
+};

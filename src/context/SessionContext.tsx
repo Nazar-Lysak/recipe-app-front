@@ -1,9 +1,4 @@
-import {
-  useState,
-  useEffect,
-  useCallback,
-  type ReactNode,
-} from "react";
+import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { getProfileData, getCurrentUser } from "../shared/api/get-data";
 import type {
   FullUserDataInterface,

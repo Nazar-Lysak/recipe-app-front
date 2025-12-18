@@ -8,7 +8,9 @@ const API_URL = {
   profile: {
     current: "/user/profile/current",
     byId: (id: string) => `/user/${id}`,
-    follow: (id: string) => `/user/${id}/follow`,
+    follow: (id: string) => `/user/profile/${id}/follow`,
+    unfollow: (id: string) => `/user/profile/${id}/unfollow`,
+    isFollowing: (id: string) => `/user/profile/${id}/is-following`,
   },
   user: {
     current: "/user/current",

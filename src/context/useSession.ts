@@ -14,7 +14,9 @@ interface SessionContextType {
   signOut: () => void;
 }
 
-export const SessionContext = createContext<SessionContextType | undefined>(undefined);
+export const SessionContext = createContext<SessionContextType | undefined>(
+  undefined,
+);
 
 export function useSession() {
   const context = useContext(SessionContext);
