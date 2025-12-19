@@ -1,0 +1,15 @@
+{
+  "home": "",
+  "categories": "Categories",
+  "community": "Community",
+  "profile": "Profile",
+  "recipe": "Recipe",
+  "user": "User",
+  "createRecipe": "Create Recipe",
+  "notifications": "Notifications",
+  "notificationSettings": "Settings",
+  "helpCenter": "Help Center",
+  "privacyPolicy": "Privacy",
+  "greeting": "Hello! {{username}}",
+  "subtitle": "What are you cooking today?"
+}

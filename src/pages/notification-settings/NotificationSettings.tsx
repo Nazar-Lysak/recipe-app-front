@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import ToggleSwitch from "../../shared/ui/toggle-switch/ToggleSwitch";
 
 const NotificationSettings = () => {
+  const { t } = useTranslation("profile");
   const [pushNotifications, setPushNotifications] = useState(false);
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [newRecipes, setNewRecipes] = useState(true);
@@ -11,27 +13,27 @@ const NotificationSettings = () => {
   return (
     <div>
       <ToggleSwitch
-        label="Push-сповіщення"
+        label={t("notificationsSettings.pushNotifications")}
         checked={pushNotifications}
         onChange={setPushNotifications}
       />
       <ToggleSwitch
-        label="Email-сповіщення"
+        label={t("notificationsSettings.emailNotifications")}
         checked={emailNotifications}
         onChange={setEmailNotifications}
       />
       <ToggleSwitch
-        label="Нові рецепти від підписок"
+        label={t("notificationsSettings.newRecipes")}
         checked={newRecipes}
         onChange={setNewRecipes}
       />
       <ToggleSwitch
-        label="Нові підписники"
+        label={t("notificationsSettings.newFollowers")}
         checked={newFollowers}
         onChange={setNewFollowers}
       />
       <ToggleSwitch
-        label="Вподобання рецептів"
+        label={t("notificationsSettings.recipeLikes")}
         checked={recipeLikes}
         onChange={setRecipeLikes}
       />

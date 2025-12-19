@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import { useSession } from "../../../context/useSession";
 import type { RecipeInterface } from "../../types/UI.types";
@@ -18,6 +19,7 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
 };
 
 const RecipeCardMinimal = ({ recipe }: RecipeCardMinimalProps) => {
+  const { t } = useTranslation("recipe");
   const { time, favouriteCount, name, image, author } = recipe;
   const { user } = useSession();
 
@@ -45,7 +47,7 @@ const RecipeCardMinimal = ({ recipe }: RecipeCardMinimalProps) => {
             </p>
             <p className={styles.time}>
               {" "}
-              <ClockIcon /> {time} хв
+              <ClockIcon /> {time} {t("min")}
             </p>
           </div>
         </div>

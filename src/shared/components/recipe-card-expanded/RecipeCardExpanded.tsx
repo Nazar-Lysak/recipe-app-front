@@ -1,4 +1,5 @@
 import DateObject from "react-date-object";
+import { useTranslation } from "react-i18next";
 import style from "./RecipeCardExpanded.module.scss";
 import HeartIcon from "../../../assets/img/svg/HeartIcon";
 import { Link } from "react-router";
@@ -24,6 +25,7 @@ interface RecipeCardExpandedProps {
 }
 
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
+  const { t } = useTranslation("recipe");
   const { id, name, description, image, createdAt, favouriteCount, time } =
     recipe;
   const { user } = useSession();
@@ -86,7 +88,7 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
               </p>
               <p className={style.time}>
                 {" "}
-                <ClockIcon /> {time} хв
+                <ClockIcon /> {time} {t("min")}
               </p>
               <p className={style.comments}>
                 <CommentsIcon /> 121

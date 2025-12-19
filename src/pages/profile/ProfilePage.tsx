@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useSession } from "../../context/useSession";
-import { useUpdateProfile } from "../../shared/hooks/mutations/useUpdateProfile";
 import LogOutIcon from "../../assets/img/svg/LogOutIcon";
 import TurnThemeIcon from "../../assets/img/svg/TurnThemeIcon";
 import LanguageIcon from "../../assets/img/svg/LanguageIcon";
@@ -12,7 +11,8 @@ import axios from "axios";
 import style from "./ProfilePage.module.scss";
 import Drawer from "../../shared/components/drawer/Drawer";
 import ButtonSimple from "../../shared/ui/button-simple/ButtonSimple";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const ProfilePage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -72,15 +72,11 @@ const ProfilePage = () => {
   //================== Settings Menu Handlers =================//
 
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
-  const [showThemePopup, setShowThemePopup] = useState(false);
-  const { fullUserData, signOut } = useSession();
+  const { signOut } = useSession();
+  const { t } = useTranslation("profile");
 
   const handleLogout = () => {
     setShowLogoutPopup(true);
-  };
-
-  const handleThemeToggle = () => {
-    setShowThemePopup(true);
   };
 
   return (
@@ -118,7 +114,7 @@ const ProfilePage = () => {
           <span className={style.menuIcon}>
             <NotificationIcon />
           </span>
-          <span className={style.menuTitle}>Сповіщення</span>
+          <span className={style.menuTitle}>{t("notifications")}</span>
           <PlayArrowIcon />
         </Link>
 
@@ -126,7 +122,7 @@ const ProfilePage = () => {
           <span className={style.menuIcon}>
             <HelpCenterIcon />
           </span>
-          <span className={style.menuTitle}>Центр допомоги</span>
+          <span className={style.menuTitle}>{t("support")}</span>
           <PlayArrowIcon />
         </Link>
 
@@ -134,7 +130,7 @@ const ProfilePage = () => {
           <span className={style.menuIcon}>
             <PrivacyIcon />
           </span>
-          <span className={style.menuTitle}>Конфіденційність</span>
+          <span className={style.menuTitle}>{t("privacy")}</span>
           <PlayArrowIcon />
         </Link>
 
@@ -142,7 +138,7 @@ const ProfilePage = () => {
           <span className={style.menuIcon}>
             <LanguageIcon />
           </span>
-          <span className={style.menuTitle}>Мова</span>
+          <span className={style.menuTitle}>{t("language")}</span>
           <PlayArrowIcon />
         </Link>
 
@@ -150,7 +146,7 @@ const ProfilePage = () => {
           <span className={style.menuIcon}>
             <TurnThemeIcon />
           </span>
-          <span className={style.menuTitle}>Тема</span>
+          <span className={style.menuTitle}>{t("theme")}</span>
           <PlayArrowIcon />
         </Link>
 
@@ -158,7 +154,7 @@ const ProfilePage = () => {
           <span className={style.menuIcon}>
             <LogOutIcon />
           </span>
-          <span className={style.menuTitle}>Вийти</span>
+          <span className={style.menuTitle}>{t("logout")}</span>
         </button>
       </div>
 

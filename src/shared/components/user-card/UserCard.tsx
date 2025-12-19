@@ -1,4 +1,5 @@
 import MoreVerticalIcon from "../../../assets/img/svg/MoreVerticalIcon";
+import { useTranslation } from "react-i18next";
 import style from "./UserCard.module.scss";
 import { Link } from "react-router";
 import type { UserInterface } from "../../types/UI.types";
@@ -29,6 +30,7 @@ function UserCard({
   recipe,
   isOwnRecipe,
 }: UserCardProps & RecipeCardProps & { isOwnRecipe?: boolean }) {
+  const { t } = useTranslation("userProfile");
   const [showUnfollowPopup, setShowUnfollowPopup] = useState(false);
   const { avatar_url, email, first_name, username } = authorData || {};
   const { token } = useSession();
@@ -83,7 +85,7 @@ function UserCard({
       <div className={style.actions}>
         {!isOwnRecipe && (
           <ButtonSimple onClick={handleFollowClick} isActive={isFollowing.data}>
-            {isFollowing.data ? "Відписатись" : "Підписатись"}
+            {isFollowing.data ? t("unfollow") : t("follow")}
           </ButtonSimple>
         )}
         {isOwnRecipe && <ButtonSimple>Редагувати профіль</ButtonSimple>}
@@ -95,8 +97,8 @@ function UserCard({
         isOpen={showUnfollowPopup}
         onClose={() => setShowUnfollowPopup(false)}
       >
-        <h3>Підтвердження відписки</h3>
-        <p>Ви впевнені, що хочете відписатись від {username}?</p>
+        <h3>{t("confirmUnfollow")}</h3>
+        <p>{t("confirmUnfollowText", { username })}</p>
         <div
           style={{
             display: "flex",
@@ -106,10 +108,10 @@ function UserCard({
           }}
         >
           <ButtonSimple onClick={() => setShowUnfollowPopup(false)}>
-            Ні
+            {t("no")}
           </ButtonSimple>
           <ButtonSimple isActive={true} onClick={handleUnfollowConfirm}>
-            Так
+            {t("yes")}
           </ButtonSimple>
         </div>
       </Drawer>

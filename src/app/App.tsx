@@ -6,6 +6,7 @@ import ThemeProvider from "./ThemeProvider";
 
 const App = () => {
   const router = createBrowserRouter(routes);
+
   return (
     <AnimatePresence mode="wait">
       <SessionProvider>

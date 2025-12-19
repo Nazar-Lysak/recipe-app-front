@@ -1,16 +1,19 @@
 import MenuTop from "../../shared/components/menu-top/MenuTop";
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import RecipeCardExpanded from "../../shared/components/recipe-card-expanded/RecipeCardExpanded";
 import { useRecipes } from "../../shared/hooks/queries/useRecipes";
 
-const elements = [
-  { id: "1", name: "Топ рецепти" },
-  { id: "2", name: "Найновіші" },
-  { id: "3", name: "Найстаріші" },
-];
-
 const CommunityPage = () => {
+  const { t } = useTranslation("community");
+
+  const elements = [
+    { id: "1", name: t("topRecipes") },
+    { id: "2", name: t("newRecipes") },
+    { id: "3", name: t("favorites") },
+  ];
+
   const [activeCategory, setActiveCategory] = useState<string>("1");
   const [limit] = useState<number>(10);
   const [offset, setOffset] = useState<number>(0);
@@ -80,9 +83,7 @@ const CommunityPage = () => {
 
       {recipes.isLoading && <PagePrealoader variant="transparent" />}
 
-      {!recipes.isLoading && allRecipes.length === 0 && (
-        <p>Рецепти не знайдено в цій категорії.</p>
-      )}
+      {!recipes.isLoading && allRecipes.length === 0 && <p>{t("noRecipes")}</p>}
     </div>
   );
 };

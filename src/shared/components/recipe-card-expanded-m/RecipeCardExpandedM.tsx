@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import style from "./RecipeCardExpandedM.module.scss";
 import HeartIcon from "../../../assets/img/svg/HeartIcon";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
@@ -19,6 +20,7 @@ interface RecipeCardExpandedProps {
 }
 
 const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
+  const { t } = useTranslation("recipe");
   const { id, name, description, image, favouriteCount, time } = recipe;
 
   const { user } = useSession();
@@ -58,7 +60,7 @@ const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
             </p>
             <p className={style.time}>
               {" "}
-              <ClockIcon /> {time} хв
+              <ClockIcon /> {time} {t("min")}
             </p>
           </div>
         </div>

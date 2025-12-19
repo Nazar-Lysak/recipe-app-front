@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import classNames from "classnames";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import styles from "./RecipePage.module.scss";
 import CommentsIcon from "../../assets/img/svg/CommentsIcon";
@@ -20,6 +21,7 @@ const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
 
 const RecipePage = () => {
+  const { t } = useTranslation("recipe");
   const [confirmDislike, setConfirmDislike] = useState(false);
   const { user } = useSession();
   const { recipeId } = useParams<{ recipeId: string }>();
@@ -110,17 +112,17 @@ const RecipePage = () => {
         isOwnRecipe={isOwnRecipe}
       />
       <div className={styles.detailsSection}>
-        <p className={styles.detailsTitle}>Опис</p>
+        <p className={styles.detailsTitle}>{t("description")}</p>
         <p className={styles.time}>
           <ClockIcon />
-          {time} хвилин
+          {time} {t("minutes")}
         </p>
       </div>
 
       <p className={styles.description}>{description}</p>
 
       <div>
-        <h2 className={styles.detailsTitle}>Інгредієнти</h2>
+        <h2 className={styles.detailsTitle}>{t("ingredients")}</h2>
         <ul>
           {ingredients?.map((ingredient: string, index: number) => (
             <li key={index} className={styles.ingredients}>
@@ -131,7 +133,7 @@ const RecipePage = () => {
       </div>
 
       <div>
-        <h2 className={styles.detailsTitle}>Кроки</h2>
+        <h2 className={styles.detailsTitle}>{t("steps")}</h2>
         <ul className={styles.stepsList}>
           {steps?.map((step: string, index: number) => (
             <li key={index} className={styles.steps}>
@@ -146,8 +148,8 @@ const RecipePage = () => {
         isOpen={confirmDislike}
         onClose={() => setConfirmDislike(false)}
       >
-        <h3>Видалити зі збережених?</h3>
-        <p>Ви впевнені, що хочете прибрати рецепт зі збережених?</p>
+        <h3>{t("removeFromSaved")}</h3>
+        <p>{t("confirmRemove")}</p>
         <div
           style={{
             display: "flex",
@@ -156,10 +158,10 @@ const RecipePage = () => {
           }}
         >
           <ButtonSimple onClick={() => setConfirmDislike(false)}>
-            Ні
+            {t("no")}
           </ButtonSimple>
           <ButtonSimple isActive={true} onClick={handleConfirmDislike}>
-            Так
+            {t("yes")}
           </ButtonSimple>
         </div>
       </Drawer>

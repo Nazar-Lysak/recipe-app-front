@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 import style from "./NewestRecipesGallery.module.scss";
 import { useRecipes } from "../../hooks/queries/useRecipes";
@@ -8,6 +9,7 @@ import type { RecipeInterface } from "../../types/UI.types";
 import RecipeCardExpandedM from "../recipe-card-expanded-m/RecipeCardExpandedM";
 
 const NewestRecipesGallery = () => {
+  const { t } = useTranslation("recipe");
   const recipes = useRecipes({
     limit: 10,
     activeCategory: "2",
@@ -15,9 +17,9 @@ const NewestRecipesGallery = () => {
 
   return (
     <div className={style.wrapper}>
-      <h2 className={style.title}>Нещодавні рецепти</h2>
-      {recipes.isLoading && <p>Loading...</p>}
-      {recipes.isError && <p>Error loading recipes.</p>}
+      <h2 className={style.title}>{t("recentRecipes")}</h2>
+      {recipes.isLoading && <p>{t("loading")}</p>}
+      {recipes.isError && <p>{t("error")}</p>}
       {recipes.data && recipes.data.recipesList.length > 0 && (
         <Swiper slidesPerView={1.2} spaceBetween={24}>
           {recipes.data.recipesList.map((recipe: RecipeInterface) => (

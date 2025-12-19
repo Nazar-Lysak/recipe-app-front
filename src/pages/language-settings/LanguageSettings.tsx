@@ -1,19 +1,21 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSession } from "../../context/useSession";
 import type { LanguageOption } from "../../shared/types/UI.types";
 import RadioButton from "../../shared/ui/radio-button/RadioButton";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import { useUpdateProfile } from "../../shared/hooks/mutations/useUpdateProfile";
 
-const languageOptions: LanguageOption[] = [
-  { value: "en", label: "Англійська" },
-  { value: "ua", label: "Українська" },
-];
-
 const LanguageSettings = () => {
+  const { t } = useTranslation("profile");
   const [languageToggle, setLanguageToggle] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
   const { token, refreshUserData, fullUserData } = useSession();
+
+  const languageOptions: LanguageOption[] = [
+    { value: "en", label: t("languages.en") },
+    { value: "ua", label: t("languages.ua") },
+  ];
 
   const { language } = fullUserData || {};
 

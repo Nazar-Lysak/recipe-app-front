@@ -1,23 +1,25 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSession } from "../../context/useSession";
 import { useUpdateProfile } from "../../shared/hooks/mutations/useUpdateProfile";
-import type { ThemeOption } from "../../shared/types/UI.types";
+import type { ThemeOption, Theme } from "../../shared/types/UI.types";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import RadioButton from "../../shared/ui/radio-button/RadioButton";
 
-const themeOptions: ThemeOption[] = [
-  { value: "light", label: "Світла" },
-  { value: "dark", label: "Темна" },
-  { value: "ocean", label: "Океан" },
-  { value: "sunset", label: "Захід сонця" },
-];
-
 const ThemePage = () => {
+  const { t } = useTranslation("profile");
   const [themeToggle, setThemeToggle] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const { token, refreshUserData, fullUserData } = useSession();
 
   const { theme } = fullUserData || {};
+
+  const themeOptions: ThemeOption[] = [
+    { value: "light", label: t("themes.light") },
+    { value: "dark", label: t("themes.dark") },
+    { value: "ocean", label: t("themes.ocean") },
+    { value: "sunset", label: t("themes.sunset") },
+  ];
 
   const updateProfileMutation = useUpdateProfile({
     token: token || "",

@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 
 import { useRecipesByCategory } from "../../shared/hooks/queries/useRecipesByCategory";
@@ -9,6 +10,7 @@ import { useCategories } from "../../shared/hooks/queries/useCategories";
 import pageStyles from "../PageStyles.module.scss";
 
 const CategoryRecipesPage = () => {
+  const { t } = useTranslation("userProfile");
   const { categoryId } = useParams<{ categoryId: string }>();
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<string>(
@@ -38,9 +40,7 @@ const CategoryRecipesPage = () => {
       )}
 
       {recipes.data?.recipesList.length === 0 && (
-        <p className={pageStyles.emptyData}>
-          Рецепти не знайдено в цій категорії.
-        </p>
+        <p className={pageStyles.emptyData}>{t("noRecipes")}</p>
       )}
     </div>
   );

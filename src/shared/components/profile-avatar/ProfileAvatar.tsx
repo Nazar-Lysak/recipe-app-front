@@ -1,5 +1,6 @@
 import { useState, type FC } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import style from "./ProfileAvatar.module.scss";
 import classNames from "classnames";
 import type { FullUserDataInterface } from "../../types/UI.types";
@@ -14,6 +15,7 @@ import ButtonSimple from "../../ui/button-simple/ButtonSimple";
 const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
   userData,
 }) => {
+  const { t } = useTranslation("userProfile");
   const [showUnfollowPopup, setShowUnfollowPopup] = useState(false);
   const { user, token } = useSession();
   const userId = useParams().userId;
@@ -74,26 +76,26 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              {isFollowing.data ? "Відписатись" : "Підписатиись"}
+              {isFollowing.data ? t("unfollow") : t("follow")}
             </motion.button>
           )}
         </div>
       </div>
       <ul className={style.statsSection}>
         <li className={style.statItem}>
-          <span>Рецепти</span>
+          <span>{t("recipes")}</span>
           <span>{recipes_count}</span>
         </li>
         <li className={style.statItem}>
-          <span>Підписники</span>
+          <span>{t("followers")}</span>
           <span>{followers_count}</span>
         </li>
         <li className={style.statItem}>
-          <span>Підписки</span>
+          <span>{t("following")}</span>
           <span>{following_count}</span>
         </li>
         <li className={style.statItem}>
-          <span>Вподобання</span>
+          <span>{t("likes")}</span>
           <span>{likes_received}</span>
         </li>
       </ul>
@@ -102,8 +104,8 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
         isOpen={showUnfollowPopup}
         onClose={() => setShowUnfollowPopup(false)}
       >
-        <h3>Підтвердження відписки</h3>
-        <p>Ви впевнені, що хочете відписатись від {username}?</p>
+        <h3>{t("confirmUnfollow")}</h3>
+        <p>{t("confirmUnfollowText", { username })}</p>
         <div
           style={{
             display: "flex",
@@ -112,10 +114,10 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
           }}
         >
           <ButtonSimple onClick={() => setShowUnfollowPopup(false)}>
-            Ні
+            {t("no")}
           </ButtonSimple>
           <ButtonSimple isActive={true} onClick={handleUnfollowConfirm}>
-            Так
+            {t("yes")}
           </ButtonSimple>
         </div>
       </Drawer>

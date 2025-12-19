@@ -1,88 +1,74 @@
+import { useTranslation } from "react-i18next";
 import styles from "./PrivacyPolicy.module.scss";
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation("privacy");
+
   return (
     <div className={styles.container}>
       <section className={styles.section}>
-        <h2>1. Збір інформації</h2>
-        <p>
-          Ми збираємо інформацію, яку ви надаєте безпосередньо при реєстрації,
-          створенні профілю або публікації рецептів. Це включає ім'я, email,
-          фото профілю та опис.
-        </p>
+        <h2>{t("section1.title")}</h2>
+        <p>{t("section1.content")}</p>
       </section>
 
       <section className={styles.section}>
-        <h2>2. Використання даних</h2>
-        <p>Ваші дані використовуються для:</p>
+        <h2>{t("section2.title")}</h2>
+        <p>{t("section2.intro")}</p>
         <ul>
-          <li>Надання та покращення наших сервісів</li>
-          <li>Персоналізації вашого досвіду</li>
-          <li>Зв'язку з вами щодо оновлень</li>
-          <li>Забезпечення безпеки облікового запису</li>
+          {(t("section2.items", { returnObjects: true }) as string[]).map(
+            (item: string, index: number) => (
+              <li key={index}>{item}</li>
+            ),
+          )}
         </ul>
       </section>
 
       <section className={styles.section}>
-        <h2>3. Передача даних третім особам</h2>
-        <p>
-          Ми не продаємо ваші персональні дані. Дані можуть бути передані лише:
-        </p>
+        <h2>{t("section3.title")}</h2>
+        <p>{t("section3.intro")}</p>
         <ul>
-          <li>За вашою згодою</li>
-          <li>Для виконання юридичних зобов'язань</li>
-          <li>Партнерам, які допомагають надавати наші послуги</li>
+          {(t("section3.items", { returnObjects: true }) as string[]).map(
+            (item: string, index: number) => (
+              <li key={index}>{item}</li>
+            ),
+          )}
         </ul>
       </section>
 
       <section className={styles.section}>
-        <h2>4. Захист інформації</h2>
-        <p>
-          Ми використовуємо сучасні технології шифрування та безпеки для захисту
-          ваших даних. Доступ до персональної інформації обмежений лише
-          авторизованим персоналом.
-        </p>
+        <h2>{t("section4.title")}</h2>
+        <p>{t("section4.content")}</p>
       </section>
 
       <section className={styles.section}>
-        <h2>5. Cookies</h2>
-        <p>
-          Ми використовуємо cookies для покращення роботи сайту, аналізу трафіку
-          та персоналізації контенту. Ви можете налаштувати використання cookies
-          у браузері.
-        </p>
+        <h2>{t("section5.title")}</h2>
+        <p>{t("section5.content")}</p>
       </section>
 
       <section className={styles.section}>
-        <h2>6. Ваші права</h2>
-        <p>Ви маєте право:</p>
+        <h2>{t("section6.title")}</h2>
+        <p>{t("section6.intro")}</p>
         <ul>
-          <li>Отримувати доступ до своїх персональних даних</li>
-          <li>Виправляти неточну інформацію</li>
-          <li>Видаляти свій обліковий запис</li>
-          <li>Обмежити обробку ваших даних</li>
-          <li>Отримати копію своїх даних</li>
+          {(t("section6.items", { returnObjects: true }) as string[]).map(
+            (item: string, index: number) => (
+              <li key={index}>{item}</li>
+            ),
+          )}
         </ul>
       </section>
 
       <section className={styles.section}>
-        <h2>7. Зміни в політиці</h2>
-        <p>
-          Ми можемо оновлювати цю політику конфіденційності. Про значні зміни ми
-          повідомимо через email або сповіщення в додатку.
-        </p>
+        <h2>{t("section7.title")}</h2>
+        <p>{t("section7.content")}</p>
       </section>
 
       <section className={styles.section}>
-        <h2>8. Контакти</h2>
-        <p>
-          Якщо у вас є питання щодо цієї політики конфіденційності, зв'яжіться з
-          нами:
-        </p>
-        <p>Email: support@recipeapp.com</p>
+        <h2>{t("section8.title")}</h2>
+        <p>{t("section8.intro")}</p>
+        <p>{t("section8.email")}</p>
       </section>
 
-      <p className={styles.updated}>Останнє оновлення: 19 грудня 2025</p>
+      <p className={styles.updated}>{t("updated")}</p>
     </div>
   );
 };

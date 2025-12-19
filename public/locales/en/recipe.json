@@ -1,0 +1,18 @@
+{
+  "description": "Description",
+  "minutes": "minutes",
+  "ingredients": "Ingredients",
+  "steps": "Steps",
+  "loading": "Loading...",
+  "error": "Loading error",
+  "notFound": "Recipe not found",
+  "removeFromSaved": "Remove from saved?",
+  "confirmRemove": "Are you sure you want to remove this recipe from saved?",
+  "yes": "Yes",
+  "no": "No",
+  "yourRecipes": "Your recipes",
+  "recentRecipes": "Recent recipes",
+  "topChefs": "Top chefs",
+  "addFirstRecipe": "Add first recipe",
+  "min": "min"
+}

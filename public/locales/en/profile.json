@@ -1,0 +1,26 @@
+{
+  "title": "Profile",
+  "notifications": "Notifications",
+  "support": "Support",
+  "privacy": "Privacy",
+  "language": "Language",
+  "theme": "Theme",
+  "themes": {
+    "light": "Light",
+    "dark": "Dark",
+    "ocean": "Ocean",
+    "sunset": "Sunset"
+  },
+  "languages": {
+    "en": "English",
+    "ua": "Ukrainian"
+  },
+  "logout": "Logout",
+  "notificationsSettings": {
+    "pushNotifications": "Push notifications",
+    "emailNotifications": "Email notifications",
+    "newRecipes": "New recipes from subscriptions",
+    "newFollowers": "New followers",
+    "recipeLikes": "Recipe likes"
+  }
+}

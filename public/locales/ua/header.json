@@ -1,0 +1,15 @@
+{
+  "home": "",
+  "categories": "Категорії",
+  "community": "Спільнота",
+  "profile": "Профіль",
+  "recipe": "Рецепт",
+  "user": "Користувач",
+  "createRecipe": "Створити рецепт",
+  "notifications": "Сповіщення",
+  "notificationSettings": "Налаштування",
+  "helpCenter": "Центр допомоги",
+  "privacyPolicy": "Конфіденційність",
+  "greeting": "Привіт! {{username}}",
+  "subtitle": "Що ти сьогодні готуєш?"
+}

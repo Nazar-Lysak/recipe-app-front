@@ -1,28 +1,13 @@
 import type { FC } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import NotificationIcon from "../../../../assets/img/svg/NotificationIcon";
 import SearchIcon from "../../../../assets/img/svg/SearchIcon";
 import ButtonIcon from "../../../ui/button-icon/ButtonIcon";
 import style from "./Header.module.scss";
 import { useSession } from "../../../../context/useSession";
 import ArrowBackIcon from "../../../../assets/img/svg/ArrowBackIcon";
-
-const ROUTE_TITLES: Record<string, string> = {
-  "/home": "",
-  "/categories": "Категорії",
-  "/community": "Спільнота",
-  "/profile": "Профіль",
-  "/recipe": "Рецепт",
-  "/user": "Користувач",
-  "/create-recipe": "Створити рецепт",
-  "/notifications": "Сповіщення",
-  "/notification-settings": "Налаштування",
-  "/help-center": "Центр допомоги",
-  "/privacy-policy": "Конфіденційність",
-  "/theme-settings": "Тема",
-  "/language-selection": "Мова",
-};
 
 const backButtonAnimation = {
   initial: { opacity: 0, x: -20 },
@@ -39,9 +24,26 @@ const titleAnimation = {
 };
 
 const Header: FC = () => {
+  const { t } = useTranslation("header");
   const { fullUserData } = useSession();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const ROUTE_TITLES: Record<string, string> = {
+    "/home": "",
+    "/categories": t("categories"),
+    "/community": t("community"),
+    "/profile": t("profile"),
+    "/recipe": t("recipe"),
+    "/user": t("user"),
+    "/create-recipe": t("createRecipe"),
+    "/notifications": t("notifications"),
+    "/notification-settings": t("notificationSettings"),
+    "/help-center": t("helpCenter"),
+    "/privacy-policy": t("privacyPolicy"),
+    "/theme-settings": t("profile:theme"),
+    "/language-selection": t("profile:language"),
+  };
 
   const getCurrentRoute = () => {
     return Object.keys(ROUTE_TITLES).find((path) =>
@@ -75,8 +77,10 @@ const Header: FC = () => {
         <motion.div key={currentRoute} {...titleAnimation}>
           {isHome ? (
             <>
-              <h1 className={style.title}>Привіт! {fullUserData?.username}</h1>
-              <p className={style.subtitle}>Що ти сьогодні готуєш?</p>
+              <h1 className={style.title}>
+                {t("greeting", { username: fullUserData?.username })}
+              </h1>
+              <p className={style.subtitle}>{t("subtitle")}</p>
             </>
           ) : (
             currentRoute && (

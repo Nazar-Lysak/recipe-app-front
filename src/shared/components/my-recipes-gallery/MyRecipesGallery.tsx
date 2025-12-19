@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 import style from "./MyRecipesGallery.module.scss";
 import { useRecipes } from "../../hooks/queries/useRecipes";
@@ -9,6 +10,7 @@ import RecipeCardMinimal from "../recipe-card-minimal/RecipeCardMinimal";
 import type { RecipeInterface } from "../../types/UI.types";
 
 const MyRecipesGallery = () => {
+  const { t } = useTranslation("recipe");
   const { fullUserData } = useSession();
   const recipes = useRecipes({
     limit: 10,
@@ -18,13 +20,13 @@ const MyRecipesGallery = () => {
 
   return (
     <div className={style.wrapper}>
-      <h2 className={style.title}>Ваші рецепти</h2>
-      {recipes.isLoading && <p>Loading...</p>}
-      {recipes.isError && <p>Error loading recipes.</p>}
+      <h2 className={style.title}>{t("yourRecipes")}</h2>
+      {recipes.isLoading && <p>{t("loading")}</p>}
+      {recipes.isError && <p>{t("error")}</p>}
       {recipes.data && recipes.data.recipesList.length === 0 && (
         <div className={style.emptyState}>
           <Link to="/create-recipe" className={style.createButton}>
-            Додати перший рецепт
+            {t("addFirstRecipe")}
           </Link>
         </div>
       )}

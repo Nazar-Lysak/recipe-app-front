@@ -1,0 +1,14 @@
+{
+  "follow": "Follow",
+  "unfollow": "Unfollow",
+  "recipes": "Recipes",
+  "followers": "Followers",
+  "following": "Following",
+  "likes": "Likes",
+  "confirmUnfollow": "Confirm unfollow",
+  "confirmUnfollowText": "Are you sure you want to unfollow {{username}}?",
+  "yes": "Yes",
+  "no": "No",
+  "errorLoading": "Error loading user profile.",
+  "noRecipes": "No recipes found in this category."
+}

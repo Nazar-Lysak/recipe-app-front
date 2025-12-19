@@ -1,0 +1,26 @@
+{
+  "title": "Профіль",
+  "notifications": "Сповіщення",
+  "notificationsSettings": {
+    "pushNotifications": "Push-сповіщення",
+    "emailNotifications": "Email-сповіщення",
+    "newRecipes": "Нові рецепти від підписок",
+    "newFollowers": "Нові підписники",
+    "recipeLikes": "Вподобання рецептів"
+  },
+  "support": "Служба підтримки",
+  "privacy": "Конфіденційність",
+  "language": "Мова",
+  "theme": "Тема",
+  "themes": {
+    "light": "Світла",
+    "dark": "Темна",
+    "ocean": "Океан",
+    "sunset": "Захід сонця"
+  },
+  "languages": {
+    "en": "Англійська",
+    "ua": "Українська"
+  },
+  "logout": "Вийти"
+}

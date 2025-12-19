@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { useUser } from "../../shared/hooks/queries/useUser";
 import { useRecipes } from "../../shared/hooks/queries/useRecipes";
 import RecipesGrid from "../../shared/components/recipes-grid/RecipesGrid";
@@ -7,6 +8,7 @@ import ProfileAvatar from "../../shared/components/profile-avatar/ProfileAvatar"
 import style from "./UserProfile.module.scss";
 
 const UserProfile = () => {
+  const { t } = useTranslation("userProfile");
   const [activeTab, setActiveTab] = useState<"recipes" | "favorites">(
     "recipes",
   );
@@ -23,7 +25,7 @@ const UserProfile = () => {
   }
 
   if (userData.isError) {
-    return <div>Помилка завантаження профілю користувача.</div>;
+    return <div>{t("errorLoading")}</div>;
   }
 
   const getActiveIndex = () => {
@@ -38,13 +40,13 @@ const UserProfile = () => {
           className={style.button}
           onClick={() => setActiveTab("recipes")}
         >
-          Рецепти
+          {t("recipes")}
         </button>
         <button
           className={style.button}
           onClick={() => setActiveTab("favorites")}
         >
-          Улюблені
+          {t("likes")}
         </button>
       </div>
       <RecipesGrid recipes={recipes.data?.recipesList || []} />

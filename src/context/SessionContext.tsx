@@ -5,6 +5,7 @@ import type {
   UserInterface,
 } from "../shared/types/UI.types";
 import { SessionContext } from "./useSession";
+import i18n from "../i18n";
 
 const LOCAL_STORAGE_KEYS = {
   TOKEN: "recipeApp_token",
@@ -23,6 +24,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     try {
       const data = await getProfileData(userToken);
       setFullUserData(data);
+      i18n.changeLanguage(data.language || "en");
     } catch (error) {
       console.error("Failed to load profile:", error);
       localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
