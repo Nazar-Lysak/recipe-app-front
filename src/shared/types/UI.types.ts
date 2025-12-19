@@ -67,3 +67,10 @@ export interface ThemeOption {
   value: Theme;
   label: string;
 }
+
+export type Language = "en" | "ua";
+
+export interface LanguageOption {
+  value: Language;
+  label: string;
+}
