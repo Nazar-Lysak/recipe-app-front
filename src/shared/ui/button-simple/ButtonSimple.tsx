@@ -1,14 +1,22 @@
 import style from "./ButtonSimple.module.scss";
+import classNames from "classnames";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
   children: React.ReactNode;
+  isActive?: boolean;
 }
 
-const ButtonSimple = ({ children, ...rest }: ButtonProps) => {
+const ButtonSimple = ({ children, isActive, ...rest }: ButtonProps) => {
   return (
-    <button {...rest} className={style.buttonSimple}>
+    <motion.button
+      {...rest}
+      className={classNames(style.buttonSimple, { [style.active]: isActive })}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    >
       {children}
-    </button>
+    </motion.button>
   );
 };
 

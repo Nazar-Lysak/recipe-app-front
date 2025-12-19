@@ -192,9 +192,11 @@ const ProfilePage = () => {
             gap: "16px",
           }}
         >
-          <ButtonSimple onClick={signOut}>Так</ButtonSimple>
           <ButtonSimple onClick={() => setShowLogoutPopup(false)}>
             Ні
+          </ButtonSimple>
+          <ButtonSimple isActive={true} onClick={signOut}>
+            Так
           </ButtonSimple>
         </div>
       </Drawer>

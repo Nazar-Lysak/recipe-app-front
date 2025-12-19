@@ -42,29 +42,6 @@
   align-items: center;
 }
 
-.followButton {
-  border-radius: 18px;
-  padding: 6px 15px;
-  font-family: $font-secondary;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: center;
-  color: $shade-100;
-  background-color: $shade-400;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
-
-  &:hover,
-  &:focus {
-    background-color: $shade-300;
-    color: $shade-900;
-  }
-}
-
 .moreButton {
   background-color: transparent;
   outline: none;

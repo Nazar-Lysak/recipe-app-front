@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import { motion } from "framer-motion";
 import style from "./ProfileAvatar.module.scss";
 import classNames from "classnames";
@@ -8,10 +8,13 @@ import { useParams } from "react-router";
 import { useFollow } from "../../hooks/mutations/useFollow";
 import { useIsFollowing } from "../../hooks/queries/useIsFollowing";
 import { useUnfollow } from "../../hooks/mutations/useUnfollow";
+import Drawer from "../drawer/Drawer";
+import ButtonSimple from "../../ui/button-simple/ButtonSimple";
 
 const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
   userData,
 }) => {
+  const [showUnfollowPopup, setShowUnfollowPopup] = useState(false);
   const { user, token } = useSession();
   const userId = useParams().userId;
 
@@ -41,10 +44,15 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
 
   const handleFollowClick = () => {
     if (isFollowing.data) {
-      mutateUnfollow.mutate();
+      setShowUnfollowPopup(true);
       return;
     }
     mutationFollow.mutate();
+  };
+
+  const handleUnfollowConfirm = () => {
+    mutateUnfollow.mutate();
+    setShowUnfollowPopup(false);
   };
 
   return (
@@ -89,6 +97,28 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
           <span>{likes_received}</span>
         </li>
       </ul>
+      <Drawer
+        direction="bottom"
+        isOpen={showUnfollowPopup}
+        onClose={() => setShowUnfollowPopup(false)}
+      >
+        <h3>Підтвердження відписки</h3>
+        <p>Ви впевнені, що хочете відписатись від {username}?</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            gap: "16px",
+          }}
+        >
+          <ButtonSimple onClick={() => setShowUnfollowPopup(false)}>
+            Ні
+          </ButtonSimple>
+          <ButtonSimple isActive={true} onClick={handleUnfollowConfirm}>
+            Так
+          </ButtonSimple>
+        </div>
+      </Drawer>
     </div>
   );
 };

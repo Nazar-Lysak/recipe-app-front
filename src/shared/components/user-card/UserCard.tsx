@@ -1,33 +1,70 @@
 import MoreVerticalIcon from "../../../assets/img/svg/MoreVerticalIcon";
 import style from "./UserCard.module.scss";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import type { UserInterface } from "../../types/UI.types";
+import { useState } from "react";
+import { useIsFollowing } from "../../hooks/queries/useIsFollowing";
+import { useSession } from "../../../context/useSession";
+import ButtonSimple from "../../ui/button-simple/ButtonSimple";
+import Drawer from "../drawer/Drawer";
+import { useUnfollow } from "../../hooks/mutations/useUnfollow";
+import { useFollow } from "../../hooks/mutations/useFollow";
 
 interface UserCardProps {
-  user?: UserInterface;
+  authorData?: UserInterface;
 }
 
 interface RecipeCardProps {
   recipe?: {
     authorId: string;
+    likedByUserIds: string[];
   };
 }
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-category-image.png";
 
-function UserCard({ user, recipe }: UserCardProps & RecipeCardProps) {
-  const { avatar_url, email, first_name, username } = user || {};
+function UserCard({
+  authorData,
+  recipe,
+  isOwnRecipe,
+}: UserCardProps & RecipeCardProps & { isOwnRecipe?: boolean }) {
+  const [showUnfollowPopup, setShowUnfollowPopup] = useState(false);
+  const { avatar_url, email, first_name, username } = authorData || {};
+  const { token } = useSession();
 
-  const authorId = recipe?.authorId;
+  const isFollowing = useIsFollowing(recipe?.authorId, token);
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
   };
 
+  const mutationFollow = useFollow({
+    userId: recipe?.authorId || "",
+    token: token || "",
+  });
+
+  const mutateUnfollow = useUnfollow({
+    userId: recipe?.authorId || "",
+    token: token || "",
+  });
+
+  const handleFollowClick = () => {
+    if (isFollowing.data) {
+      setShowUnfollowPopup(true);
+      return;
+    }
+    mutationFollow.mutate();
+  };
+
+  const handleUnfollowConfirm = () => {
+    mutateUnfollow.mutate();
+    setShowUnfollowPopup(false);
+  };
+
   return (
     <div className={style.wrapper}>
-      <Link to={`/user/${authorId}`}>
+      <Link to={`/user/${recipe?.authorId}`}>
         <div className={style.userInfo}>
           <img
             src={avatar_url || FALLBACK_IMAGE}
@@ -44,11 +81,38 @@ function UserCard({ user, recipe }: UserCardProps & RecipeCardProps) {
         </div>
       </Link>
       <div className={style.actions}>
-        <button className={style.followButton}>Підписатись</button>
+        {!isOwnRecipe && (
+          <ButtonSimple onClick={handleFollowClick} isActive={isFollowing.data}>
+            {isFollowing.data ? "Відписатись" : "Підписатись"}
+          </ButtonSimple>
+        )}
+        {isOwnRecipe && <ButtonSimple>Редагувати профіль</ButtonSimple>}
         <button className={style.moreButton}>
           <MoreVerticalIcon />
         </button>
       </div>
+      <Drawer
+        isOpen={showUnfollowPopup}
+        onClose={() => setShowUnfollowPopup(false)}
+      >
+        <h3>Підтвердження відписки</h3>
+        <p>Ви впевнені, що хочете відписатись від {username}?</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            gap: "10px",
+            marginTop: "20px",
+          }}
+        >
+          <ButtonSimple onClick={() => setShowUnfollowPopup(false)}>
+            Ні
+          </ButtonSimple>
+          <ButtonSimple isActive={true} onClick={handleUnfollowConfirm}>
+            Так
+          </ButtonSimple>
+        </div>
+      </Drawer>
     </div>
   );
 }

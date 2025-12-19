@@ -17,10 +17,10 @@ const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
 
 const RecipePage = () => {
+  const { user } = useSession();
   const { recipeId } = useParams<{ recipeId: string }>();
 
   const recipe = useRecipe(recipeId || "");
-  const { user } = useSession();
   const { optimisticLikes, handleLike } = useLike(
     recipeId || "",
     recipe.data?.favouriteCount || 0,
@@ -87,9 +87,13 @@ const RecipePage = () => {
           </button>
         </div>
       </div>
-      <UserCard user={authorRecipe.data} recipe={recipe.data} />
+      <UserCard
+        authorData={authorRecipe.data}
+        recipe={recipe.data}
+        isOwnRecipe={isOwnRecipe}
+      />
       <div className={styles.detailsSection}>
-        <p className={styles.detailsTitle}>Details</p>
+        <p className={styles.detailsTitle}>Опис</p>
         <p className={styles.time}>
           <ClockIcon />
           {time} хвилин

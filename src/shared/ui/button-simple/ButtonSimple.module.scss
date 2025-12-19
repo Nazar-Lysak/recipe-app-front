@@ -13,4 +13,14 @@
   padding: 4px 8px;
   border: solid 1px transparent;
   background-color: $shade-400;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s,
+    color 0.2s;
+
+  &.active {
+    border-color: $shade-400;
+    background-color: $shade-200;
+    color: $shade-400;
+  }
 }
