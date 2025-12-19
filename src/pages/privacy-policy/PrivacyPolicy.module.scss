@@ -1,0 +1,57 @@
+@use "@/styles/variables" as *;
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  color: $shade-950;
+}
+
+.section {
+  margin-bottom: 32px;
+
+  h2 {
+    font-family: $font-secondary;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: $shade-950;
+  }
+
+  p {
+    font-family: $font-primary;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    margin-bottom: 12px;
+    color: $shade-900;
+  }
+
+  ul {
+    padding-left: 24px;
+
+    li {
+      font-family: $font-primary;
+      font-size: 15px;
+      line-height: 1.8;
+      color: $shade-900;
+      margin-bottom: 0px;
+      position: relative;
+
+        &::before {
+            content: "•";
+            position: absolute;
+            left: -16px;
+            color: $shade-300;
+        }
+    }
+  }
+}
+
+.updated {
+  text-align: center;
+  font-family: $font-primary;
+  font-size: 13px;
+  color: $shade-400;
+  margin-top: 40px;
+  font-style: italic;
+}

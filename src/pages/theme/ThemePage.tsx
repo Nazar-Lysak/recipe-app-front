@@ -14,26 +14,32 @@ const themeOptions: ThemeOption[] = [
 
 const ThemePage = () => {
   const [themeToggle, setThemeToggle] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const { token, refreshUserData, fullUserData } = useSession();
 
   const { theme } = fullUserData || {};
 
   const updateProfileMutation = useUpdateProfile({
     token: token || "",
-    onSuccess: async () => {},
+    onSuccess: async () => {
+      setTimeout(async () => {
+        await refreshUserData();
+        setThemeToggle(false);
+        setSelectedTheme(null);
+      }, 700);
+    },
   });
 
   const handleThemeSelect = (
     newTheme: "light" | "dark" | "ocean" | "sunset",
   ) => {
+    setSelectedTheme(newTheme);
     setThemeToggle(true);
-
-    setTimeout(async () => {
-      await updateProfileMutation.mutateAsync({ theme: newTheme });
-      await refreshUserData();
-      setThemeToggle(false);
-    }, 700);
+    updateProfileMutation.mutate({ theme: newTheme });
   };
+
+  const displayTheme = selectedTheme || theme;
+
   return (
     <div>
       {themeOptions.map((option) => (
@@ -41,7 +47,7 @@ const ThemePage = () => {
           <RadioButton
             label={option.label}
             onChange={() => handleThemeSelect(option.value)}
-            checked={theme === option.value}
+            checked={displayTheme === option.value}
           />
         </div>
       ))}
