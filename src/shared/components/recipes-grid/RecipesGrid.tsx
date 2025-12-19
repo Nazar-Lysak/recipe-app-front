@@ -8,9 +8,6 @@ interface RecipesGridProps {
 }
 
 const RecipesGrid = ({ recipes }: RecipesGridProps) => {
-  if (recipes.length === 0) {
-    return <div className={style.noRecipes}>Рецепти не знайдено.</div>;
-  }
   return (
     <div className={style.list}>
       {recipes.map((recipe) => (
