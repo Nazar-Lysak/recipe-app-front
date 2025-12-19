@@ -12,11 +12,15 @@ import { useSession } from "../../context/useSession";
 import { useRecipe } from "../../shared/hooks/queries/useRecipe";
 import { useLike } from "../../shared/hooks/mutations/useLike";
 import OwnRecipeIcon from "../../assets/img/svg/OwnRecipeIcon";
+import { useState } from "react";
+import Drawer from "../../shared/components/drawer/Drawer";
+import ButtonSimple from "../../shared/ui/button-simple/ButtonSimple";
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
 
 const RecipePage = () => {
+  const [confirmDislike, setConfirmDislike] = useState(false);
   const { user } = useSession();
   const { recipeId } = useParams<{ recipeId: string }>();
 
@@ -28,6 +32,20 @@ const RecipePage = () => {
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
+  };
+
+  const handleLikeClick = (isLiked: boolean) => {
+    
+    if (isLiked) {
+      setConfirmDislike(true);
+      return;
+    }
+    handleLike(isLiked);
+  }
+
+  const handleConfirmDislike = () => {
+    handleLike(true);
+    setConfirmDislike(false);
   };
 
   const authorRecipe = useUser(recipe.data?.authorId);
@@ -66,7 +84,7 @@ const RecipePage = () => {
               { [styles.ownRecipe]: isOwnRecipe },
             )}
             disabled={isOwnRecipe}
-            onClick={() => handleLike(isLiked)}
+            onClick={() => handleLikeClick(isLiked)}
           >
             {isOwnRecipe ? <OwnRecipeIcon /> : <RatingStarIcon />}
             <AnimatePresence mode="wait">
@@ -123,6 +141,29 @@ const RecipePage = () => {
           ))}
         </ul>
       </div>
+
+      <Drawer
+        direction="bottom"
+        isOpen={confirmDislike}
+        onClose={() => setConfirmDislike(false)}
+      >
+        <h3>Видалити зі збережених?</h3>
+        <p>Ви впевнені, що хочете прибрати рецепт зі збережених?</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            gap: "16px",
+          }}
+        >
+          <ButtonSimple onClick={() => setConfirmDislike(false)}>
+            Ні
+          </ButtonSimple>
+          <ButtonSimple isActive={true} onClick={handleConfirmDislike}>
+            Так
+          </ButtonSimple>
+        </div>
+      </Drawer>
     </div>
   );
 };
