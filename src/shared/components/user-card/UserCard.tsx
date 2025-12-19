@@ -1,6 +1,6 @@
 import MoreVerticalIcon from "../../../assets/img/svg/MoreVerticalIcon";
 import style from "./UserCard.module.scss";
-import { Link, useParams } from "react-router";
+import { Link } from "react-router";
 import type { UserInterface } from "../../types/UI.types";
 import { useState } from "react";
 import { useIsFollowing } from "../../hooks/queries/useIsFollowing";

@@ -21,6 +21,7 @@ const ROUTE_TITLES: Record<string, string> = {
   "/help-center": "Центр допомоги",
   "/privacy-policy": "Конфіденційність",
   "/theme-settings": "Тема",
+  "/language-selection": "Мова",
 };
 
 const backButtonAnimation = {

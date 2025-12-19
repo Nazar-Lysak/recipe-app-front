@@ -60,3 +60,10 @@ export interface FullUserDataInterface {
   updated_at: string;
   liked_recipes: string[];
 }
+
+export type Theme = "light" | "dark" | "ocean" | "sunset";
+
+export interface ThemeOption {
+  value: Theme;
+  label: string;
+}

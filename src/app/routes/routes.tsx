@@ -36,6 +36,9 @@ const PrivacyPolicy = lazy(
   () => import("../../pages/privacy-policy/PrivacyPolicy"),
 );
 const ThemePage = lazy(() => import("../../pages/theme/ThemePage"));
+const LanguageSettings = lazy(
+  () => import("../../pages/language-settings/LanguageSettings"),
+);
 
 export const routes: RouteObject[] = [
   {
@@ -68,6 +71,7 @@ export const routes: RouteObject[] = [
               { path: "help-center", Component: HelpCenter },
               { path: "privacy-policy", Component: PrivacyPolicy },
               { path: "theme-settings", Component: ThemePage },
+              { path: "language-selection", Component: LanguageSettings },
               { path: "community", Component: CommunityPage },
               { path: "categories", Component: CategoryPage },
               {

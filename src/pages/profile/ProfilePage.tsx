@@ -73,16 +73,7 @@ const ProfilePage = () => {
 
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [showThemePopup, setShowThemePopup] = useState(false);
-  const { token, fullUserData, refreshUserData, signOut } = useSession();
-  const { theme } = fullUserData || {};
-  const navigate = useNavigate();
-
-  const updateProfileMutation = useUpdateProfile({
-    token: token || "",
-    onSuccess: async () => {
-      await refreshUserData();
-    },
-  });
+  const { fullUserData, signOut } = useSession();
 
   const handleLogout = () => {
     setShowLogoutPopup(true);
@@ -90,13 +81,6 @@ const ProfilePage = () => {
 
   const handleThemeToggle = () => {
     setShowThemePopup(true);
-  };
-
-  const handleThemeSelect = (
-    newTheme: "light" | "dark" | "ocean" | "sunset",
-  ) => {
-    updateProfileMutation.mutate({ theme: newTheme });
-    setShowThemePopup(false);
   };
 
   return (

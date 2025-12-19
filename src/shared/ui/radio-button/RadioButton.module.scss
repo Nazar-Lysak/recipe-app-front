@@ -1,0 +1,58 @@
+@use "@/styles/variables" as *;
+
+.radioButton {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  padding: 16px 0;
+  user-select: none;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.circle {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border: 2px solid $shade-400;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+
+  &.checked {
+    border-color: $shade-400;
+  }
+}
+
+.innerCircle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $shade-400;
+  animation: scaleIn 0.2s ease;
+}
+
+.label {
+  font-family: $font-primary;
+  font-size: 16px;
+  font-weight: 400;
+  color: $shade-950;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
