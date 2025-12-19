@@ -184,35 +184,6 @@ const ProfilePage = () => {
           </ButtonSimple>
         </div>
       </Drawer>
-
-      <Drawer
-        direction="bottom"
-        isOpen={showThemePopup}
-        onClose={() => setShowThemePopup(false)}
-      >
-        <h3>Оберіть тему</h3>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "12px",
-            marginTop: "16px",
-          }}
-        >
-          <ButtonSimple onClick={() => handleThemeSelect("light")}>
-            ☀️ Світла
-          </ButtonSimple>
-          <ButtonSimple onClick={() => handleThemeSelect("dark")}>
-            🌙 Темна
-          </ButtonSimple>
-          <ButtonSimple onClick={() => handleThemeSelect("ocean")}>
-            🌊 Океан
-          </ButtonSimple>
-          <ButtonSimple onClick={() => handleThemeSelect("sunset")}>
-            🌅 Захід сонця
-          </ButtonSimple>
-        </div>
-      </Drawer>
     </div>
   );
 };
