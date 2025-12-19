@@ -35,13 +35,12 @@ const RecipePage = () => {
   };
 
   const handleLikeClick = (isLiked: boolean) => {
-    
     if (isLiked) {
       setConfirmDislike(true);
       return;
     }
     handleLike(isLiked);
-  }
+  };
 
   const handleConfirmDislike = () => {
     handleLike(true);
