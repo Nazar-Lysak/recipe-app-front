@@ -29,6 +29,7 @@ export const useUpdateProfile = ({
 }: UseUpdateProfileProps) => {
   return useMutation({
     mutationFn: async (data: UpdateProfileData) => {
+      console.log("+++++ ", data);
       const response = await axios.put(
         `http://localhost:3000/user/current`,
         data,
@@ -40,9 +41,10 @@ export const useUpdateProfile = ({
       );
       return response.data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       if (onSuccess) {
         onSuccess();
+        console.log(data);
       }
     },
     onError: (error) => {

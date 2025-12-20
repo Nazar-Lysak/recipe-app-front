@@ -41,8 +41,8 @@ export interface FullUserDataInterface {
   last_name: string | undefined;
   bio: string | null;
   location: string | null;
-  avatar_url: string | null;
-  banner_url: string | null;
+  avatar_url?: string | null;
+  banner_url?: string | null;
   website: string | null;
   facebook: string | null;
   instagram: string | null;

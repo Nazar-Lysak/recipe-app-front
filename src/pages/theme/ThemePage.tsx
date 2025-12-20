@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSession } from "../../context/useSession";
 import { useUpdateProfile } from "../../shared/hooks/mutations/useUpdateProfile";
-import type { ThemeOption, Theme } from "../../shared/types/UI.types";
+import type { ThemeOption } from "../../shared/types/UI.types";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import RadioButton from "../../shared/ui/radio-button/RadioButton";
 
