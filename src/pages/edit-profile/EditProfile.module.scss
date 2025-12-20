@@ -1,0 +1,52 @@
+@use "@/styles/variables" as *;
+
+.username {
+  font-family: $font-primary;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 110%;
+  text-transform: capitalize;
+  text-align: center;
+  color: $shade-300;
+  margin: 0 0 8px 0;
+}
+
+.email {
+  font-family: $font-secondary;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 110%;
+  text-align: center;
+  color: $shade-900;
+  margin-bottom: 20px;
+  margin: 0 0 20px 0;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.editPhotoButton {
+  display: block;
+  margin: 0 auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: $font-primary;
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  color: $shade-400;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 auto;
+}

@@ -4,7 +4,7 @@ import {
   type ReactNode,
   useState,
 } from "react";
-
+import classNames from "classnames";
 import styles from "./InputText.module.scss";
 
 export interface InputTextProps extends Omit<
@@ -17,7 +17,7 @@ export interface InputTextProps extends Omit<
   icon?: ReactNode;
   helperText?: string;
   placeholder?: string;
-  mask?: string; // for future mask support
+  mask?: string;
   size?: "small" | "medium" | "large";
   className?: string;
 }
@@ -45,7 +45,16 @@ const InputText: FC<InputTextProps> = ({
         .filter(Boolean)
         .join(" ")}
     >
-      {label && <label className={styles.label}>{label}</label>}
+      {label && (
+        <label
+          className={classNames({
+            [styles.label]: true,
+            [styles.required]: rest.required,
+          })}
+        >
+          {label}
+        </label>
+      )}
       <div className={styles.inputBox}>
         <input
           placeholder={placeholder}

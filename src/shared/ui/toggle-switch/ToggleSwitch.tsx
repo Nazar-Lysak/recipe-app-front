@@ -24,6 +24,7 @@ const ToggleSwitch = ({
     <label className={style.container}>
       <span className={style.label}>{label}</span>
       <button
+        type="button"
         className={style.toggleSwitch}
         onClick={handleToggle}
         disabled={disabled}

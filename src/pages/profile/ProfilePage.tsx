@@ -111,7 +111,6 @@ const ProfilePage = () => {
       </div> */}
 
       <div className={style.settingsMenu}>
-
         <Link className={style.menuButton} to={"/edit-profile"}>
           <span className={style.menuIcon}>
             <ProfileIcon />

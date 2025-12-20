@@ -11,16 +11,16 @@ interface UpdateProfileData {
   language?: string;
   first_name?: string;
   last_name?: string;
-  bio?: string;
-  location?: string;
-  website?: string;
-  facebook?: string;
-  instagram?: string;
-  youtube?: string;
-  tiktok?: string;
+  bio?: string | null;
+  location?: string | null;
+  website?: string | null;
+  facebook?: string | null;
+  instagram?: string | null;
+  youtube?: string | null;
+  tiktok?: string | null;
   is_private?: boolean;
-  avatar_url?: string;
-  banner_url?: string;
+  avatar_url?: string | null;
+  banner_url?: string | null;
 }
 
 export const useUpdateProfile = ({

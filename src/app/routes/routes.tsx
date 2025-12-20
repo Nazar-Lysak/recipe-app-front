@@ -67,7 +67,7 @@ export const routes: RouteObject[] = [
               },
               {
                 path: "edit-profile",
-                Component: EditProfile
+                Component: EditProfile,
               },
               {
                 path: "notification-settings",
