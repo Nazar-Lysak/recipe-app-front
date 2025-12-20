@@ -1,10 +1,8 @@
-import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import { useSession } from "../../../context/useSession";
 import type { RecipeInterface } from "../../types/UI.types";
 import styles from "./RecipeCardMinimal.module.scss";
-import OwnRecipeIcon from "../../../assets/img/svg/OwnRecipeIcon";
 import ClockIcon from "../../../assets/img/svg/ClockIcon";
 import HeartIcon from "../../../assets/img/svg/HeartIcon";
 

@@ -8,8 +8,6 @@ import type {
   RecipeInterface,
 } from "../../types/UI.types";
 import { useSession } from "../../../context/useSession";
-import OwnRecipeIcon from "../../../assets/img/svg/OwnRecipeIcon";
-import classNames from "classnames";
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
@@ -21,7 +19,7 @@ interface RecipeCardExpandedProps {
 
 const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
   const { t } = useTranslation("recipe");
-  const { id, name, description, image, favouriteCount, time } = recipe;
+  const { id, name, description, image, time } = recipe;
 
   const { user } = useSession();
 
