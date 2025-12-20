@@ -30,13 +30,16 @@ const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
   };
 
   const isOwnRecipe = user?.id === recipe.author.id;
+  const isLiked = recipe.likedByUserIds.includes(user ? user.id : "");
 
   return (
     <div key={id}>
       <div className={style.recipeContent}>
-        <button className={style.likeButton}>
-          <HeartIcon favourited={false} />
-        </button>
+        {!isOwnRecipe && (
+          <span className={style.likeButton}>
+            <HeartIcon favourited={isLiked} />
+          </span>
+        )}
         <img
           src={image || FALLBACK_IMAGE}
           alt={name}
@@ -49,14 +52,8 @@ const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
             <p className={style.recipeDescription}>{description}</p>
           </div>
           <div className={style.recipeStats}>
-            <p
-              className={classNames({
-                [style.rating]: true,
-                [style.isOwnRecipe]: isOwnRecipe,
-              })}
-            >
-              {isOwnRecipe ? <OwnRecipeIcon /> : <RatingStarIcon />}{" "}
-              {favouriteCount}
+            <p className={style.rating}>
+              <RatingStarIcon /> 0
             </p>
             <p className={style.time}>
               {" "}

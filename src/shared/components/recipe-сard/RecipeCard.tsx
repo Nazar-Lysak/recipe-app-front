@@ -4,8 +4,6 @@ import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 import style from "./RecipeCard.module.scss";
 import type { RecipeInterface } from "../../types/UI.types";
 import { useSession } from "../../../context/useSession";
-import classNames from "classnames";
-import OwnRecipeIcon from "../../../assets/img/svg/OwnRecipeIcon";
 
 interface RecipeCardProps {
   recipe: RecipeInterface;
@@ -15,7 +13,7 @@ const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
 
 const RecipeCard = ({ recipe }: RecipeCardProps) => {
-  const { image, name, description, favouriteCount, time, author } = recipe;
+  const { image, name, description, time, author } = recipe;
   const { user } = useSession();
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -27,9 +25,11 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
 
   return (
     <div className={style.card}>
-      <button className={style.favorite}>
-        <HeartIcon favourited={false} />
-      </button>
+      {!isOwnRecipe && (
+        <button className={style.favorite}>
+          <HeartIcon favourited={isLiked} />
+        </button>
+      )}
       <img
         className={style.image}
         src={image || FALLBACK_IMAGE}
@@ -39,14 +39,8 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
       <h3 className={style.title}>{name}</h3>
       <p className={style.description}>{description}</p>
       <div className={style.info}>
-        <span
-          className={classNames(
-            { [style.rating]: true, [style.isLiked]: isLiked },
-            { [style.isOwnRecipe]: isOwnRecipe },
-          )}
-        >
-          {favouriteCount}
-          {isOwnRecipe ? <OwnRecipeIcon /> : <RatingStarIcon />}
+        <span className={style.rating}>
+          <RatingStarIcon />0
         </span>
         <span className={style.time}>
           <ClockIcon />

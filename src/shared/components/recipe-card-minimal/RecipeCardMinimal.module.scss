@@ -2,6 +2,14 @@
 
 .wrapper {
   padding-bottom: 24px;
+  position: relative;
+
+  .likeIcon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px;
+  }
   .image {
     aspect-ratio: 1;
     width: 100%;
@@ -53,7 +61,7 @@
   }
 
   .rating {
-    fill: $shade-300;
+    fill: $shade-400;
   }
 
   .isOwnRecipe {

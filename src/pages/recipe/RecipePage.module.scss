@@ -4,6 +4,30 @@
   background-color: $shade-400;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
+
+  .likeButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: rgba($shade-900, 0.5);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba($shade-900, 0.7);
+    }
+
+    svg {
+      width: 36px;
+      height: 36px;
+    }
+  }
 }
 
 .details {
@@ -21,6 +45,7 @@
   .comments {
     display: flex;
     justify-content: flex-end;
+    align-items: baseline;
     gap: 4px;
     padding: 5px 0;
     min-width: 30px;
@@ -34,22 +59,6 @@
     fill: $shade-300;
     stroke-width: 0.7;
     stroke: $shade-100;
-
-    &.liked {
-      stroke: transparent;
-      fill: $shade-100;
-      transform: scale(1.2);
-    }
-
-    &.ownRecipe {
-      stroke: $shade-100;
-      fill: $shade-300;
-      stroke-width: 1.5;
-    }
-
-    &:disabled {
-      color: inherit;
-    }
   }
 
   .comments {

@@ -1,5 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
-import classNames from "classnames";
+import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
@@ -12,10 +11,10 @@ import ClockIcon from "../../assets/img/svg/ClockIcon";
 import { useSession } from "../../context/useSession";
 import { useRecipe } from "../../shared/hooks/queries/useRecipe";
 import { useLike } from "../../shared/hooks/mutations/useLike";
-import OwnRecipeIcon from "../../assets/img/svg/OwnRecipeIcon";
 import { useState } from "react";
 import Drawer from "../../shared/components/drawer/Drawer";
 import ButtonSimple from "../../shared/ui/button-simple/ButtonSimple";
+import HeartIcon from "../../assets/img/svg/HeartIcon";
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
@@ -76,33 +75,28 @@ const RecipePage = () => {
           onError={handleImageError}
           className={styles.image}
         />
-        <div className={styles.details}>
-          <h1 className={styles.title}>{name}</h1>
-          <button
-            className={classNames(
-              styles.rating,
-              { [styles.liked]: isLiked },
-              { [styles.ownRecipe]: isOwnRecipe },
-            )}
-            disabled={isOwnRecipe}
+        {!isOwnRecipe && (
+          <motion.button
+            key={optimisticLikes}
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className={styles.likeButton}
             onClick={() => handleLikeClick(isLiked)}
           >
-            {isOwnRecipe ? <OwnRecipeIcon /> : <RatingStarIcon />}
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={optimisticLikes}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                className={styles.count}
-              >
-                {optimisticLikes}
-              </motion.span>
-            </AnimatePresence>
-          </button>
+            <HeartIcon favourited={isLiked} />
+          </motion.button>
+        )}
+
+        <div className={styles.details}>
+          <h1 className={styles.title}>{name}</h1>
+
+          <span className={styles.rating}>
+            <RatingStarIcon /> 0
+          </span>
           <button className={styles.comments}>
-            <CommentsIcon /> 199
+            <CommentsIcon /> 0
           </button>
         </div>
       </div>

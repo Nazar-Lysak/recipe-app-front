@@ -6,6 +6,7 @@ import type { RecipeInterface } from "../../types/UI.types";
 import styles from "./RecipeCardMinimal.module.scss";
 import OwnRecipeIcon from "../../../assets/img/svg/OwnRecipeIcon";
 import ClockIcon from "../../../assets/img/svg/ClockIcon";
+import HeartIcon from "../../../assets/img/svg/HeartIcon";
 
 interface RecipeCardMinimalProps {
   recipe: RecipeInterface;
@@ -20,13 +21,19 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
 
 const RecipeCardMinimal = ({ recipe }: RecipeCardMinimalProps) => {
   const { t } = useTranslation("recipe");
-  const { time, favouriteCount, name, image, author } = recipe;
+  const { time, name, image, author } = recipe;
   const { user } = useSession();
 
+  const isLiked = recipe.likedByUserIds.includes(user ? user.id : "");
   const isOwnRecipe = user?.id === author.id;
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
+        {!isOwnRecipe && (
+          <span className={styles.likeIcon}>
+            <HeartIcon favourited={isLiked} />
+          </span>
+        )}
         <img
           src={image || FALLBACK_IMAGE}
           alt={name}
@@ -36,14 +43,8 @@ const RecipeCardMinimal = ({ recipe }: RecipeCardMinimalProps) => {
         <div className={styles.info}>
           <h3 className={styles.title}>{name}</h3>
           <div className={styles.stats}>
-            <p
-              className={classNames({
-                [styles.rating]: true,
-                [styles.isOwnRecipe]: isOwnRecipe,
-              })}
-            >
-              {isOwnRecipe ? <OwnRecipeIcon /> : <RatingStarIcon />}{" "}
-              {favouriteCount}
+            <p className={styles.rating}>
+              <RatingStarIcon /> 0
             </p>
             <p className={styles.time}>
               {" "}

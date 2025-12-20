@@ -10,16 +10,13 @@
 .likeButton {
   position: absolute;
   padding: 0;
-  background-color: transparent;
-  outline: none;
-  border: none;
   top: 11px;
   right: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  z-index: 1;
+  z-index: 4;
+  fill: $shade-400;
 }
 
 .recipeImage {
@@ -98,7 +95,7 @@
   }
 
   .rating {
-    fill: $shade-300;
+    fill: $shade-400;
   }
 
   .isOwnRecipe {
