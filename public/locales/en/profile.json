@@ -16,6 +16,25 @@
     "en": "English",
     "ua": "Ukrainian"
   },
+  "editProfileForm": {
+    "firstName": "First Name",
+    "firstNamePlaceholder": "User's first name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "User's last name",
+    "bio": "About me",
+    "bioPlaceholder": "Tell something about yourself",
+    "location": "Country/City",
+    "locationPlaceholder": "Country or city",
+    "website": "Website",
+    "websitePlaceholder": "https://example.com",
+    "instagramPlaceholder": "https://instagram.com/yourprofile",
+    "tiktokPlaceholder": "https://tiktok.com/yourprofile",
+    "facebookPlaceholder": "https://facebook.com/yourprofile",
+    "youtubePlaceholder": "https://youtube.com/yourprofile",
+    "showProfile": "Show my profile",
+    "editPhoto": "Edit Photo",
+    "saveChanges": "Save changes"
+  },
   "logout": "Logout",
   "notificationsSettings": {
     "pushNotifications": "Push notifications",

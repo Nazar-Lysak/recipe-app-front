@@ -23,5 +23,24 @@
     "en": "Англійська",
     "ua": "Українська"
   },
+  "editProfileForm": {
+    "firstName": "Імя",
+    "firstNamePlaceholder": "Імя користувача",
+    "lastName": "Прізвище",
+    "lastNamePlaceholder": "Прізвище користувача",
+    "bio": "Про мене",
+    "bioPlaceholder": "Розкажіть щось про себе",
+    "location": "Країна/Місто",
+    "locationPlaceholder": "Країна або місто",
+    "website": "Вебсайт",
+    "websitePlaceholder": "https://example.com",
+    "instagramPlaceholder": "https://instagram.com/yourprofile",
+    "tiktokPlaceholder": "https://tiktok.com/yourprofile",
+    "facebookPlaceholder": "https://facebook.com/yourprofile",
+    "youtubePlaceholder": "https://youtube.com/yourprofile",
+    "showProfile": "Показувати мій профіль",
+    "editPhoto": "Змінити фото",
+    "saveChanges": "Зберегти зміни"
+  },
   "logout": "Вийти"
 }

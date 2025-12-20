@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSession } from "../../context/useSession";
 import Button from "../../shared/ui/button/Button";
 import InputText from "../../shared/ui/input-text/InputText";
@@ -9,6 +10,7 @@ import type { FullUserDataInterface } from "../../shared/types/UI.types";
 import { useUpdateProfile } from "../../shared/hooks/mutations/useUpdateProfile";
 
 const EditProfile = () => {
+  const { t } = useTranslation("profile");
   const { fullUserData, refreshUserData, token } = useSession();
   const [userData, setUserData] = useState<FullUserDataInterface | null>(
     fullUserData,
@@ -60,72 +62,72 @@ const EditProfile = () => {
       <h2 className={style.username}>{username}</h2>
       <p className={style.email}>{email}</p>
       <img className={style.avatar} src={avatar_url || ""} alt="User Avatar" />
-      <button className={style.editPhotoButton}>Edit Photo</button>
+      <button className={style.editPhotoButton}>{t("editProfileForm.editPhoto")}</button>
       <form className={style.form} onSubmit={handleSubmit}>
         <InputText
-          label="Імя"
-          placeholder="Імя користувача"
+          label={t("editProfileForm.firstName")}
+          placeholder={t("editProfileForm.firstNamePlaceholder")}
           required
           value={first_name || ""}
           onChange={(e) => handleChange("first_name", e.target.value)}
         />
         <InputText
-          label="Прізвище"
-          placeholder="Прізвище користувача"
+          label={t("editProfileForm.lastName")}
+          placeholder={t("editProfileForm.lastNamePlaceholder")}
           required
           value={last_name || ""}
           onChange={(e) => handleChange("last_name", e.target.value)}
         />
         <TextArea
-          label="Про мене"
-          placeholder="Розкажіть щось про себе"
+          label={t("editProfileForm.bio")}
+          placeholder={t("editProfileForm.bioPlaceholder")}
           required
           value={bio || ""}
           onChange={(e) => handleChange("bio", e.target.value)}
         />
         <InputText
-          label="Країна/Місто"
-          placeholder="Країна або місто"
+          label={t("editProfileForm.location")}
+          placeholder={t("editProfileForm.locationPlaceholder")}
           value={location || ""}
           onChange={(e) => handleChange("location", e.target.value)}
         />
         <InputText
-          label="Вебсайт"
-          placeholder="https://example.com"
+          label={t("editProfileForm.website")}
+          placeholder={t("editProfileForm.websitePlaceholder")}
           value={website || ""}
           onChange={(e) => handleChange("website", e.target.value)}
         />
         <InputText
           label="Instagram"
-          placeholder="https://instagram.com/yourprofile"
+          placeholder={t("editProfileForm.instagramPlaceholder")}
           value={instagram || ""}
           onChange={(e) => handleChange("instagram", e.target.value)}
         />
         <InputText
           label="TikTok"
-          placeholder="https://tiktok.com/yourprofile"
+          placeholder={t("editProfileForm.tiktokPlaceholder")}
           value={tiktok || ""}
           onChange={(e) => handleChange("tiktok", e.target.value)}
         />
         <InputText
           label="Facebook"
-          placeholder="https://facebook.com/yourprofile"
+          placeholder={t("editProfileForm.facebookPlaceholder")}
           value={facebook || ""}
           onChange={(e) => handleChange("facebook", e.target.value)}
         />
         <InputText
           label="YouTube"
-          placeholder="https://youtube.com/yourprofile"
+          placeholder={t("editProfileForm.youtubePlaceholder")}
           value={youtube || ""}
           onChange={(e) => handleChange("youtube", e.target.value)}
         />
         <ToggleSwitch
-          label="Показувати мій профіль"
+          label={t("editProfileForm.showProfile")}
           checked={Boolean(is_private)}
           onChange={() => handleChange("is_private", Boolean(!is_private))}
         />
         <Button style={{ margin: "0 auto" }} type="submit">
-          Зберегти зміни
+          {t("editProfileForm.saveChanges")}
         </Button>
       </form>
     </div>
