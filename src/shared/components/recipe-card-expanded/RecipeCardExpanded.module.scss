@@ -130,16 +130,11 @@
     font-family: $font-primary;
   }
 
-  .rating {
-    fill: $shade-400;
-    stroke-width: 0.7;
-    stroke: $shade-100;
-  }
 
-  .liked {
-    fill: $shade-100;
-    stroke: transparent;
-    transform: scale(1.2);
+  .rating {
+    fill: transparent;
+    stroke-width: 1px;
+    stroke: $shade-100;
   }
 
   .isOwnRecipe {

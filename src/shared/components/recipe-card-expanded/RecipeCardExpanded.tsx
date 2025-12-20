@@ -60,7 +60,9 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
         </div>
         <div className={style.recipeContent}>
           <button className={style.likeButton}>
-            <HeartIcon favourited={false} />
+            {!isOwnRecipe && (
+              <HeartIcon favourited={isLiked} />
+            )}
           </button>
           <img
             src={image || FALLBACK_IMAGE}
@@ -75,14 +77,9 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
             </div>
             <div className={style.recipeStats}>
               <p
-                className={classNames(
-                  style.rating,
-                  { [style.liked]: isLiked },
-                  { [style.isOwnRecipe]: isOwnRecipe },
-                )}
+                className={style.rating}
               >
-                {isOwnRecipe ? <OwnRecipeIcon /> : <RatingStarIcon />}{" "}
-                {favouriteCount}
+                <RatingStarIcon />{" "}0
               </p>
               <p className={style.time}>
                 {" "}
