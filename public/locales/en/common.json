@@ -1,0 +1,23 @@
+{
+  "popup": {
+    "success": {
+      "title": "Success!",
+      "profileUpdated": "Profile updated!",
+      "profileUpdatedMessage": "Your changes have been successfully saved. Now your profile looks even better!",
+      "backToProfile": "Back to profile"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "saveFailed": "Failed to save changes",
+      "saveFailedMessage": "Unfortunately, we couldn't save the changes. Check your internet connection and try again.",
+      "tryAgain": "Try again",
+      "backToProfile": "Back to profile"
+    }
+  },
+  "loading": "Loading...",
+  "close": "Close",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "save": "Save",
+  "delete": "Delete"
+}

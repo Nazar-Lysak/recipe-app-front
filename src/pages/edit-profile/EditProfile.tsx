@@ -9,9 +9,14 @@ import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import style from "./EditProfile.module.scss";
 import type { FullUserDataInterface } from "../../shared/types/UI.types";
 import { useUpdateProfile } from "../../shared/hooks/mutations/useUpdateProfile";
+import Popup from "../../shared/components/popup/Popup";
+import CheckIcon from "../../assets/img/svg/CheckIcon";
+import { Link } from "react-router";
+import SadSmile from "../../assets/img/svg/SadSmile";
 
 const EditProfile = () => {
   const { t } = useTranslation("profile");
+  const { t: tCommon } = useTranslation("common");
   const { fullUserData, refreshUserData, token } = useSession();
   const [uploadImage, setUploadImage] = useState<string | null>(null);
   const [userData, setUserData] = useState<FullUserDataInterface | null>(
@@ -55,19 +60,21 @@ const EditProfile = () => {
       delete profileData.avatar_url;
     }
 
-    console.log("-----> ", profileData);
-
     updateProfileMutation.mutate(profileData);
   };
 
   const updateProfileMutation = useUpdateProfile({
     token: token || "",
     onSuccess: async () => {
-      setTimeout(async () => {
-        await refreshUserData();
-      }, 700);
+      //   setTimeout(async () => {
+      //     await refreshUserData();
+      //   }, 700);
     },
   });
+
+  const refreshUserDataHandler = async () => {
+    await refreshUserData();
+  };
 
   const getAvatarUrl = () => {
     if (uploadImage) {
@@ -176,6 +183,30 @@ const EditProfile = () => {
       {updateProfileMutation.isPending && (
         <PagePrealoader variant="transparent" />
       )}
+      <Popup
+        isOpen={updateProfileMutation.isSuccess}
+        onClose={() => {}}
+        variant="success"
+      >
+        <h2 className={style.popupTitle}>{tCommon("popup.success.profileUpdated")}</h2>
+        <CheckIcon />
+        <p className={style.popupText}>{tCommon("popup.success.profileUpdatedMessage")}</p>
+        <Link to="/edit-profile" onClick={refreshUserDataHandler}>
+          {tCommon("popup.success.backToProfile")}
+        </Link>
+      </Popup>
+      <Popup
+        isOpen={updateProfileMutation.isError}
+        onClose={() => {}}
+        variant="error"
+      >
+        <h2 className={style.popupTitle}>{tCommon("popup.error.title")}</h2>
+        <SadSmile />
+        <p className={style.popupText}>{tCommon("popup.error.saveFailedMessage")}</p>
+        <Link to="/profile" className={style.popupLink}>
+          {tCommon("popup.error.backToProfile")}
+        </Link>
+      </Popup>
     </div>
   );
 };
