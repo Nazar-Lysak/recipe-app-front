@@ -1,0 +1,96 @@
+@import "../../../styles/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 10px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-family: $font-primary;
+  font-weight: 600;
+  font-size: 11px;
+  color: $shade-300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.value {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--shade-900);
+}
+
+.socialSection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-family: $font-primary;
+  font-weight: 600;
+  font-size: 11px;
+  color: $shade-300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 8px;
+}
+
+.socialGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  background-color: var(--shade-100);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: var(--shade-200);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.icon {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.linkName {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--shade-900);
+}

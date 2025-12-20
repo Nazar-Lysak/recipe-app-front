@@ -10,8 +10,6 @@ import type {
   RecipeInterface,
 } from "../../types/UI.types";
 import { useSession } from "../../../context/useSession";
-import classNames from "classnames";
-import OwnRecipeIcon from "../../../assets/img/svg/OwnRecipeIcon";
 
 const FALLBACK_AVATAR =
   "/src/assets/img/fallback-images/general-category-image.png";
@@ -24,7 +22,7 @@ interface RecipeCardExpandedProps {
 }
 
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
-  const { id, name, description, image, createdAt, favouriteCount, time } =
+  const { id, name, description, image, createdAt, time } =
     recipe;
   const { user } = useSession();
   const date = new DateObject(createdAt);

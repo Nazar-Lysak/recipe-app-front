@@ -10,5 +10,10 @@
   "yes": "Yes",
   "no": "No",
   "errorLoading": "Error loading user profile.",
-  "noRecipes": "No recipes found in this category."
+  "noRecipes": "No recipes found in this category.",
+  "details": {
+    "fullName": "Full name",
+    "location": "Location",
+    "socialLinks": "Social links"
+  }
 }
