@@ -13,6 +13,7 @@ import Drawer from "../../shared/components/drawer/Drawer";
 import ButtonSimple from "../../shared/ui/button-simple/ButtonSimple";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
+import ProfileIcon from "../../assets/img/svg/ProfileIcon";
 
 const ProfilePage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -110,6 +111,14 @@ const ProfilePage = () => {
       </div> */}
 
       <div className={style.settingsMenu}>
+
+        <Link className={style.menuButton} to={"/edit-profile"}>
+          <span className={style.menuIcon}>
+            <ProfileIcon />
+          </span>
+          <span className={style.menuTitle}>{t("editProfile")}</span>
+          <PlayArrowIcon />
+        </Link>
         <Link className={style.menuButton} to={"/notification-settings"}>
           <span className={style.menuIcon}>
             <NotificationIcon />

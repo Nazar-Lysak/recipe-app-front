@@ -43,6 +43,7 @@ const Header: FC = () => {
     "/privacy-policy": t("privacyPolicy"),
     "/theme-settings": t("profile:theme"),
     "/language-selection": t("profile:language"),
+    "/edit-profile": t("editProfile"),
   };
 
   const getCurrentRoute = () => {

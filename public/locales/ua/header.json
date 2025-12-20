@@ -10,6 +10,7 @@
   "notificationSettings": "Налаштування",
   "helpCenter": "Центр допомоги",
   "privacyPolicy": "Конфіденційність",
+  "editProfile": "Редагувати профіль",
   "greeting": "Привіт! {{username}}",
   "subtitle": "Що ти сьогодні готуєш?"
 }
