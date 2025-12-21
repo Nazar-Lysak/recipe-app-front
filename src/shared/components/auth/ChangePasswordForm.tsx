@@ -95,7 +95,7 @@ const ChangePasswordForm = () => {
           <h2>{t("changePasswordForm.errorTitle")}</h2>
           <SadSmile />
           <p>
-            {changePasswordMutation.error?.response?.data?.message ||
+            {(changePasswordMutation.error as any)?.response?.data?.message ||
               t("changePasswordForm.tryAgain")}
           </p>
           <ButtonSimple onClick={() => changePasswordMutation.reset()}>

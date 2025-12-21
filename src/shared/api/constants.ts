@@ -1,9 +1,11 @@
+
 const API_URL = {
   auth: {
     login: "/user/login",
     signup: "/user",
     users: "/user",
     forgotPassword: "/user/forgot-password",
+    changePassword: "/user/current/password",
   },
   profile: {
     current: "/user/profile/current",

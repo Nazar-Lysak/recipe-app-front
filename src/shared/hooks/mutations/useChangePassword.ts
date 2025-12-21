@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { changePassword } from "../../api/put-data";
 
 interface UseChangePasswordProps {
   token: string | null;
@@ -13,24 +13,9 @@ interface ChangePasswordData {
 
 export const useChangePassword = ({ token }: UseChangePasswordProps) => {
   return useMutation({
-    mutationFn: async (data: ChangePasswordData) => {
-      if (!token) {
-        throw new Error("No token available");
-      }
-
-      const response = await axios.put(
-        `http://localhost:3000/user/current/password`,
-        data,
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        },
-      );
-      return response.data;
-    },
-    onError: (error: any) => {
-      console.error(error.response?.data.message);
+    mutationFn: async (data: ChangePasswordData) => changePassword(token!, data),
+    onError: (error) => {
+      console.error("Error changing password:", error);
     },
   });
 };
