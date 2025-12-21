@@ -13,6 +13,7 @@ import ButtonSimple from "../../shared/ui/button-simple/ButtonSimple";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import ProfileIcon from "../../assets/img/svg/ProfileIcon";
+import PasswordIcon from "../../assets/img/svg/PasswordIcon";
 
 const ProfilePage = () => {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
@@ -35,7 +36,7 @@ const ProfilePage = () => {
         </Link>
         <Link className={style.menuButton} to={"/edit-password"}>
           <span className={style.menuIcon}>
-            <ProfileIcon />
+            <PasswordIcon />
           </span>
           <span className={style.menuTitle}>{t("editPassword")}</span>
           <PlayArrowIcon />
