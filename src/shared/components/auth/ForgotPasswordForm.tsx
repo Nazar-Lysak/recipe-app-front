@@ -58,14 +58,11 @@ const ForgotPasswordForm = () => {
           <div className={style.popupContent}>
             <h2>Лист надіслано</h2>
             <CheckIcon />
-            <p>
-              {successMessage}
-            </p>
+            <p>{successMessage}</p>
             <Link to="/home">Повернутися на головну</Link>
           </div>
         </Popup>
       )}
-
 
       <AnimatePresence>
         {forgotEmailMutation.isPending && (

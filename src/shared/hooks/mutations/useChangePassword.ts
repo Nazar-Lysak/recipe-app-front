@@ -13,7 +13,8 @@ interface ChangePasswordData {
 
 export const useChangePassword = ({ token }: UseChangePasswordProps) => {
   return useMutation({
-    mutationFn: async (data: ChangePasswordData) => changePassword(token!, data),
+    mutationFn: async (data: ChangePasswordData) =>
+      changePassword(token!, data),
     onError: (error) => {
       console.error("Error changing password:", error);
     },

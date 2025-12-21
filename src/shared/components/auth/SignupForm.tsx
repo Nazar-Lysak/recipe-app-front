@@ -7,6 +7,9 @@ import style from "./form.module.scss";
 import PagePrealoader from "../../ui/page-prealoader/PagePrealoader";
 import { signup } from "../../api/post-data";
 import { useNavigate } from "react-router";
+import CheckIcon from "../../../assets/img/svg/CheckIcon";
+import Popup from "../popup/Popup";
+import SadSmile from "../../../assets/img/svg/SadSmile";
 
 const SignupForm = () => {
   const [username, setUsername] = useState("");
@@ -18,9 +21,9 @@ const SignupForm = () => {
   const signupMutation = useMutation({
     mutationFn: signup,
     onSuccess: (data) => {
-      console.log("Signup success:", data);
+      // console.log("Signup success:", data);
       // Тут можна зберегти токен і перенаправити користувача
-      navigate("/");
+      // navigate("/");
     },
     onError: (error: any) => {
       // error.response.data - тут буде відповідь з бекенду
@@ -93,9 +96,35 @@ const SignupForm = () => {
         </Button>
       </div>
 
-      <AnimatePresence>
-        {signupMutation.isPending && <PagePrealoader variant={"transparent"} />}
-      </AnimatePresence>
+      {signupMutation.isError && (
+        <Popup onClose={() => {}} isOpen={true}>
+          <h2>Помилка реєстрації</h2>
+          <SadSmile />
+          <p>
+            {signupMutation.error?.response?.data?.message ||
+              "Не вдалося зареєструватися. Спробуйте ще раз."}
+          </p>
+          <Button onClick={() => signupMutation.reset()}>Закрити</Button>
+        </Popup>
+      )}
+
+      {signupMutation.isSuccess && (
+        <Popup onClose={() => {}} isOpen={true}>
+          <h2>Реєстрація успішна</h2>
+          <CheckIcon />
+          <p>
+            Реєстрація завершена! Перевірте вашу електронну пошту та увійдіть у
+            свій акаунт.
+          </p>
+          <Button onClick={() => navigate("/login")}>Ок</Button>
+        </Popup>
+      )}
+
+      {signupMutation.isPending && (
+        <AnimatePresence>
+          <PagePrealoader variant={"transparent"} />
+        </AnimatePresence>
+      )}
     </form>
   );
 };
