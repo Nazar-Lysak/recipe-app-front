@@ -33,6 +33,13 @@ const ProfilePage = () => {
           <span className={style.menuTitle}>{t("editProfile")}</span>
           <PlayArrowIcon />
         </Link>
+        <Link className={style.menuButton} to={"/edit-password"}>
+          <span className={style.menuIcon}>
+            <ProfileIcon />
+          </span>
+          <span className={style.menuTitle}>{t("editPassword")}</span>
+          <PlayArrowIcon />
+        </Link>
         <Link className={style.menuButton} to={"/notification-settings"}>
           <span className={style.menuIcon}>
             <NotificationIcon />

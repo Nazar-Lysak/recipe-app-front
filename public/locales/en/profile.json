@@ -1,6 +1,7 @@
 {
   "title": "Profile",
   "editProfile": "Edit Profile",
+  "editPassword": "Change Password",
   "notifications": "Notifications",
   "support": "Support",
   "privacy": "Privacy",
@@ -34,6 +35,16 @@
     "showProfile": "Show my profile",
     "editPhoto": "Edit Photo",
     "saveChanges": "Save changes"
+  },
+  "changePasswordForm": {
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "submitButton": "Change Password",
+    "successTitle": "Password Changed Successfully",
+    "backToProfile": "Back to Profile",
+    "errorTitle": "Error Changing Password",
+    "tryAgain": "Try Again"
   },
   "logout": "Logout",
   "notificationsSettings": {

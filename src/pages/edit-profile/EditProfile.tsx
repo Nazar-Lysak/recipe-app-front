@@ -188,9 +188,13 @@ const EditProfile = () => {
         onClose={() => {}}
         variant="success"
       >
-        <h2 className={style.popupTitle}>{tCommon("popup.success.profileUpdated")}</h2>
+        <h2 className={style.popupTitle}>
+          {tCommon("popup.success.profileUpdated")}
+        </h2>
         <CheckIcon />
-        <p className={style.popupText}>{tCommon("popup.success.profileUpdatedMessage")}</p>
+        <p className={style.popupText}>
+          {tCommon("popup.success.profileUpdatedMessage")}
+        </p>
         <Link to="/edit-profile" onClick={refreshUserDataHandler}>
           {tCommon("popup.success.backToProfile")}
         </Link>
@@ -202,7 +206,9 @@ const EditProfile = () => {
       >
         <h2 className={style.popupTitle}>{tCommon("popup.error.title")}</h2>
         <SadSmile />
-        <p className={style.popupText}>{tCommon("popup.error.saveFailedMessage")}</p>
+        <p className={style.popupText}>
+          {tCommon("popup.error.saveFailedMessage")}
+        </p>
         <Link to="/profile" className={style.popupLink}>
           {tCommon("popup.error.backToProfile")}
         </Link>

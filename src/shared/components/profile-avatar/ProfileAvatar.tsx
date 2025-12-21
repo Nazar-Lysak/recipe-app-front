@@ -30,7 +30,7 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
     likes_received,
     followers_count,
     following_count,
-    is_private
+    is_private,
   } = userData || {};
 
   const isFollowing = useIsFollowing(userId, token);
@@ -81,10 +81,10 @@ const ProfileAvatar: FC<{ userData: FullUserDataInterface }> = ({
               {isFollowing.data ? t("unfollow") : t("follow")}
             </motion.button>
           )}
-        </div>        
+        </div>
       </div>
-      {is_private && (<ProfileDetails userData={userData} />)}
-      
+      {is_private && <ProfileDetails userData={userData} />}
+
       <ul className={style.statsSection}>
         <li className={style.statItem}>
           <span>{t("recipes")}</span>

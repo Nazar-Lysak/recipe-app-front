@@ -22,8 +22,7 @@ interface RecipeCardExpandedProps {
 }
 
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
-  const { id, name, description, image, createdAt, time } =
-    recipe;
+  const { id, name, description, image, createdAt, time } = recipe;
   const { user } = useSession();
   const date = new DateObject(createdAt);
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -58,9 +57,7 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
         </div>
         <div className={style.recipeContent}>
           <button className={style.likeButton}>
-            {!isOwnRecipe && (
-              <HeartIcon favourited={isLiked} />
-            )}
+            {!isOwnRecipe && <HeartIcon favourited={isLiked} />}
           </button>
           <img
             src={image || FALLBACK_IMAGE}
@@ -74,10 +71,8 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
               <p className={style.recipeDescription}>{description}</p>
             </div>
             <div className={style.recipeStats}>
-              <p
-                className={style.rating}
-              >
-                <RatingStarIcon />{" "}0
+              <p className={style.rating}>
+                <RatingStarIcon /> 0
               </p>
               <p className={style.time}>
                 {" "}

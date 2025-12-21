@@ -44,6 +44,7 @@ const Header: FC = () => {
     "/theme-settings": t("profile:theme"),
     "/language-selection": t("profile:language"),
     "/edit-profile": t("editProfile"),
+    "/edit-password": t("editPassword"),
   };
 
   const getCurrentRoute = () => {

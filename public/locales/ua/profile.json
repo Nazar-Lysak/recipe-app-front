@@ -1,6 +1,7 @@
 {
   "title": "Профіль",
   "editProfile": "Редагувати профіль",
+  "editPassword": "Змінити пароль",
   "notifications": "Сповіщення",
   "notificationsSettings": {
     "pushNotifications": "Push-сповіщення",
@@ -41,6 +42,16 @@
     "showProfile": "Показувати мій профіль",
     "editPhoto": "Змінити фото",
     "saveChanges": "Зберегти зміни"
+  },
+  "changePasswordForm": {
+    "currentPassword": "Поточний пароль",
+    "newPassword": "Новий пароль",
+    "confirmNewPassword": "Підтвердіть новий пароль",
+    "submitButton": "Змінити пароль",
+    "successTitle": "Пароль успішно змінено",
+    "backToProfile": "Повернутися до профілю",
+    "errorTitle": "Помилка при зміні пароля",
+    "tryAgain": "Спробувати знову"
   },
   "logout": "Вийти"
 }

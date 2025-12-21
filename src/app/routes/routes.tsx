@@ -40,6 +40,9 @@ const LanguageSettings = lazy(
   () => import("../../pages/language-settings/LanguageSettings"),
 );
 const EditProfile = lazy(() => import("../../pages/edit-profile/EditProfile"));
+const ChangePasswordPage = lazy(
+  () => import("../../pages/change-password/ChangePasswordPage"),
+);
 
 export const routes: RouteObject[] = [
   {
@@ -68,6 +71,10 @@ export const routes: RouteObject[] = [
               {
                 path: "edit-profile",
                 Component: EditProfile,
+              },
+              {
+                path: "edit-password",
+                Component: ChangePasswordPage,
               },
               {
                 path: "notification-settings",
