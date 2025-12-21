@@ -10,6 +10,7 @@ import { Link } from "react-router";
 import CheckIcon from "../../../assets/img/svg/CheckIcon";
 import ButtonSimple from "../../ui/button-simple/ButtonSimple";
 import { useTranslation } from "react-i18next";
+import style from "./form.module.scss"
 
 const ChangePasswordForm = () => {
   const { token } = useSession();
@@ -58,7 +59,7 @@ const ChangePasswordForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={style.container}>
         <InputText
           label={t("changePasswordForm.currentPassword")}
           type="password"
@@ -86,9 +87,12 @@ const ChangePasswordForm = () => {
           }
           required
         />
-        <Button type="submit" disabled={!isFormValid()}>
+        <div className={style.buttonWrapper}>
+          <Button type="submit" disabled={!isFormValid()}>
           {t("changePasswordForm.submitButton")}
         </Button>
+        </div>
+        
       </form>
       {changePasswordMutation.isSuccess && (
       <Popup isOpen={changePasswordMutation.isSuccess} onClose={() => changePasswordMutation.reset()} variant="success">
