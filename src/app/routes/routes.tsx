@@ -43,6 +43,9 @@ const EditProfile = lazy(() => import("../../pages/edit-profile/EditProfile"));
 const ChangePasswordPage = lazy(
   () => import("../../pages/change-password/ChangePasswordPage"),
 );
+const RestorePasswordPage = lazy(
+  () => import("../../pages/auth/RestorePasswordPage"),
+);
 
 export const routes: RouteObject[] = [
   {
@@ -58,6 +61,7 @@ export const routes: RouteObject[] = [
               { path: "login", Component: LoginPage },
               { path: "signup", Component: SignupPage },
               { path: "forgot-password", Component: ForgotPasswordPage },
+              { path: "restore-password", Component: RestorePasswordPage },
             ],
           },
           {

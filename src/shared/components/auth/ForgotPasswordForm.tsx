@@ -6,6 +6,9 @@ import InputText from "../../ui/input-text/InputText";
 import style from "./form.module.scss";
 import { forgotPassword } from "../../api/post-data";
 import PagePrealoader from "../../ui/page-prealoader/PagePrealoader";
+import Popup from "../popup/Popup";
+import { Link } from "react-router";
+import CheckIcon from "../../../assets/img/svg/CheckIcon";
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");
@@ -49,6 +52,20 @@ const ForgotPasswordForm = () => {
           {forgotEmailMutation.isPending ? "Відправляємо..." : "Відправити"}
         </Button>
       </div>
+
+      {forgotEmailMutation.isSuccess && (
+        <Popup onClose={() => console.log("Popup closed")} isOpen={true}>
+          <div className={style.popupContent}>
+            <h2>Лист надіслано</h2>
+            <CheckIcon />
+            <p>
+              {successMessage}
+            </p>
+            <Link to="/home">Повернутися на головну</Link>
+          </div>
+        </Popup>
+      )}
+
 
       <AnimatePresence>
         {forgotEmailMutation.isPending && (
