@@ -46,6 +46,19 @@
   &.readonly {
     cursor: default;
   }
+
+  &.light {
+    svg {
+      fill: transparent;
+      stroke: $shade-100;
+    }
+  }
+  &.light.filled {
+    svg {
+      fill: $shade-100;
+      stroke: transparent;
+    }
+  }
 }
 
 .small {

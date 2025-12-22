@@ -120,8 +120,8 @@ export const routes: RouteObject[] = [
               },
               {
                 path: "search",
-                Component: SearchPage
-              }
+                Component: SearchPage,
+              },
             ],
           },
         ],

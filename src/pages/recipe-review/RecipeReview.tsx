@@ -1,10 +1,11 @@
-
+import RecipeReviewCard from "../../shared/components/recipe-review-card/RecipeReviewCard";
 
 const RecipeReviewPage = () => {
-
-    return (
-        <div>Сторінка відгуку рецепту</div>
-    )
-}
+  return (
+    <div>
+      <RecipeReviewCard />
+    </div>
+  );
+};
 
 export default RecipeReviewPage;

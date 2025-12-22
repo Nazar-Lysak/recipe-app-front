@@ -1,0 +1,83 @@
+@use "@/styles/variables" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-inline: -15px;
+  background-color: $shade-400;
+  border-radius: 20px;
+  padding: 30px 20px;
+}
+
+.image {
+  img {
+    width: 162px;
+    height: 162px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+}
+
+.title {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 18px;
+  text-transform: capitalize;
+  color: $shade-100;
+  margin: 4px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rating {
+  color: $shade-100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0 8px;
+
+  p {
+    font-family: $font-primary;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 183%;
+    text-transform: capitalize;
+    color: $shade-100;
+    margin: 0;
+  }
+}
+
+.reviewText {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  img {
+    width: 47px;
+    height: 47px;
+    flex-shrink: 0;
+    margin-right: 8px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.reviewerUserName {
+  margin: 4px 0;
+  font-family: $font-primary;
+  font-weight: 400;
+  font-size: 13px;
+  color: $shade-100;
+}
+
+.reviewerName {
+  margin: 4px 0;
+  font-family: $font-secondary;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 93%;
+  color: $shade-100;
+}

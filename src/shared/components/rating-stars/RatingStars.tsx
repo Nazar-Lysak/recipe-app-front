@@ -4,6 +4,7 @@ import RatingStarIcon from "../../../assets/img/svg/RatingStarIcon";
 
 interface RatingStarsProps {
   rating?: number;
+  theme?: "light" | "red";
   onRatingChange?: (rating: number) => void;
   readonly?: boolean;
   size?: "small" | "medium" | "large";
@@ -14,6 +15,7 @@ const RatingStars = ({
   onRatingChange,
   readonly = false,
   size = "medium",
+  theme = "red",
 }: RatingStarsProps) => {
   const [hoverRating, setHoverRating] = useState(0);
   const [selectedRating, setSelectedRating] = useState(rating);
@@ -42,7 +44,7 @@ const RatingStars = ({
         <button
           key={star}
           type="button"
-          className={`${styles.star} ${
+          className={`${styles.star}  ${styles[theme]} ${
             star <= displayRating ? styles.filled : styles.empty
           } ${readonly ? styles.readonly : ""}`}
           onClick={() => handleClick(star)}
