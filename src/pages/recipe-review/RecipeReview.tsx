@@ -10,7 +10,7 @@ const RecipeReviewPage = () => {
 
   const recipe = useRecipe(recipeId || "");
   const author = useUser(recipe.data?.authorId);
-  const {t} = useTranslation(["community", "common"]);
+  const { t } = useTranslation(["community", "common"]);
 
   if (recipe.isLoading || author.isLoading) {
     return <div>{t("common:loading")}</div>;
