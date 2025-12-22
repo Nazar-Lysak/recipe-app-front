@@ -6,12 +6,23 @@ import { useTranslation } from "react-i18next";
 import Comment from "../../shared/components/comment/Comment";
 
 import style from "../PageStyles.module.scss";
+import { useQuery } from "@tanstack/react-query";
 const RecipeReviewPage = () => {
   const { recipeId } = useParams();
 
   const recipe = useRecipe(recipeId || "");
   const author = useUser(recipe.data?.authorId);
   const { t } = useTranslation(["community", "common"]);
+
+  const recipesReviews = useQuery({
+    queryKey: ["recipe-reviews", recipeId],
+    queryFn: async () => {
+      const response = await fetch(
+        `http://localhost:3000/reviews/recipe-reviews/${recipeId}`,
+      );
+      return response.json();
+    },
+  });
 
   if (recipe.isLoading || author.isLoading) {
     return <div>{t("common:loading")}</div>;
@@ -29,9 +40,10 @@ const RecipeReviewPage = () => {
     <div>
       <RecipeReviewCard recipe={recipe.data} author={author.data} />
       <h2 className={style.accentTitle}>Коментарі</h2>
-      {[1, 2, 3, 4, 5, 6, 7].map((item) => {
-        return <Comment key={item} />;
-      })}
+      {recipesReviews?.data?.length &&
+        recipesReviews.data?.map((review: any) => {
+          return <Comment key={review.id} review={review} />;
+        })}
     </div>
   );
 };

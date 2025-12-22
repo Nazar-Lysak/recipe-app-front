@@ -66,7 +66,16 @@ const RecipePage = () => {
     return <div>Рецепт не знайдено</div>;
   }
 
-  const { name, description, image, time, ingredients, steps } = recipe.data;
+  const {
+    name,
+    description,
+    image,
+    time,
+    ingredients,
+    steps,
+    averageRating,
+    reviewsCount,
+  } = recipe.data;
   const isLiked = recipe.data.likedByUserIds.includes(user?.id || "");
   const isOwnRecipe = user?.id === recipe.data.authorId;
 
@@ -100,10 +109,10 @@ const RecipePage = () => {
             className={styles.rating}
             onClick={() => setRatingPopup(!ratingPopup)}
           >
-            <RatingStarIcon /> 0
+            <RatingStarIcon /> {averageRating}
           </button>
           <Link to={`/recipe-review/${recipeId}`} className={styles.comments}>
-            <CommentsIcon /> 0
+            <CommentsIcon /> {reviewsCount}
           </Link>
         </div>
       </div>

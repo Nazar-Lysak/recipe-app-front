@@ -22,7 +22,8 @@ interface RecipeCardExpandedProps {
 }
 
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
-  const { id, name, description, image, createdAt, time } = recipe;
+  const { id, name, description, image, createdAt, time, averageRating } =
+    recipe;
   const { user } = useSession();
   const date = new DateObject(createdAt);
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -72,7 +73,7 @@ const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
             </div>
             <div className={style.recipeStats}>
               <p className={style.rating}>
-                <RatingStarIcon /> 0
+                <RatingStarIcon /> {averageRating}
               </p>
               <p className={style.time}>
                 {" "}

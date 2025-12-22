@@ -19,7 +19,7 @@ interface RecipeCardExpandedProps {
 
 const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
   const { t } = useTranslation("recipe");
-  const { id, name, description, image, time } = recipe;
+  const { id, name, description, image, time, averageRating } = recipe;
 
   const { user } = useSession();
 
@@ -51,7 +51,7 @@ const RecipeCardExpandedM = ({ recipe }: RecipeCardExpandedProps) => {
           </div>
           <div className={style.recipeStats}>
             <p className={style.rating}>
-              <RatingStarIcon /> 0
+              <RatingStarIcon /> {averageRating}
             </p>
             <p className={style.time}>
               {" "}

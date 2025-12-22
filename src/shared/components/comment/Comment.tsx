@@ -1,26 +1,24 @@
+import DateObject from "react-date-object";
 import RatingStars from "../rating-stars/RatingStars";
 
 import style from "./Comment.module.scss";
 
-const Comment = () => {
+const Comment = ({ review }: { review: any }) => {
+  const { comment, rating, user, createdAt } = review;
+  const recipeDate = new DateObject(createdAt);
   return (
     <div className={style.container}>
       <header className={style.header}>
-        <img
-          src="https://res.cloudinary.com/dohg7oxwo/image/upload/v1766252531/avatars/enha8ylzxsgxaoggvtqi.webp"
-          alt=""
-        />
-        <p className={style.username}>@r_joshua</p>
-        <p className={style.time}>(15 min ago)</p>
+        <img src={user?.avatar_url || ""} alt="" />
+        <p className={style.username}>{user?.user.username}</p>
+        <p className={style.time}>
+          ({recipeDate.format("DD MMM YYYY, HH:mm")})
+        </p>
       </header>
       <div>
-        <p className={style.text}>
-          This recipe was absolutely delicious! The flavors were perfectly
-          balanced, and the instructions were easy to follow. I will definitely
-          be making this again.
-        </p>
+        <p className={style.text}>{comment}</p>
       </div>
-      <RatingStars rating={4} readonly size="small" />
+      <RatingStars rating={rating} readonly size="small" />
     </div>
   );
 };

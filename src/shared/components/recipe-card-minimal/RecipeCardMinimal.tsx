@@ -19,7 +19,7 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
 
 const RecipeCardMinimal = ({ recipe }: RecipeCardMinimalProps) => {
   const { t } = useTranslation("recipe");
-  const { time, name, image, author } = recipe;
+  const { time, name, image, author, averageRating } = recipe;
   const { user } = useSession();
 
   const isLiked = recipe.likedByUserIds.includes(user ? user.id : "");
@@ -42,7 +42,7 @@ const RecipeCardMinimal = ({ recipe }: RecipeCardMinimalProps) => {
           <h3 className={styles.title}>{name}</h3>
           <div className={styles.stats}>
             <p className={styles.rating}>
-              <RatingStarIcon /> 0
+              <RatingStarIcon /> {averageRating}
             </p>
             <p className={styles.time}>
               {" "}

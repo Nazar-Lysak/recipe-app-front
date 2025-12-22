@@ -32,8 +32,6 @@ const UserProfile = () => {
     return activeTab === "recipes" ? 0 : 1;
   };
 
-  console.log("USER DATA:", recipes.data);
-
   return (
     <div>
       {userData.data && <ProfileAvatar userData={userData.data} />}

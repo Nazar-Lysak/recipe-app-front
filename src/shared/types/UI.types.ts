@@ -31,6 +31,19 @@ export interface RecipeInterface {
   createdAt: string;
   updatedAt: string;
   likedByUserIds: string[];
+  averageRating?: number;
+  reviewsCount?: number;
+  reviews?: ReviewInterface[];
+}
+
+export interface ReviewInterface {
+  comment: string;
+  createdAt: Date;
+  id: string;
+  imgage: string | null;
+  rating: number;
+  recipeId: string;
+  userId: string;
 }
 
 export interface FullUserDataInterface {

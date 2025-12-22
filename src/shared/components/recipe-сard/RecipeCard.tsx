@@ -13,7 +13,7 @@ const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
 
 const RecipeCard = ({ recipe }: RecipeCardProps) => {
-  const { image, name, description, time, author } = recipe;
+  const { image, name, description, time, author, averageRating } = recipe;
   const { user } = useSession();
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -40,7 +40,7 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
       <p className={style.description}>{description}</p>
       <div className={style.info}>
         <span className={style.rating}>
-          <RatingStarIcon />0
+          <RatingStarIcon /> {averageRating}
         </span>
         <span className={style.time}>
           <ClockIcon />

@@ -31,8 +31,15 @@ const RecipeReviewCard = ({
       <div className={style.content}>
         <h2 className={style.title}>{recipe.name}</h2>
         <div className={style.rating}>
-          <RatingStars readonly size="small" rating={4} theme="light" />
-          <p>(0 {t("reviews")})</p>
+          <RatingStars
+            readonly
+            size="small"
+            rating={recipe.averageRating}
+            theme="light"
+          />
+          <p>
+            ({recipe.reviewsCount} {t("reviews")})
+          </p>
         </div>
         <div className={style.reviewText}>
           <img src={author?.avatar_url || ""} alt={userNameValidation()} />
