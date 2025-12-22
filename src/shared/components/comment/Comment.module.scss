@@ -45,6 +45,20 @@
   }
 }
 
+.uploadedImage {
+  width: auto;
+  display: block;
+  max-width: 100%;
+  max-height: 200px;
+  margin: 0 0 20px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
 .text {
   font-family: $font-primary;
   font-weight: 300;

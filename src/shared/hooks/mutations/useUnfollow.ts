@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { unfollowUser } from "../../api/post-data";
 import type { FullUserDataInterface } from "../../types/UI.types";
+import { unfollowUser } from "../../api/delete-data";
 
 interface UseUnfollowProps {
   userId: string;

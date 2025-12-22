@@ -4,7 +4,8 @@ import RatingStars from "../rating-stars/RatingStars";
 import style from "./Comment.module.scss";
 
 const Comment = ({ review }: { review: any }) => {
-  const { comment, rating, user, createdAt } = review;
+  const { comment, rating, user, createdAt, image } = review;
+
   const recipeDate = new DateObject(createdAt);
   return (
     <div className={style.container}>
@@ -17,6 +18,11 @@ const Comment = ({ review }: { review: any }) => {
       </header>
       <div>
         <p className={style.text}>{comment}</p>
+        {image && (
+        <div className={style.imageContainer}>
+          <img className={style.uploadedImage} src={image} alt={user?.user.username} />
+        </div>
+      )}
       </div>
       <RatingStars rating={rating} readonly size="small" />
     </div>

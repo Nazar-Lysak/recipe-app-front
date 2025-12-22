@@ -13,6 +13,7 @@ import SadSmile from "../../assets/img/svg/SadSmile";
 import CheckIcon from "../../assets/img/svg/CheckIcon";
 import { useCreateReview } from "../../shared/hooks/mutations/useCreateReview";
 import { useTranslation } from "react-i18next";
+import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 
 interface ReviewSubmitInterface {
   rating: number;
@@ -150,12 +151,15 @@ const LeaveReviewPage = () => {
           </ButtonSimple>
         </div>
       </form>
+      {createReviewMutation.isPending && (
+        <PagePrealoader variant={"transparent"} />
+      )}
       <Popup
         onClose={() => createReviewMutation.reset()}
         isOpen={createReviewMutation.isError}
         variant="error"
       >
-        <h2>{t("common:error:reviewError")}</h2>
+        <h2>{t("common:popup.error.title")}</h2>
         <SadSmile />
         {createReviewMutation.error?.response?.data?.message ? (
           <p>{createReviewMutation.error.response.data.message}</p>
