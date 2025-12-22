@@ -41,7 +41,9 @@ const RatingStars = ({
   const displayRating = hoverRating || selectedRating;
 
   return (
-    <div className={`${styles.container} ${styles[size]} ${error ? styles.error : ""}`}>
+    <div
+      className={`${styles.container} ${styles[size]} ${error ? styles.error : ""}`}
+    >
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}

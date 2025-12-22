@@ -106,9 +106,14 @@ export const followUser = async (userId: string, token: string) => {
   return response.data;
 };
 
-export const unfollowUser = async (userId: string, token: string) => {
-  const response = await axios.delete(
-    `${BASE_URL}${API_URL.profile.follow(userId)}`,
+export const createReview = async (
+  recipeId: string,
+  data: { rating: number; comment: string; image_url?: string },
+  token: string,
+) => {
+  const response = await axios.post(
+    `${BASE_URL}${API_URL.reviews.create(recipeId)}`,
+    data,
     {
       headers: {
         Authorization: `Token ${token}`,

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useRecipe } from "../../shared/hooks/queries/useRecipe";
 import style from "./LeaveReview.module.scss";
 import RatingStars from "../../shared/components/rating-stars/RatingStars";
@@ -7,10 +7,15 @@ import ButtonSimple from "../../shared/ui/button-simple/ButtonSimple";
 import { convertImageToBase64 } from "../../shared/utils/converImageToBase64";
 import { useState } from "react";
 import AddIcon from "../../assets/img/svg/AddIcon";
+import { useSession } from "../../context/useSession";
+import Popup from "../../shared/components/popup/Popup";
+import SadSmile from "../../assets/img/svg/SadSmile";
+import CheckIcon from "../../assets/img/svg/CheckIcon";
+import { useCreateReview } from "../../shared/hooks/mutations/useCreateReview";
 
 interface ReviewSubmitInterface {
   rating: number;
-  reviewText: string;
+  comment: string;
   image?: string | null;
 }
 
@@ -19,34 +24,28 @@ const LeaveReviewPage = () => {
   const [reviewSubmit, setReviewSubmit] = useState<ReviewSubmitInterface>(
     () => ({
       rating: 0,
-      reviewText: "",
+      comment: "",
       image: null,
     }),
   );
+  const navigate = useNavigate();
   const { recipeId } = useParams();
+  const { token } = useSession();
   const recipe = useRecipe(recipeId || "");
   const { image, name } = recipe.data || {};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+  const createReviewMutation = useCreateReview({
+    token: token,
+    data: reviewSubmit,
+    recipeId: recipeId || "",
+    onSuccess: () => {
+      console.log("Review created successfully");
+    },
+  });
 
   const handleTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
-    setReviewSubmit((prev) => ({ ...prev, reviewText: value }));
+    setReviewSubmit((prev) => ({ ...prev, comment: value }));
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,17 +66,19 @@ const LeaveReviewPage = () => {
     }
 
     setRatingError(false);
-    console.log("Form submitted");
-    console.log(reviewSubmit);
+    createReviewMutation.mutate(reviewSubmit);
   };
 
-    
+  const handleSuccessClose = () => {
+    navigate(`/recipe-review/${recipeId}`);
+  };
+
   if (recipe.isLoading) {
-    return <div>Loading...</div>;
+    return <div>Завантаження...</div>;
   }
 
   if (recipe.isError) {
-    return <div>Error loading recipe.</div>;
+    return <div>Помилка завантаження рецепту.</div>;
   }
 
   return (
@@ -87,8 +88,8 @@ const LeaveReviewPage = () => {
         <h2 className={style.title}>{name}</h2>
       </header>
       <div className={style.ratingContainer}>
-        <RatingStars 
-          size="large" 
+        <RatingStars
+          size="large"
           rating={reviewSubmit.rating}
           error={ratingError}
           onRatingChange={(rating) => {
@@ -96,9 +97,9 @@ const LeaveReviewPage = () => {
             setRatingError(false);
           }}
         />
-        <p className={style.ratingText}>Your overall rating</p>
+        <p className={style.ratingText}>Ваша загальна оцінка</p>
         {ratingError && (
-          <p className={style.errorText}>Please select a rating</p>
+          <p className={style.errorText}>Будь ласка, виберіть оцінку</p>
         )}
       </div>
       <form className={style.reviewForm} onSubmit={submitForm}>
@@ -106,13 +107,13 @@ const LeaveReviewPage = () => {
           placeholder="Leave us Review!"
           rows={6}
           required
-          value={reviewSubmit.reviewText}
+          value={reviewSubmit.comment}
           onChange={handleTextArea}
         />
 
         <label className={style.editPhotoButton}>
           <AddIcon />
-          Add Photo
+          Додати фото
           <input
             type="file"
             onChange={handleImageChange}
@@ -134,17 +135,45 @@ const LeaveReviewPage = () => {
                 setReviewSubmit((prev) => ({ ...prev, image: null }))
               }
             >
-              Remove Photo
+              Видалити фото
             </ButtonSimple>
           </div>
         )}
         <div className={style.buttonsContainer}>
-          <ButtonSimple isActive>Cancel</ButtonSimple>
+          <ButtonSimple isActive onClick={handleSuccessClose}>
+            Скасувати
+          </ButtonSimple>
           <ButtonSimple variant="primary" type="submit">
-            Submit
+            Надіслати
           </ButtonSimple>
         </div>
       </form>
+      <Popup
+        onClose={() => createReviewMutation.reset()}
+        isOpen={createReviewMutation.isError}
+        variant="error"
+      >
+        <h2>Щось пішло не так</h2>
+        <SadSmile />
+        {createReviewMutation.error?.response?.data?.message ? (
+          <p>{createReviewMutation.error.response.data.message}</p>
+        ) : (
+          <p>Не вдалося надіслати відгук. Спробуйте ще раз.</p>
+        )}
+        <ButtonSimple onClick={() => createReviewMutation.reset()}>
+          Close
+        </ButtonSimple>
+      </Popup>
+      <Popup
+        onClose={handleSuccessClose}
+        isOpen={createReviewMutation.isSuccess}
+        variant="success"
+      >
+        <h2>Відгук надіслано успішно</h2>
+        <CheckIcon />
+        <p>Дякуємо за ваш відгук!</p>
+        <ButtonSimple onClick={handleSuccessClose}>Ok</ButtonSimple>
+      </Popup>
     </div>
   );
 };
