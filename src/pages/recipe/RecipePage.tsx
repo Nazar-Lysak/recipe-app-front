@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import styles from "./RecipePage.module.scss";
@@ -26,6 +26,7 @@ const RecipePage = () => {
   const { t } = useTranslation("recipe");
   const [confirmDislike, setConfirmDislike] = useState(false);
   const [ratingPopup, setRatingPopup] = useState(false);
+  const navigate = useNavigate()
   const { user } = useSession();
   const { recipeId } = useParams<{ recipeId: string }>();
 
@@ -50,6 +51,11 @@ const RecipePage = () => {
   const handleConfirmDislike = () => {
     handleLike(true);
     setConfirmDislike(false);
+  };
+
+  const createReview = () => {
+    navigate(`/leave-review/${recipeId}`);
+    setRatingPopup(false)
   };
 
   const authorRecipe = useUser(recipe.data?.authorId);
@@ -157,7 +163,7 @@ const RecipePage = () => {
         <h2>Оцініть будь ласка страву "{name}"</h2>
         <RatingStars />
         <p>Ваш відгук допомагає нам ставати кращими.</p>
-        <Button onClick={() => setRatingPopup(false)}>Оцінити</Button>
+        <Button onClick={() => createReview()}>Оцінити</Button>
       </Popup>
 
       <Drawer
