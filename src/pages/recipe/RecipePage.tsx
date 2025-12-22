@@ -15,6 +15,10 @@ import { useState } from "react";
 import Drawer from "../../shared/components/drawer/Drawer";
 import ButtonSimple from "../../shared/ui/button-simple/ButtonSimple";
 import HeartIcon from "../../assets/img/svg/HeartIcon";
+import Popup from "../../shared/components/popup/Popup";
+import CheckIcon from "../../assets/img/svg/CheckIcon";
+import Button from "../../shared/ui/button/Button";
+import RatingStars from "../../shared/components/rating-stars/RatingStars";
 
 const FALLBACK_IMAGE =
   "/src/assets/img/fallback-images/general-recipe-image.png";
@@ -22,6 +26,7 @@ const FALLBACK_IMAGE =
 const RecipePage = () => {
   const { t } = useTranslation("recipe");
   const [confirmDislike, setConfirmDislike] = useState(false);
+  const [ratingPopup, setRatingPopup] = useState(false);
   const { user } = useSession();
   const { recipeId } = useParams<{ recipeId: string }>();
 
@@ -92,9 +97,12 @@ const RecipePage = () => {
         <div className={styles.details}>
           <h1 className={styles.title}>{name}</h1>
 
-          <span className={styles.rating}>
+          <button
+            className={styles.rating}
+            onClick={() => setRatingPopup(!ratingPopup)}
+          >
             <RatingStarIcon /> 0
-          </span>
+          </button>
           <button className={styles.comments}>
             <CommentsIcon /> 0
           </button>
@@ -136,6 +144,13 @@ const RecipePage = () => {
           ))}
         </ul>
       </div>
+
+      <Popup isOpen={ratingPopup} onClose={() => setRatingPopup(false)}>
+        <h2>Дякуємо за оцінку!</h2>
+        <RatingStars />
+        <p>Ваш відгук допомагає нам ставати кращими.</p>
+        <Button onClick={() => setRatingPopup(false)}>Оцінити</Button>
+      </Popup>
 
       <Drawer
         direction="bottom"
