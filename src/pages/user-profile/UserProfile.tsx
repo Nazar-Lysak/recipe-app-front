@@ -32,24 +32,34 @@ const UserProfile = () => {
     return activeTab === "recipes" ? 0 : 1;
   };
 
+  console.log("USER DATA:", recipes.data);
+
   return (
     <div>
       {userData.data && <ProfileAvatar userData={userData.data} />}
-      <div className={style.buttons} data-active={getActiveIndex()}>
-        <button
-          className={style.button}
-          onClick={() => setActiveTab("recipes")}
-        >
-          {t("recipes")}
-        </button>
-        <button
-          className={style.button}
-          onClick={() => setActiveTab("favorites")}
-        >
-          {t("likes")}
-        </button>
-      </div>
-      <RecipesGrid recipes={recipes.data?.recipesList || []} />
+
+      {recipes.data.recipesCount > 0 && (
+        <>
+          <div className={style.buttons} data-active={getActiveIndex()}>
+            <button
+              className={style.button}
+              onClick={() => setActiveTab("recipes")}
+            >
+              {t("recipes")}
+            </button>
+            <button
+              className={style.button}
+              onClick={() => setActiveTab("favorites")}
+            >
+              {t("likes")}
+            </button>
+          </div>
+          <RecipesGrid recipes={recipes.data?.recipesList || []} />
+        </>
+      )}
+      {recipes.data.recipesCount === 0 && (
+        <div className={style.noRecipes}>{t("noRecipes")}</div>
+      )}
     </div>
   );
 };
