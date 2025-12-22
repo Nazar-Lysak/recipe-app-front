@@ -45,6 +45,7 @@ const Header: FC = () => {
     "/language-selection": t("profile:language"),
     "/edit-profile": t("editProfile"),
     "/edit-password": t("editPassword"),
+    "/search": t("search"),
   };
 
   const getCurrentRoute = () => {
@@ -97,9 +98,11 @@ const Header: FC = () => {
             <NotificationIcon />
           </ButtonIcon>
         </Link>
-        <ButtonIcon>
-          <SearchIcon />
-        </ButtonIcon>
+        <Link to="/search">
+          <ButtonIcon>
+            <SearchIcon />
+          </ButtonIcon>
+        </Link>
       </div>
     </header>
   );

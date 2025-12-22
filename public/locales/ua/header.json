@@ -13,5 +13,7 @@
   "privacyPolicy": "Конфіденційність",
   "editProfile": "Редагувати профіль",
   "greeting": "Привіт! {{username}}",
-  "subtitle": "Що ти сьогодні готуєш?"
+  "subtitle": "Що ти сьогодні готуєш?",
+  "search": "Пошук",
+  "searchPlaceholder": "Шукати рецепти..."
 }

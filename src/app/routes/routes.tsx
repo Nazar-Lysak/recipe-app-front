@@ -46,6 +46,7 @@ const ChangePasswordPage = lazy(
 const RestorePasswordPage = lazy(
   () => import("../../pages/auth/RestorePasswordPage"),
 );
+const SearchPage = lazy(() => import("../../pages/search/SearchPage"));
 
 export const routes: RouteObject[] = [
   {
@@ -110,6 +111,10 @@ export const routes: RouteObject[] = [
                 path: "notifications",
                 Component: NotificationPage,
               },
+              {
+                path: "search",
+                Component: SearchPage
+              }
             ],
           },
         ],

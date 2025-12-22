@@ -13,5 +13,7 @@
   "privacyPolicy": "Privacy",
   "editProfile": "Edit Profile",
   "greeting": "Hello! {{username}}",
-  "subtitle": "What are you cooking today?"
+  "subtitle": "What are you cooking today?",
+  "search": "Search",
+  "searchPlaceholder": "Search recipes..."
 }
