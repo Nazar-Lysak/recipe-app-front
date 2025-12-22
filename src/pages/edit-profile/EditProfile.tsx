@@ -13,6 +13,7 @@ import Popup from "../../shared/components/popup/Popup";
 import CheckIcon from "../../assets/img/svg/CheckIcon";
 import { Link } from "react-router";
 import SadSmile from "../../assets/img/svg/SadSmile";
+import { convertImageToBase64 } from "../../shared/utils/converImageToBase64";
 
 const EditProfile = () => {
   const { t } = useTranslation("profile");
@@ -84,20 +85,14 @@ const EditProfile = () => {
     return avatar_url || "";
   };
 
-  const convertImageToBase64 = (file: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const base64data = reader.result as string;
-      setUploadImage(base64data);
-    };
-  };
-
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
     if (!file) return;
-    convertImageToBase64(file);
+
+    convertImageToBase64(file, (base64Image) => {
+      setUploadImage(base64Image);
+    });
   };
 
   return (

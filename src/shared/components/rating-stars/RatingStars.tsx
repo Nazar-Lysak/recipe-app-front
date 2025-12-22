@@ -8,6 +8,7 @@ interface RatingStarsProps {
   onRatingChange?: (rating: number) => void;
   readonly?: boolean;
   size?: "small" | "medium" | "large";
+  error?: boolean;
 }
 
 const RatingStars = ({
@@ -16,6 +17,7 @@ const RatingStars = ({
   readonly = false,
   size = "medium",
   theme = "red",
+  error = false,
 }: RatingStarsProps) => {
   const [hoverRating, setHoverRating] = useState(0);
   const [selectedRating, setSelectedRating] = useState(rating);
@@ -39,7 +41,7 @@ const RatingStars = ({
   const displayRating = hoverRating || selectedRating;
 
   return (
-    <div className={`${styles.container} ${styles[size]}`}>
+    <div className={`${styles.container} ${styles[size]} ${error ? styles.error : ""}`}>
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}

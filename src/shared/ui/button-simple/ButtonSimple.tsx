@@ -5,7 +5,7 @@ import { motion, type HTMLMotionProps } from "framer-motion";
 interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
   children: React.ReactNode;
   isActive?: boolean;
-  variant?: "primary" | "light";
+  variant?: "primary" | "light" | "link";
 }
 
 const ButtonSimple = ({

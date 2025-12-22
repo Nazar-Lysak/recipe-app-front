@@ -50,6 +50,9 @@ const SearchPage = lazy(() => import("../../pages/search/SearchPage"));
 const RecipeReviewPage = lazy(
   () => import("../../pages/recipe-review/RecipeReview"),
 );
+const LeaveReviewPage = lazy(
+  () => import("../../pages/leave-review/LeaveReviewPage"),
+);
 
 export const routes: RouteObject[] = [
   {
@@ -105,6 +108,10 @@ export const routes: RouteObject[] = [
               {
                 path: "recipe-review/:recipeId",
                 Component: RecipeReviewPage,
+              },
+              {
+                path: "leave-review/:recipeId",
+                Component: LeaveReviewPage,
               },
               {
                 path: "user/:userId",

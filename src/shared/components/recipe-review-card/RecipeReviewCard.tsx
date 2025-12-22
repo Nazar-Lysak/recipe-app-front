@@ -7,6 +7,7 @@ import RatingStars from "../rating-stars/RatingStars";
 import { useTranslation } from "react-i18next";
 
 import style from "./RecipeReviewCard.module.scss";
+import { useNavigate } from "react-router";
 
 const RecipeReviewCard = ({
   recipe,
@@ -16,6 +17,11 @@ const RecipeReviewCard = ({
   author: FullUserDataInterface | undefined;
 }) => {
   const { t } = useTranslation("review");
+  const navigate = useNavigate();
+
+  const handleLiveReview = () => {
+    navigate(`/leave-review/${recipe.id}`);
+  };
 
   const userNameValidation = () => {
     if (author?.first_name?.length && author?.last_name) {
@@ -49,7 +55,9 @@ const RecipeReviewCard = ({
           </div>
         </div>
 
-        <ButtonSimple variant="light">{t("addReview")}</ButtonSimple>
+        <ButtonSimple variant="light" onClick={handleLiveReview}>
+          {t("addReview")}
+        </ButtonSimple>
       </div>
     </div>
   );

@@ -47,6 +47,7 @@ const Header: FC = () => {
     "/edit-password": t("editPassword"),
     "/search": t("search"),
     "/recipe-review/": t("recipeReview"),
+    "/leave-review/": t("leaveReview"),
   };
 
   const getCurrentRoute = () => {
