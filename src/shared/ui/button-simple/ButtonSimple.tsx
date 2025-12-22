@@ -8,11 +8,19 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
   variant?: "primary" | "light";
 }
 
-const ButtonSimple = ({ children, isActive, variant = "primary", ...rest }: ButtonProps) => {
+const ButtonSimple = ({
+  children,
+  isActive,
+  variant = "primary",
+  ...rest
+}: ButtonProps) => {
   return (
     <motion.button
       {...rest}
-      className={classNames(style.buttonSimple, { [style.active]: isActive, [style[variant]]: variant })}
+      className={classNames(style.buttonSimple, {
+        [style.active]: isActive,
+        [style[variant]]: variant,
+      })}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >

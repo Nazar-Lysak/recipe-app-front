@@ -38,7 +38,7 @@
   gap: 10px;
   font-family: $font-secondary;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 16px;
   color: $shade-900;
 
   .rating,
@@ -46,6 +46,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
+    color: $shade-900;
     gap: 4px;
     padding: 5px 0;
     min-width: 30px;
@@ -53,6 +54,11 @@
     border: none;
     outline: none;
     cursor: pointer;
+
+    svg {
+      width: 13px;
+      height: 13px;
+    }
   }
 
   .rating {

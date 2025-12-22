@@ -8,3 +8,11 @@
   text-align: center;
   margin-top: 50px;
 }
+
+.accentTitle {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: capitalize;
+  color: $shade-400;
+}
