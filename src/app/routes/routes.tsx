@@ -47,6 +47,9 @@ const RestorePasswordPage = lazy(
   () => import("../../pages/auth/RestorePasswordPage"),
 );
 const SearchPage = lazy(() => import("../../pages/search/SearchPage"));
+const RecipeReviewPage = lazy(
+  () => import("../../pages/recipe-review/RecipeReview"),
+);
 
 export const routes: RouteObject[] = [
   {
@@ -98,6 +101,10 @@ export const routes: RouteObject[] = [
               {
                 path: "recipe/:recipeId",
                 Component: RecipePage,
+              },
+              {
+                path: "recipe-review/:recipeId",
+                Component: RecipeReviewPage,
               },
               {
                 path: "user/:userId",

@@ -34,7 +34,7 @@ const Header: FC = () => {
     "/categories": t("categories"),
     "/community": t("community"),
     "/profile": t("profile"),
-    "/recipe": t("recipe"),
+    "/recipe/": t("recipe"),
     "/user": t("user"),
     "/create-recipe": t("createRecipe"),
     "/notifications": t("notifications"),
@@ -46,6 +46,7 @@ const Header: FC = () => {
     "/edit-profile": t("editProfile"),
     "/edit-password": t("editPassword"),
     "/search": t("search"),
+    "/recipe-review/": t("recipeReview"),
   };
 
   const getCurrentRoute = () => {

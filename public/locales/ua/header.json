@@ -15,5 +15,6 @@
   "greeting": "Привіт! {{username}}",
   "subtitle": "Що ти сьогодні готуєш?",
   "search": "Пошук",
-  "searchPlaceholder": "Шукати рецепти..."
+  "searchPlaceholder": "Шукати рецепти...",
+  "recipeReview": "Відгук на рецепт"
 }

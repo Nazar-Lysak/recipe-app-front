@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import styles from "./RecipePage.module.scss";
@@ -102,9 +102,9 @@ const RecipePage = () => {
           >
             <RatingStarIcon /> 0
           </button>
-          <button className={styles.comments}>
+          <Link to={`/recipe-review/${recipeId}`} className={styles.comments}>
             <CommentsIcon /> 0
-          </button>
+          </Link>
         </div>
       </div>
       <UserCard
