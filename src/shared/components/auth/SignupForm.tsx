@@ -45,7 +45,6 @@ const SignupForm = () => {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: Add validation and API call
-    console.log({ username, email, password, confirmPassword });
 
     signupMutation.mutate({ email, username, password });
   };
