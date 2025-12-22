@@ -14,6 +14,12 @@
       "backToProfile": "Back to profile"
     }
   },
+  "imageUpload": {
+    "uploading": "Uploading image...",
+    "uploadFailed": "Failed to upload image. Please try again.",
+    "uploadButton": "Upload image",
+    "removeImage": "Remove image"
+  },
   "loading": "Loading...",
   "close": "Close",
   "error": "Loading error",

@@ -5,5 +5,11 @@
   "yourRating": "Your rating",
   "writeReview": "Write a review",
   "submit": "Submit",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "thankYouTitle": "Thank you for your review!",
+  "thankYouMessage": "Your feedback helps us get better.",
+  "backToRecipe": "Back to recipe",
+  "reviewSent": "Review sent",
+  "reviewError": "Failed to send review. Please try again.",
+  "selectRating": "Please select a rating"
 }

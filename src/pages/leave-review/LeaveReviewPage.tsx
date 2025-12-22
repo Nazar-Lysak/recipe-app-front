@@ -12,6 +12,7 @@ import Popup from "../../shared/components/popup/Popup";
 import SadSmile from "../../assets/img/svg/SadSmile";
 import CheckIcon from "../../assets/img/svg/CheckIcon";
 import { useCreateReview } from "../../shared/hooks/mutations/useCreateReview";
+import { useTranslation } from "react-i18next";
 
 interface ReviewSubmitInterface {
   rating: number;
@@ -28,6 +29,7 @@ const LeaveReviewPage = () => {
       image: null,
     }),
   );
+  const {t} = useTranslation(["review", "common"]);
   const navigate = useNavigate();
   const { recipeId } = useParams();
   const { token } = useSession();
@@ -74,11 +76,11 @@ const LeaveReviewPage = () => {
   };
 
   if (recipe.isLoading) {
-    return <div>Завантаження...</div>;
+    return <div>{t("common:loading")}</div>;
   }
 
   if (recipe.isError) {
-    return <div>Помилка завантаження рецепту.</div>;
+    return <div>{t("common:error.title")}</div>;
   }
 
   return (
@@ -97,14 +99,14 @@ const LeaveReviewPage = () => {
             setRatingError(false);
           }}
         />
-        <p className={style.ratingText}>Ваша загальна оцінка</p>
+        <p className={style.ratingText}>{t("yourRating")}</p>
         {ratingError && (
-          <p className={style.errorText}>Будь ласка, виберіть оцінку</p>
+          <p className={style.errorText}>{t("selectRating")}</p>
         )}
       </div>
       <form className={style.reviewForm} onSubmit={submitForm}>
         <TextArea
-          placeholder="Leave us Review!"
+          placeholder={t("writeReview")}
           rows={6}
           required
           value={reviewSubmit.comment}
@@ -113,7 +115,7 @@ const LeaveReviewPage = () => {
 
         <label className={style.editPhotoButton}>
           <AddIcon />
-          Додати фото
+          {t("common:imageUpload.uploadButton")}
           <input
             type="file"
             onChange={handleImageChange}
@@ -135,16 +137,16 @@ const LeaveReviewPage = () => {
                 setReviewSubmit((prev) => ({ ...prev, image: null }))
               }
             >
-              Видалити фото
+              {t("common:imageUpload.removeImage")}
             </ButtonSimple>
           </div>
         )}
         <div className={style.buttonsContainer}>
           <ButtonSimple isActive onClick={handleSuccessClose}>
-            Скасувати
+            {t("review:cancel")}
           </ButtonSimple>
           <ButtonSimple variant="primary" type="submit">
-            Надіслати
+            {t("review:submit")}
           </ButtonSimple>
         </div>
       </form>
@@ -153,15 +155,15 @@ const LeaveReviewPage = () => {
         isOpen={createReviewMutation.isError}
         variant="error"
       >
-        <h2>Щось пішло не так</h2>
+        <h2>{t("common:error:reviewError")}</h2>
         <SadSmile />
         {createReviewMutation.error?.response?.data?.message ? (
           <p>{createReviewMutation.error.response.data.message}</p>
         ) : (
-          <p>Не вдалося надіслати відгук. Спробуйте ще раз.</p>
+          <p>{t("review:reviewError")}</p>
         )}
         <ButtonSimple onClick={() => createReviewMutation.reset()}>
-          Close
+            {t("common:close")}
         </ButtonSimple>
       </Popup>
       <Popup
@@ -169,10 +171,10 @@ const LeaveReviewPage = () => {
         isOpen={createReviewMutation.isSuccess}
         variant="success"
       >
-        <h2>Відгук надіслано успішно</h2>
+        <h2>{t("review:reviewSent")}</h2>
         <CheckIcon />
-        <p>Дякуємо за ваш відгук!</p>
-        <ButtonSimple onClick={handleSuccessClose}>Ok</ButtonSimple>
+        <p>{t("review:thankYouMessage")}</p>
+        <ButtonSimple onClick={handleSuccessClose}>{t("review:backToRecipe")}</ButtonSimple>
       </Popup>
     </div>
   );
