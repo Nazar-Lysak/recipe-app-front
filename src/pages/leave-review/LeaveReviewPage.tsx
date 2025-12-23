@@ -30,7 +30,7 @@ const LeaveReviewPage = () => {
       image: null,
     }),
   );
-  const {t} = useTranslation(["review", "common"]);
+  const { t } = useTranslation(["review", "common"]);
   const navigate = useNavigate();
   const { recipeId } = useParams();
   const { token } = useSession();
@@ -101,9 +101,7 @@ const LeaveReviewPage = () => {
           }}
         />
         <p className={style.ratingText}>{t("yourRating")}</p>
-        {ratingError && (
-          <p className={style.errorText}>{t("selectRating")}</p>
-        )}
+        {ratingError && <p className={style.errorText}>{t("selectRating")}</p>}
       </div>
       <form className={style.reviewForm} onSubmit={submitForm}>
         <TextArea
@@ -167,7 +165,7 @@ const LeaveReviewPage = () => {
           <p>{t("review:reviewError")}</p>
         )}
         <ButtonSimple onClick={() => createReviewMutation.reset()}>
-            {t("common:close")}
+          {t("common:close")}
         </ButtonSimple>
       </Popup>
       <Popup
@@ -178,7 +176,9 @@ const LeaveReviewPage = () => {
         <h2>{t("review:reviewSent")}</h2>
         <CheckIcon />
         <p>{t("review:thankYouMessage")}</p>
-        <ButtonSimple onClick={handleSuccessClose}>{t("review:backToRecipe")}</ButtonSimple>
+        <ButtonSimple onClick={handleSuccessClose}>
+          {t("review:backToRecipe")}
+        </ButtonSimple>
       </Popup>
     </div>
   );

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { AnimatePresence } from "framer-motion";
-import Button from "../../ui/button/Button";
-import InputText from "../../ui/input-text/InputText";
+import Button from "../../../ui/button/Button";
+import InputText from "../../../ui/input-text/InputText";
 import style from "./form.module.scss";
-import { login } from "../../api/post-data";
-import PagePrealoader from "../../ui/page-prealoader/PagePrealoader";
+import { login } from "../../../api/post-data";
+import PagePrealoader from "../../../ui/page-prealoader/PagePrealoader";
 import { useNavigate } from "react-router";
-import { useSession } from "../../../context/useSession";
+import { useSession } from "../../../../context/useSession";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");

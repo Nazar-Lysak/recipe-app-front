@@ -1,5 +1,7 @@
+import CreateRecipeForm from "../../shared/components/forms/create-recipe/CreateRecipeForm";
+
 const CreateRecipePage = () => {
-  return <div>Create Recipe Page</div>;
+  return <CreateRecipeForm />;
 };
 
 export default CreateRecipePage;

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
-import AuthLayout from "../../shared/components/auth/AuthLayout";
-import LoginForm from "../../shared/components/auth/LoginForm";
+import AuthLayout from "../../shared/components/forms/auth/AuthLayout";
+import LoginForm from "../../shared/components/forms/auth/LoginForm";
 import style from "./Auth.module.scss";
 
 export default function LoginPage() {

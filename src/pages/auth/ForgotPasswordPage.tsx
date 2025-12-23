@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
-import AuthLayout from "../../shared/components/auth/AuthLayout";
-import ForgotPasswordForm from "../../shared/components/auth/ForgotPasswordForm";
+import AuthLayout from "../../shared/components/forms/auth/AuthLayout";
+import ForgotPasswordForm from "../../shared/components/forms/auth/ForgotPasswordForm";
 import style from "./Auth.module.scss";
 
 export default function ForgotPasswordPage() {

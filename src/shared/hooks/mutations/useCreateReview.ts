@@ -12,7 +12,7 @@ interface UseCreateReviewProps {
   token: string | null;
   recipeId: string;
   data: CreateReviewDataInterface;
-  onSuccess?: () => void; 
+  onSuccess?: () => void;
 }
 
 export const useCreateReview = ({

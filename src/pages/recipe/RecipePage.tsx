@@ -26,7 +26,7 @@ const RecipePage = () => {
   const { t } = useTranslation("recipe");
   const [confirmDislike, setConfirmDislike] = useState(false);
   const [ratingPopup, setRatingPopup] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user } = useSession();
   const { recipeId } = useParams<{ recipeId: string }>();
 
@@ -55,7 +55,7 @@ const RecipePage = () => {
 
   const createReview = () => {
     navigate(`/leave-review/${recipeId}`);
-    setRatingPopup(false)
+    setRatingPopup(false);
   };
 
   const authorRecipe = useUser(recipe.data?.authorId);

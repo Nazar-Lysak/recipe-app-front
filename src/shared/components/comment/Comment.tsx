@@ -19,10 +19,14 @@ const Comment = ({ review }: { review: any }) => {
       <div>
         <p className={style.text}>{comment}</p>
         {image && (
-        <div className={style.imageContainer}>
-          <img className={style.uploadedImage} src={image} alt={user?.user.username} />
-        </div>
-      )}
+          <div className={style.imageContainer}>
+            <img
+              className={style.uploadedImage}
+              src={image}
+              alt={user?.user.username}
+            />
+          </div>
+        )}
       </div>
       <RatingStars rating={rating} readonly size="small" />
     </div>

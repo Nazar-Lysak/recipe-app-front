@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { AnimatePresence } from "framer-motion";
-import Button from "../../ui/button/Button";
-import InputText from "../../ui/input-text/InputText";
+import Button from "../../../ui/button/Button";
+import InputText from "../../../ui/input-text/InputText";
 import style from "./form.module.scss";
-import { forgotPassword } from "../../api/post-data";
-import PagePrealoader from "../../ui/page-prealoader/PagePrealoader";
-import Popup from "../popup/Popup";
+import { forgotPassword } from "../../../api/post-data";
+import PagePrealoader from "../../../ui/page-prealoader/PagePrealoader";
+import Popup from "../../popup/Popup";
 import { Link } from "react-router";
-import CheckIcon from "../../../assets/img/svg/CheckIcon";
+import CheckIcon from "../../../../assets/img/svg/CheckIcon";
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");

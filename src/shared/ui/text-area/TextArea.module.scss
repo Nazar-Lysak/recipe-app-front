@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@use "@/styles/variables" as *;
 
 .container {
   display: flex;
@@ -29,7 +29,7 @@
   font-family: inherit;
   color: $shade-950;
   background-color: $shade-200;
-  border: 1px solid $shade-300;
+  border: 1px solid transparent;
   font-size: 18px;
   border-radius: 18px;
   resize: vertical;

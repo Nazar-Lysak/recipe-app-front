@@ -14,6 +14,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
         document.documentElement.style.setProperty("--shade-200", "#ffc6c9");
         document.documentElement.style.setProperty("--shade-300", "#fd5d69");
         document.documentElement.style.setProperty("--shade-400", "#ec888d");
+        document.documentElement.style.setProperty("--shade-500", "#757575");
         document.documentElement.style.setProperty("--shade-900", "#fffdf9");
         document.documentElement.style.setProperty("--shade-950", "#ffffff");
       } else if (theme === "ocean") {
@@ -21,6 +22,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
         document.documentElement.style.setProperty("--shade-200", "#7dd3fc");
         document.documentElement.style.setProperty("--shade-300", "#38bdf8");
         document.documentElement.style.setProperty("--shade-400", "#0ea5e9");
+        document.documentElement.style.setProperty("--shade-500", "#757575");
         document.documentElement.style.setProperty("--shade-900", "#f0f9ff");
         document.documentElement.style.setProperty("--shade-950", "#ffffff");
       } else if (theme === "sunset") {
@@ -28,6 +30,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
         document.documentElement.style.setProperty("--shade-200", "#fbbf24");
         document.documentElement.style.setProperty("--shade-300", "#f97316");
         document.documentElement.style.setProperty("--shade-400", "#dc2626");
+        document.documentElement.style.setProperty("--shade-500", "#757575");
         document.documentElement.style.setProperty("--shade-900", "#fef3c7");
         document.documentElement.style.setProperty("--shade-950", "#ffffff");
       } else {
@@ -35,6 +38,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
         document.documentElement.style.setProperty("--shade-200", "#ffc6c9");
         document.documentElement.style.setProperty("--shade-300", "#ec888d");
         document.documentElement.style.setProperty("--shade-400", "#fd5d69");
+        document.documentElement.style.setProperty("--shade-500", "#757575");
         document.documentElement.style.setProperty("--shade-900", "#3e2823");
         document.documentElement.style.setProperty("--shade-950", "#1c0f0d");
       }

@@ -1,0 +1,128 @@
+@use "@/styles/variables" as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  button {
+    flex-grow: 1;
+  }
+}
+
+.inputFile {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: rgba($shade-300, 0.15);
+  border-radius: 20px;
+  border: 2px dashed $shade-300;
+  background-color: $shade-200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba($shade-300, 0.25);
+    border-color: $shade-400;
+    transform: scale(1.01);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+
+  input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  .icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: $shade-300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    pointer-events: none;
+
+    svg {
+      width: 32px;
+      height: 32px;
+      fill: $shade-200;
+      stroke: $shade-400;
+    }
+  }
+
+  &:hover .icon {
+    background-color: $shade-400;
+    transform: scale(1.1);
+  }
+
+  .text {
+    font-family: $font-primary;
+    font-weight: 400;
+    font-size: 16px;
+    color: $shade-500;
+    text-align: center;
+    pointer-events: none;
+  }
+}
+
+.ingredientsItem {
+  display: flex;
+  align-items: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.subTitle {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: capitalize;
+  color: $shade-900;
+}
+
+.addElement {
+  display: flex;
+  justify-content: center;
+}
+
+.deleteButton {
+  height: 41px;
+  width: 41px;
+  border: none;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: $shade-200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  fill: transparent;
+  stroke: $shade-400;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}

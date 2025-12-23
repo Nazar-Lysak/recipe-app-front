@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { AnimatePresence } from "framer-motion";
-import Button from "../../ui/button/Button";
-import InputText from "../../ui/input-text/InputText";
+import Button from "../../../ui/button/Button";
+import InputText from "../../../ui/input-text/InputText";
 import style from "./form.module.scss";
-import PagePrealoader from "../../ui/page-prealoader/PagePrealoader";
+import PagePrealoader from "../../../ui/page-prealoader/PagePrealoader";
 import axios, { AxiosError } from "axios";
-import Popup from "../popup/Popup";
-import CheckIcon from "../../../assets/img/svg/CheckIcon";
+import Popup from "../../popup/Popup";
+import CheckIcon from "../../../../assets/img/svg/CheckIcon";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 

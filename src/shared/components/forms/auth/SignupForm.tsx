@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { AnimatePresence } from "framer-motion";
-import Button from "../../ui/button/Button";
-import InputText from "../../ui/input-text/InputText";
+import Button from "../../../ui/button/Button";
+import InputText from "../../../ui/input-text/InputText";
 import style from "./form.module.scss";
-import PagePrealoader from "../../ui/page-prealoader/PagePrealoader";
-import { signup } from "../../api/post-data";
+import PagePrealoader from "../../../ui/page-prealoader/PagePrealoader";
+import { signup } from "../../../api/post-data";
 import { useNavigate } from "react-router";
-import CheckIcon from "../../../assets/img/svg/CheckIcon";
-import Popup from "../popup/Popup";
-import SadSmile from "../../../assets/img/svg/SadSmile";
+import CheckIcon from "../../../../assets/img/svg/CheckIcon";
+import Popup from "../../popup/Popup";
+import SadSmile from "../../../../assets/img/svg/SadSmile";
 
 const SignupForm = () => {
   const [username, setUsername] = useState("");

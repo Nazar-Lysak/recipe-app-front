@@ -1,15 +1,15 @@
 import { useState } from "react";
-import Button from "../../ui/button/Button";
-import InputText from "../../ui/input-text/InputText";
-import { useSession } from "../../../context/useSession";
-import Popup from "../popup/Popup";
-import SadSmile from "../../../assets/img/svg/SadSmile";
+import Button from "../../../ui/button/Button";
+import InputText from "../../../ui/input-text/InputText";
+import { useSession } from "../../../../context/useSession";
+import Popup from "../../popup/Popup";
+import SadSmile from "../../../../assets/img/svg/SadSmile";
 import { Link } from "react-router";
-import CheckIcon from "../../../assets/img/svg/CheckIcon";
-import ButtonSimple from "../../ui/button-simple/ButtonSimple";
+import CheckIcon from "../../../../assets/img/svg/CheckIcon";
+import ButtonSimple from "../../../ui/button-simple/ButtonSimple";
 import { useTranslation } from "react-i18next";
 import style from "./form.module.scss";
-import { useChangePassword } from "../../hooks/mutations/useChangePassword";
+import { useChangePassword } from "../../../hooks/mutations/useChangePassword";
 
 const ChangePasswordForm = () => {
   const { token } = useSession();
