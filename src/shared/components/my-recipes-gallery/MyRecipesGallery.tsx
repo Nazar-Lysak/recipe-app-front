@@ -32,6 +32,14 @@ const MyRecipesGallery = () => {
       )}
       {recipes.data && recipes.data.recipesList.length > 0 && (
         <Swiper slidesPerView={2.3} spaceBetween={15}>
+          <SwiperSlide className={style.swiperSlide}>
+            <Link to="/create-recipe" className={style.createRecipeCard}>
+              <div className={style.createRecipeContent}>
+                <span className={style.plusIcon}>+</span>
+                <span className={style.createText}>{t("addRecipe")}</span>
+              </div>
+            </Link>
+          </SwiperSlide>
           {recipes.data.recipesList.map((recipe: RecipeInterface) => (
             <SwiperSlide key={recipe.id} className={style.swiperSlide}>
               <Link to={`/recipe/${recipe.id}`}>

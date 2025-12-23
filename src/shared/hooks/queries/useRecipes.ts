@@ -6,6 +6,7 @@ interface UseRecipesProps {
   offset?: number;
   username?: string;
   uniqueAuthors?: boolean;
+  likedBy?: string;
 }
 
 export const useRecipes = ({
@@ -14,9 +15,10 @@ export const useRecipes = ({
   offset,
   username,
   uniqueAuthors,
+  likedBy,
 }: UseRecipesProps) => {
   return useQuery({
-    queryKey: ["recipes", activeCategory, offset, username],
+    queryKey: ["recipes", activeCategory, offset, username, likedBy], 
     queryFn: async () => {
       const params = new URLSearchParams();
 
@@ -26,6 +28,11 @@ export const useRecipes = ({
         params.append("newest", "true");
       } else if (activeCategory === "3") {
         params.append("oldest", "true");
+      }
+
+      
+      if (likedBy) {
+        params.append("likedBy", likedBy);
       }
 
       if (username) {

@@ -16,26 +16,31 @@ const NotificationSettings = () => {
         label={t("notificationsSettings.pushNotifications")}
         checked={pushNotifications}
         onChange={setPushNotifications}
+        disabled
       />
       <ToggleSwitch
         label={t("notificationsSettings.emailNotifications")}
         checked={emailNotifications}
         onChange={setEmailNotifications}
+        disabled
       />
       <ToggleSwitch
         label={t("notificationsSettings.newRecipes")}
         checked={newRecipes}
         onChange={setNewRecipes}
+        disabled
       />
       <ToggleSwitch
         label={t("notificationsSettings.newFollowers")}
         checked={newFollowers}
         onChange={setNewFollowers}
+        disabled
       />
       <ToggleSwitch
         label={t("notificationsSettings.recipeLikes")}
         checked={recipeLikes}
         onChange={setRecipeLikes}
+        disabled
       />
     </div>
   );
