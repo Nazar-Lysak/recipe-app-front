@@ -103,7 +103,6 @@ export const recipeFormReducer: Reducer<RecipeFormState, RecipeFormAction> = (
           {
             id: nanoid(),
             text: "",
-            //order: state.instructions.length,
           },
         ],
       };
