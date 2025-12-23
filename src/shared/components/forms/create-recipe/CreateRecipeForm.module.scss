@@ -133,3 +133,13 @@
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
+
+.drawerButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+
+  button {
+    flex-grow: 1;
+  }
+}

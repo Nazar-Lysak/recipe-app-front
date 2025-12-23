@@ -1,4 +1,5 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   DndContext,
   type DragEndEvent,
@@ -27,6 +28,15 @@ import {
   type RecipeFormState,
 } from "../../../hooks/useRecipeForm";
 import { convertImageToBase64 } from "../../../utils/converImageToBase64";
+import Drawer from "../../drawer/Drawer";
+import { useMutation } from "@tanstack/react-query";
+import { useSession } from "../../../../context/useSession";
+import axios, { AxiosError } from "axios";
+import Popup from "../../popup/Popup";
+import SadSmile from "../../../../assets/img/svg/SadSmile";
+import PagePrealoader from "../../../ui/page-prealoader/PagePrealoader";
+import CheckIcon from "../../../../assets/img/svg/CheckIcon";
+import { Link } from "react-router";
 
 interface HandleTextChangeParams {
   type: string;
@@ -35,13 +45,18 @@ interface HandleTextChangeParams {
 }
 
 const CreateRecipeForm = () => {
+  const { t } = useTranslation("recipe");
+  const { t: tCommon } = useTranslation("common");
+  const [clearForm, setClearForm] = useState(false);
   const [formState, dispatch] = useReducer(
     recipeFormReducer,
     initialRecipeFormState,
   );
   const categories = useCategories();
 
-  console.log(formState);
+  const { token } = useSession();
+
+  // console.log(formState);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -66,13 +81,11 @@ const CreateRecipeForm = () => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
-    const oldIndex = formState.instructions.findIndex(
-      (i) => i.id === active.id,
-    );
-    const newIndex = formState.instructions.findIndex((i) => i.id === over.id);
-    const reordered = arrayMove(formState.instructions, oldIndex, newIndex);
+    const oldIndex = formState.steps.findIndex((i) => i.id === active.id);
+    const newIndex = formState.steps.findIndex((i) => i.id === over.id);
+    const reordered = arrayMove(formState.steps, oldIndex, newIndex);
 
-    dispatch({ type: "REORDER_INSTRUCTIONS", instructions: reordered });
+    dispatch({ type: "REORDER_INSTRUCTIONS", steps: reordered });
   };
 
   const handleTextChange = ({ type, field, value }: HandleTextChangeParams) => {
@@ -90,18 +103,50 @@ const CreateRecipeForm = () => {
     });
   };
 
-  console.log(formState.name);
+  const createRecipeMutation = useMutation({
+    mutationFn: async (newRecipe: RecipeFormState) => {
+      if (!token) throw new Error("No authentication token");
+
+      const preparedDataRecipe = {
+        ...newRecipe,
+        ingredients: newRecipe.ingredients.map((ing) => ing.name),
+        steps: newRecipe.steps.map((step) => step.text),
+      };
+
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      const response = await axios.post(
+        `http://localhost:3000/recipe`,
+        { recipe: preparedDataRecipe },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      return response.data;
+    },
+    onSuccess: () => {
+      console.log("Recipe created successfully");
+    },
+    onError: (error) => {
+      console.error("Failed to create recipe:", error);
+    },
+  });
+
+  const submitForm = (e: React.FormEvent) => {
+    e.preventDefault();
+    createRecipeMutation.mutate(formState);
+    console.log(formState);
+  };
 
   return (
-    <form className={style.form}>
+    <form className={style.form} onSubmit={submitForm}>
       <div className={style.buttons}>
-        <ButtonSimple type="button">Publish</ButtonSimple>
-        <ButtonSimple
-          isActive
-          type="button"
-          onClick={() => dispatch({ type: "RESET" })}
-        >
-          Clear Form
+        <ButtonSimple type="submit">{tCommon("publish")}</ButtonSimple>
+        <ButtonSimple isActive type="button" onClick={() => setClearForm(true)}>
+          {t("createRecipe.clearForm")}
         </ButtonSimple>
       </div>
       {!formState.image && (
@@ -109,10 +154,11 @@ const CreateRecipeForm = () => {
           <div className={style.icon}>
             <AddIcon />
           </div>
-          <span className={style.text}>Add image recipe</span>
+          <span className={style.text}>{t("createRecipe.addImage")}</span>
           <input
             type="file"
             accept="video/*,image/*"
+            required
             onChange={(e) =>
               handleImageChange(e.target.files ? e.target.files[0] : null)
             }
@@ -136,8 +182,9 @@ const CreateRecipeForm = () => {
       )}
 
       <InputText
-        label="Recipe Name"
-        placeholder="Pina Colada"
+        label={t("createRecipe.recipeName")}
+        placeholder={t("createRecipe.recipeNamePlaceholder")}
+        required
         value={formState.name}
         onChange={(e) =>
           handleTextChange({
@@ -148,9 +195,10 @@ const CreateRecipeForm = () => {
         }
       />
       <TextArea
-        label="Description"
-        placeholder="A tropical explosion in every sip"
+        label={t("description")}
+        placeholder={t("createRecipe.recipeNamePlaceholder")}
         value={formState.description}
+        required
         onChange={(e) =>
           handleTextChange({
             type: "SET_FIELD",
@@ -160,31 +208,34 @@ const CreateRecipeForm = () => {
         }
       />
       <InputText
-        label="Preparation Time"
+        label={t("createRecipe.preparationTime")}
         type="number"
-        placeholder="30min"
-        value={formState.preparationTime?.toString() || ""}
+        placeholder={t("createRecipe.preparationTimePlaceholder")}
+        required
+        value={formState.time?.toString() || ""}
         onChange={(e) =>
           handleTextChange({
             type: "SET_FIELD",
-            field: "preparationTime",
+            field: "time",
             value: e.target.value,
           })
         }
       />
       <InputSelect
         options={categories.data?.categories || []}
-        value={formState.categoryId}
+        value={formState.category}
+        placeholder={t("createRecipe.categoryPlaceholder")}
+        required
         onChange={(e) =>
           handleTextChange({
             type: "SET_FIELD",
-            field: "categoryId",
+            field: "category",
             value: e,
           })
         }
       />
 
-      <h2 className={style.subTitle}>Ingredients</h2>
+      <h2 className={style.subTitle}>{t("ingredients")}</h2>
       <DndContext
         sensors={sensors}
         modifiers={[restrictToVerticalAxis]}
@@ -210,8 +261,9 @@ const CreateRecipeForm = () => {
                     <MoveXIcon />
                   </button>
                   <InputText
-                    placeholder="ingredient"
+                    placeholder={t("createRecipe.ingredientPlaceholder")}
                     value={ingredient.name}
+                    required
                     onChange={(e) =>
                       dispatch({
                         type: "UPDATE_INGREDIENT",
@@ -240,18 +292,18 @@ const CreateRecipeForm = () => {
           type="button"
           onClick={() => dispatch({ type: "ADD_INGREDIENT" })}
         >
-          + Add Ingredient
+          + {t("createRecipe.addIngredient")}
         </ButtonSimple>
       </div>
-      <h2 className={style.subTitle}>Instructions</h2>
+      <h2 className={style.subTitle}>{t("createRecipe.instructions")}</h2>
 
       <DndContext
         sensors={sensors}
         modifiers={[restrictToVerticalAxis]}
         onDragEnd={handleDragEndInstructions}
       >
-        <SortableContext items={formState.instructions}>
-          {formState.instructions.map((step) => (
+        <SortableContext items={formState.steps}>
+          {formState.steps.map((step) => (
             <SortableItem key={step.id} id={step.id} useDragHandle>
               {(dragHandleListeners: any) => (
                 <div
@@ -270,8 +322,9 @@ const CreateRecipeForm = () => {
                     <MoveXIcon />
                   </button>
                   <InputText
-                    placeholder="instruction"
+                    placeholder={t("createRecipe.instructionPlaceholder")}
                     value={step.text}
+                    required
                     onChange={(e) =>
                       dispatch({
                         type: "UPDATE_INSTRUCTION",
@@ -300,9 +353,68 @@ const CreateRecipeForm = () => {
           type="button"
           onClick={() => dispatch({ type: "ADD_INSTRUCTION" })}
         >
-          + Add Instruction
+          + {t("createRecipe.addInstruction")}
         </ButtonSimple>
       </div>
+      {createRecipeMutation.isPending && (
+        <PagePrealoader variant="transparent" />
+      )}
+
+      <Popup
+        variant="success"
+        onClose={() => {}}
+        isOpen={createRecipeMutation.isSuccess}
+      >
+        <h2>{t("createRecipe.success")}</h2>
+        <CheckIcon />
+        <Link to="/">{tCommon("goToHome")}</Link>
+      </Popup>
+
+      <Popup
+        variant="error"
+        onClose={() => createRecipeMutation.reset()}
+        isOpen={createRecipeMutation.isError}
+      >
+        <h2>{t("createRecipe.errorCreating")}</h2>
+        <SadSmile />
+        <div>
+          {createRecipeMutation.error instanceof AxiosError &&
+            createRecipeMutation.error.response?.data?.message?.map(
+              (msg: string, index: number) => (
+                <p key={index} style={{ margin: 0 }}>
+                  {msg}
+                </p>
+              ),
+            )}
+        </div>
+
+        <ButtonSimple
+          type="button"
+          onClick={() => createRecipeMutation.reset()}
+        >
+          {tCommon("close")}
+        </ButtonSimple>
+      </Popup>
+
+      <Drawer isOpen={clearForm} onClose={() => setClearForm(false)}>
+        <h2>{t("createRecipe.clearForm")}</h2>
+        <p>{t("createRecipe.clearFormMessage")}</p>
+        <div className={style.drawerButtons}>
+          <ButtonSimple type="button" onClick={() => setClearForm(false)}>
+            {tCommon("cancel")}
+          </ButtonSimple>
+          <ButtonSimple
+            isActive
+            type="button"
+            onClick={() => {
+              dispatch({ type: "RESET" });
+              setClearForm(false);
+            }}
+          >
+            {tCommon("clear")}
+          </ButtonSimple>
+        </div>
+      </Drawer>
     </form>
   );
 };

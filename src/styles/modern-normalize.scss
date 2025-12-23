@@ -12,7 +12,9 @@ html {
   -webkit-text-size-adjust: 100%;
   tab-size: 4;
   overflow: hidden;
+  scroll-behavior: smooth;
 }
+
 body {
   margin: 0;
   background-color: $shade-100;

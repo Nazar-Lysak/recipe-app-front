@@ -14,5 +14,23 @@
   "recentRecipes": "Recent recipes",
   "topChefs": "Top chefs",
   "addFirstRecipe": "Add first recipe",
-  "min": "min"
+  "min": "min",
+  "createRecipe": {
+    "title": "Create Recipe",
+    "clearForm": "Clear Form",
+    "addImage": "Add image recipe",
+    "recipeName": "Recipe Name",
+    "recipeNamePlaceholder": "Pina Colada",
+    "preparationTime": "Preparation Time",
+    "preparationTimePlaceholder": "30 min",
+    "categoryPlaceholder": "Select category",
+    "instructions": "Instructions",
+    "ingredientPlaceholder": "ingredient",
+    "instructionPlaceholder": "instruction",
+    "addIngredient": "Add Ingredient",
+    "addInstruction": "Add Instruction",
+    "success": "Recipe Created Successfully",
+    "errorCreating": "Error Creating Recipe",
+    "clearFormMessage": "Are you sure you want to clear the form? All data will be lost."
+  }
 }

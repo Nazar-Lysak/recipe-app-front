@@ -26,5 +26,8 @@
   "cancel": "Cancel",
   "confirm": "Confirm",
   "save": "Save",
-  "delete": "Delete"
+  "delete": "Delete",
+  "clear": "Clear",
+  "publish": "Publish",
+  "goToHome": "Go to Home Page"
 }

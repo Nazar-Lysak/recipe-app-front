@@ -14,5 +14,23 @@
   "recentRecipes": "Нещодавні рецепти",
   "topChefs": "Рейтинг кухарів",
   "addFirstRecipe": "Додати перший рецепт",
-  "min": "хв"
+  "min": "хв",
+  "createRecipe": {
+    "title": "Створити рецепт",
+    "clearForm": "Очистити форму",
+    "addImage": "Додати зображення рецепту",
+    "recipeName": "Назва рецепту",
+    "recipeNamePlaceholder": "Піна колада",
+    "preparationTime": "Час приготування",
+    "preparationTimePlaceholder": "30 хв",
+    "categoryPlaceholder": "Оберіть категорію",
+    "instructions": "Інструкції",
+    "ingredientPlaceholder": "інгредієнт",
+    "instructionPlaceholder": "інструкція",
+    "addIngredient": "Додати інгредієнт",
+    "addInstruction": "Додати інструкцію",
+    "success": "Рецепт успішно створено",
+    "errorCreating": "Помилка створення рецепту",
+    "clearFormMessage": "Ви впевнені, що хочете очистити форму? Всі дані будуть втрачені."
+  }
 }

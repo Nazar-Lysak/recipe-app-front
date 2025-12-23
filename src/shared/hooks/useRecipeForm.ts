@@ -14,11 +14,11 @@ interface Instruction {
 export interface RecipeFormState {
   name: string;
   description: string;
-  preparationTime: number | null;
-  categoryId: string;
+  time: number | null;
+  category: string;
   image: string | null;
   ingredients: Ingredient[];
-  instructions: Instruction[];
+  steps: Instruction[];
 }
 
 type RecipeFormAction =
@@ -32,27 +32,27 @@ type RecipeFormAction =
   | { type: "ADD_INSTRUCTION" }
   | { type: "UPDATE_INSTRUCTION"; id: string; text: string }
   | { type: "REMOVE_INSTRUCTION"; id: string }
-  | { type: "REORDER_INSTRUCTIONS"; instructions: Instruction[] }
+  | { type: "REORDER_INSTRUCTIONS"; steps: Instruction[] }
   | { type: "RESET" };
 
 export const initialRecipeFormState: RecipeFormState = {
   name: "",
   description: "",
-  preparationTime: null,
-  categoryId: "",
+  time: null,
+  category: "",
   image: null,
   ingredients: [{ id: nanoid(), name: "" }],
-  instructions: [{ id: nanoid(), text: "" }],
+  steps: [{ id: nanoid(), text: "" }],
 };
 
 const createInitialRecipeFormState = (): RecipeFormState => ({
   name: "",
   description: "",
-  preparationTime: null,
-  categoryId: "",
+  time: null,
+  category: "",
   image: null,
   ingredients: [{ id: nanoid(), name: "" }],
-  instructions: [{ id: nanoid(), text: "" }],
+  steps: [{ id: nanoid(), text: "" }],
 });
 
 export const recipeFormReducer: Reducer<RecipeFormState, RecipeFormAction> = (
@@ -98,8 +98,8 @@ export const recipeFormReducer: Reducer<RecipeFormState, RecipeFormAction> = (
     case "ADD_INSTRUCTION":
       return {
         ...state,
-        instructions: [
-          ...state.instructions,
+        steps: [
+          ...state.steps,
           {
             id: nanoid(),
             text: "",
@@ -110,7 +110,7 @@ export const recipeFormReducer: Reducer<RecipeFormState, RecipeFormAction> = (
     case "UPDATE_INSTRUCTION":
       return {
         ...state,
-        instructions: state.instructions.map((inst) =>
+        steps: state.steps.map((inst) =>
           inst.id === action.id ? { ...inst, text: action.text } : inst,
         ),
       };
@@ -118,15 +118,13 @@ export const recipeFormReducer: Reducer<RecipeFormState, RecipeFormAction> = (
     case "REMOVE_INSTRUCTION":
       return {
         ...state,
-        instructions: state.instructions.filter(
-          (inst) => inst.id !== action.id,
-        ),
+        steps: state.steps.filter((inst) => inst.id !== action.id),
       };
 
     case "REORDER_INSTRUCTIONS":
       return {
         ...state,
-        instructions: action.instructions,
+        steps: action.steps,
       };
 
     case "RESET":
