@@ -66,7 +66,9 @@ const CreateRecipeForm = () => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
-    const oldIndex = formState.instructions.findIndex((i) => i.id === active.id);
+    const oldIndex = formState.instructions.findIndex(
+      (i) => i.id === active.id,
+    );
     const newIndex = formState.instructions.findIndex((i) => i.id === over.id);
     const reordered = arrayMove(formState.instructions, oldIndex, newIndex);
 
@@ -79,11 +81,11 @@ const CreateRecipeForm = () => {
 
   const handleImageChange = (file: File | null) => {
     if (!file) return;
-    
+
     convertImageToBase64(file, (base64) => {
-      dispatch({ 
-        type: "SET_IMAGE", 
-        file: base64 
+      dispatch({
+        type: "SET_IMAGE",
+        file: base64,
       });
     });
   };
@@ -94,38 +96,44 @@ const CreateRecipeForm = () => {
     <form className={style.form}>
       <div className={style.buttons}>
         <ButtonSimple type="button">Publish</ButtonSimple>
-        <ButtonSimple isActive type="button" onClick={() => dispatch({ type: "RESET" })}>
+        <ButtonSimple
+          isActive
+          type="button"
+          onClick={() => dispatch({ type: "RESET" })}
+        >
           Clear Form
         </ButtonSimple>
       </div>
       {!formState.image && (
         <label className={style.inputFile}>
-        <div className={style.icon}>
-          <AddIcon />
-        </div>
-        <span className={style.text}>Add image recipe</span>
-        <input 
-          type="file" 
-          accept="video/*,image/*" 
-          onChange={(e) =>
-            handleImageChange(e.target.files ? e.target.files[0] : null)
-          }
-        />       
-      </label>
+          <div className={style.icon}>
+            <AddIcon />
+          </div>
+          <span className={style.text}>Add image recipe</span>
+          <input
+            type="file"
+            accept="video/*,image/*"
+            onChange={(e) =>
+              handleImageChange(e.target.files ? e.target.files[0] : null)
+            }
+          />
+        </label>
       )}
       {formState.image && (
-        <button className={style.imagePreview} type="button" onClick={() => dispatch({ type: "REMOVE_IMAGE" })}>
+        <button
+          className={style.imagePreview}
+          type="button"
+          onClick={() => dispatch({ type: "REMOVE_IMAGE" })}
+        >
           {formState.image && (
-          <img 
-            src={formState.image}
-            alt="Recipe"
-            className={style.previewImage}
-          />
-        )}
+            <img
+              src={formState.image}
+              alt="Recipe"
+              className={style.previewImage}
+            />
+          )}
         </button>
       )}
-      
-
 
       <InputText
         label="Recipe Name"
@@ -180,7 +188,7 @@ const CreateRecipeForm = () => {
       <DndContext
         sensors={sensors}
         modifiers={[restrictToVerticalAxis]}
-        onDragEnd={ handleDragEndIngredients }
+        onDragEnd={handleDragEndIngredients}
       >
         <SortableContext items={formState.ingredients}>
           {formState.ingredients.map((ingredient) => (
@@ -201,7 +209,7 @@ const CreateRecipeForm = () => {
                   >
                     <MoveXIcon />
                   </button>
-                  <InputText 
+                  <InputText
                     placeholder="ingredient"
                     value={ingredient.name}
                     onChange={(e) =>
@@ -210,7 +218,7 @@ const CreateRecipeForm = () => {
                         id: ingredient.id,
                         name: e.target.value,
                       })
-                    }  
+                    }
                   />
                   <button
                     type="button"
@@ -240,7 +248,7 @@ const CreateRecipeForm = () => {
       <DndContext
         sensors={sensors}
         modifiers={[restrictToVerticalAxis]}
-        onDragEnd={ handleDragEndInstructions }
+        onDragEnd={handleDragEndInstructions}
       >
         <SortableContext items={formState.instructions}>
           {formState.instructions.map((step) => (
@@ -261,7 +269,7 @@ const CreateRecipeForm = () => {
                   >
                     <MoveXIcon />
                   </button>
-                  <InputText 
+                  <InputText
                     placeholder="instruction"
                     value={step.text}
                     onChange={(e) =>
@@ -270,9 +278,7 @@ const CreateRecipeForm = () => {
                         id: step.id,
                         text: e.target.value,
                       })
-                    }  
-  
-                   
+                    }
                   />
                   <button
                     type="button"

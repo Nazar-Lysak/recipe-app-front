@@ -119,7 +119,9 @@ export const recipeFormReducer: Reducer<RecipeFormState, RecipeFormAction> = (
     case "REMOVE_INSTRUCTION":
       return {
         ...state,
-        instructions: state.instructions.filter((inst) => inst.id !== action.id),
+        instructions: state.instructions.filter(
+          (inst) => inst.id !== action.id,
+        ),
       };
 
     case "REORDER_INSTRUCTIONS":
