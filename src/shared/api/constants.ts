@@ -23,6 +23,7 @@ const API_URL = {
     byId: (id: string) => `/recipe/${id}`,
     like: (id: string) => `/recipe/${id}/like`,
     unlike: (id: string) => `/recipe/${id}/unlike`,
+    create: "/recipe",
   },
   reviews: {
     create: (recipeId: string) => `/reviews/create/${recipeId}`,

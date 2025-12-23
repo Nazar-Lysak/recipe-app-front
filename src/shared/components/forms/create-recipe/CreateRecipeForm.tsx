@@ -29,14 +29,14 @@ import {
 } from "../../../hooks/useRecipeForm";
 import { convertImageToBase64 } from "../../../utils/converImageToBase64";
 import Drawer from "../../drawer/Drawer";
-import { useMutation } from "@tanstack/react-query";
 import { useSession } from "../../../../context/useSession";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import Popup from "../../popup/Popup";
 import SadSmile from "../../../../assets/img/svg/SadSmile";
 import PagePrealoader from "../../../ui/page-prealoader/PagePrealoader";
 import CheckIcon from "../../../../assets/img/svg/CheckIcon";
 import { Link } from "react-router";
+import { useCreateRecipe } from "../../../hooks/mutations/useCreateRecipe";
 
 interface HandleTextChangeParams {
   type: string;
@@ -53,10 +53,7 @@ const CreateRecipeForm = () => {
     initialRecipeFormState,
   );
   const categories = useCategories();
-
   const { token } = useSession();
-
-  // console.log(formState);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -103,36 +100,8 @@ const CreateRecipeForm = () => {
     });
   };
 
-  const createRecipeMutation = useMutation({
-    mutationFn: async (newRecipe: RecipeFormState) => {
-      if (!token) throw new Error("No authentication token");
-
-      const preparedDataRecipe = {
-        ...newRecipe,
-        ingredients: newRecipe.ingredients.map((ing) => ing.name),
-        steps: newRecipe.steps.map((step) => step.text),
-      };
-
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      const response = await axios.post(
-        `http://localhost:3000/recipe`,
-        { recipe: preparedDataRecipe },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      return response.data;
-    },
-    onSuccess: () => {
-      console.log("Recipe created successfully");
-    },
-    onError: (error) => {
-      console.error("Failed to create recipe:", error);
-    },
+  const createRecipeMutation = useCreateRecipe({
+    token,
   });
 
   const submitForm = (e: React.FormEvent) => {

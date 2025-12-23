@@ -36,6 +36,16 @@ interface ForgotPasswordResponse {
   message: string;
 }
 
+interface CreateRecipeData {
+  name: string;
+  description: string;
+  time: number | null;
+  category: string;
+  image: string | null;
+  ingredients: string[];
+  steps: string[];
+}
+
 export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
   //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.post<LoginResponse>(
@@ -117,6 +127,19 @@ export const createReview = async (
     {
       headers: {
         Authorization: `Token ${token}`,
+      },
+    },
+  );
+  return response.data;
+};
+
+export const createRecipe = async (data: CreateRecipeData, token: string) => {
+  const response = await axios.post(
+    `${BASE_URL}${API_URL.recipes.create}`,
+    { recipe: data },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
     },
   );
