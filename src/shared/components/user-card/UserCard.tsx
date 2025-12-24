@@ -19,6 +19,7 @@ interface RecipeCardProps {
   recipe?: {
     authorId: string;
     likedByUserIds: string[];
+    id: string;
   };
 }
 
@@ -88,7 +89,14 @@ function UserCard({
             {isFollowing.data ? t("unfollow") : t("follow")}
           </ButtonSimple>
         )}
-        {isOwnRecipe && <ButtonSimple>Редагувати профіль</ButtonSimple>}
+        {isOwnRecipe && (
+          <Link
+            to={`/edit-recipe/${recipe?.id}`}
+            className={style.editRecipeLink}
+          >
+            Редагувати рецепт
+          </Link>
+        )}
         <button className={style.moreButton}>
           <MoreVerticalIcon />
         </button>

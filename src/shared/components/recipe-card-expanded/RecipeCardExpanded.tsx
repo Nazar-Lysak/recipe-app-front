@@ -22,8 +22,16 @@ interface RecipeCardExpandedProps {
 }
 
 const RecipeCardExpanded = ({ recipe }: RecipeCardExpandedProps) => {
-  const { id, name, description, image, createdAt, time, averageRating, reviewsCount } =
-    recipe;
+  const {
+    id,
+    name,
+    description,
+    image,
+    createdAt,
+    time,
+    averageRating,
+    reviewsCount,
+  } = recipe;
 
   const { user } = useSession();
   const date = new DateObject(createdAt);

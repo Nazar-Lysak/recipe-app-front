@@ -18,7 +18,7 @@ export const useRecipes = ({
   likedBy,
 }: UseRecipesProps) => {
   return useQuery({
-    queryKey: ["recipes", activeCategory, offset, username, likedBy], 
+    queryKey: ["recipes", activeCategory, offset, username, likedBy],
     queryFn: async () => {
       const params = new URLSearchParams();
 
@@ -30,7 +30,6 @@ export const useRecipes = ({
         params.append("oldest", "true");
       }
 
-      
       if (likedBy) {
         params.append("likedBy", likedBy);
       }

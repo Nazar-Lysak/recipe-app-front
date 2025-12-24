@@ -25,6 +25,7 @@ const UserProfilePage = lazy(
 const CreateRecipePage = lazy(
   () => import("../../pages/create-recipe/CreateRecipePage"),
 );
+const EditRecipePage = lazy(() => import("../../pages/edit-recipe/EditRecipe"));
 const NotificationPage = lazy(
   () => import("../../pages/notification/NotificationPage"),
 );
@@ -120,6 +121,10 @@ export const routes: RouteObject[] = [
               {
                 path: "create-recipe",
                 Component: CreateRecipePage,
+              },
+              {
+                path: "edit-recipe/:recipeId",
+                Component: EditRecipePage,
               },
               {
                 path: "notifications",

@@ -9,16 +9,14 @@ import style from "./UserProfile.module.scss";
 
 const UserProfile = () => {
   const { t } = useTranslation("userProfile");
-  const [activeTab, setActiveTab] = useState<"all" | "favorites">(
-    "all",
-  );
+  const [activeTab, setActiveTab] = useState<"all" | "favorites">("all");
   const userId = useParams().userId;
   const userData = useUser(userId);
 
   const recipes = useRecipes({
     activeCategory: activeTab,
     username: activeTab === "all" ? userData.data?.username : undefined,
-    likedBy: activeTab === "favorites" ? userId : undefined
+    likedBy: activeTab === "favorites" ? userId : undefined,
   });
 
   if (userData.isLoading || recipes.isLoading) {

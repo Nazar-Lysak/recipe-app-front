@@ -42,6 +42,21 @@
   align-items: center;
 }
 
+.editRecipeLink {
+  font-family: $font-primary;
+  font-weight: 400;
+  font-size: 14px;
+  color: $shade-400;
+  margin-right: 12px;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+
+  &:hover {
+    text-decoration: underline;
+    color: $shade-900;
+  }
+}
+
 .moreButton {
   background-color: transparent;
   outline: none;

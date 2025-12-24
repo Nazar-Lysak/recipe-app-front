@@ -55,6 +55,31 @@ const createInitialRecipeFormState = (): RecipeFormState => ({
   steps: [{ id: nanoid(), text: "" }],
 });
 
+// Helper function to create initial state from recipe data (for editing)
+export const createRecipeFormStateFromData = (
+  recipeData: any,
+): RecipeFormState => {
+  if (!recipeData) return createInitialRecipeFormState();
+
+  return {
+    name: recipeData.name || "",
+    description: recipeData.description || "",
+    time: recipeData.time || null,
+    category: recipeData.category?.id || "",
+    image: recipeData.image || null,
+    ingredients:
+      recipeData.ingredients?.map((name: string) => ({
+        id: nanoid(),
+        name,
+      })) || [{ id: nanoid(), name: "" }],
+    steps:
+      recipeData.steps?.map((text: string) => ({
+        id: nanoid(),
+        text,
+      })) || [{ id: nanoid(), text: "" }],
+  };
+};
+
 export const recipeFormReducer: Reducer<RecipeFormState, RecipeFormAction> = (
   state,
   action,

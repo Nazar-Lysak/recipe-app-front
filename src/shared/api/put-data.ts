@@ -22,3 +22,30 @@ export const changePassword = async (
   );
   return response.data;
 };
+
+interface UpdateRecipeData {
+  name: string;
+  description: string;
+  time: number | null;
+  category: string;
+  image: string | null;
+  ingredients: string[];
+  steps: string[];
+}
+
+export const updateRecipe = async (
+  recipeId: string,
+  data: UpdateRecipeData,
+  token: string,
+) => {
+  const response = await axios.put(
+    `${BASE_URL}${API_URL.recipes.update(recipeId)}`,
+    { recipe: data },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  return response.data;
+};

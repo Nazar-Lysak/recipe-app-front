@@ -22,11 +22,7 @@ import style from "./CreateRecipeForm.module.scss";
 import SortableItem from "../../SortableItem/SortableItem";
 import DeleteIcon from "../../../../assets/img/svg/DeleteIcon";
 import MoveXIcon from "../../../../assets/img/svg/MoveXIcon";
-import {
-  initialRecipeFormState,
-  recipeFormReducer,
-  type RecipeFormState,
-} from "../../../hooks/useRecipeForm";
+import { type RecipeFormState } from "../../../hooks/useRecipeForm";
 import { convertImageToBase64 } from "../../../utils/converImageToBase64";
 import Drawer from "../../drawer/Drawer";
 import { useSession } from "../../../../context/useSession";
@@ -44,14 +40,16 @@ interface HandleTextChangeParams {
   value: string | number | null;
 }
 
-const CreateRecipeForm = () => {
+interface CreateRecipeFormProps {
+  formState: RecipeFormState;
+  dispatch: React.Dispatch<any>;
+}
+
+const CreateRecipeForm = ({ formState, dispatch }: CreateRecipeFormProps) => {
   const { t } = useTranslation("recipe");
   const { t: tCommon } = useTranslation("common");
   const [clearForm, setClearForm] = useState(false);
-  const [formState, dispatch] = useReducer(
-    recipeFormReducer,
-    initialRecipeFormState,
-  );
+
   const categories = useCategories();
   const { token } = useSession();
 
@@ -290,7 +288,7 @@ const CreateRecipeForm = () => {
                   >
                     <MoveXIcon />
                   </button>
-                  <InputText
+                  <TextArea
                     placeholder={t("createRecipe.instructionPlaceholder")}
                     value={step.text}
                     required

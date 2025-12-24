@@ -7,6 +7,7 @@
   "recipe": "Recipe",
   "user": "User",
   "createRecipe": "Create Recipe",
+  "editRecipe": "Edit Recipe",
   "notifications": "Notifications",
   "notificationSettings": "Settings",
   "helpCenter": "Help Center",

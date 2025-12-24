@@ -10,7 +10,7 @@ const CommunityPage = () => {
 
   const elements = [
     { id: "1", name: t("topRecipes") },
-    { id: "2", name: t("newRecipes") }, 
+    { id: "2", name: t("newRecipes") },
   ];
 
   const [activeCategory, setActiveCategory] = useState<string>("1");
