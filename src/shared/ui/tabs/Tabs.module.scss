@@ -1,0 +1,54 @@
+@use "@/styles/variables" as *;
+
+.tabs {
+  display: flex;
+  gap: 0;
+  position: relative;
+  margin-bottom: 16px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: $shade-400;
+    transition: transform 0.3s ease;
+    width: var(--tab-width, 50%);
+  }
+
+  &[data-active="0"]::after {
+    transform: translateX(0%);
+  }
+
+  &[data-active="1"]::after {
+    transform: translateX(100%);
+  }
+
+  &[data-active="2"]::after {
+    transform: translateX(200%);
+  }
+
+  &[data-active="3"]::after {
+    transform: translateX(300%);
+  }
+
+  &[data-active="4"]::after {
+    transform: translateX(400%);
+  }
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $shade-900;
+
+  &[data-active="true"] {
+    color: $shade-900;
+  }
+}

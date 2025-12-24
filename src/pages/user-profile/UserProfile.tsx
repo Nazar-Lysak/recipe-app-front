@@ -5,6 +5,7 @@ import { useUser } from "../../shared/hooks/queries/useUser";
 import { useRecipes } from "../../shared/hooks/queries/useRecipes";
 import RecipesGrid from "../../shared/components/recipes-grid/RecipesGrid";
 import ProfileAvatar from "../../shared/components/profile-avatar/ProfileAvatar";
+import Tabs from "../../shared/ui/tabs/Tabs";
 import style from "./UserProfile.module.scss";
 
 const UserProfile = () => {
@@ -27,9 +28,10 @@ const UserProfile = () => {
     return <div>{t("errorLoading")}</div>;
   }
 
-  const getActiveIndex = () => {
-    return activeTab === "all" ? 0 : 1;
-  };
+  const tabs = [
+    { value: "all" as const, label: t("recipes") },
+    { value: "favorites" as const, label: t("likes") },
+  ];
 
   return (
     <div>
@@ -37,20 +39,7 @@ const UserProfile = () => {
 
       {recipes.data.recipesCount > 0 && (
         <>
-          <div className={style.buttons} data-active={getActiveIndex()}>
-            <button
-              className={style.button}
-              onClick={() => setActiveTab("all")}
-            >
-              {t("recipes")}
-            </button>
-            <button
-              className={style.button}
-              onClick={() => setActiveTab("favorites")}
-            >
-              {t("likes")}
-            </button>
-          </div>
+          <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
           <RecipesGrid recipes={recipes.data?.recipesList || []} />
         </>
       )}

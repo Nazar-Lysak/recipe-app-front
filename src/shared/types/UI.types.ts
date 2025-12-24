@@ -46,6 +46,12 @@ export interface ReviewInterface {
   userId: string;
 }
 
+export interface FollowerInterface {
+  id: string;
+  followerId: string;
+  followingId: string;
+}
+
 export interface FullUserDataInterface {
   id: string;
   username: string;
@@ -64,6 +70,7 @@ export interface FullUserDataInterface {
   language: string;
   theme: "light" | "dark" | "ocean" | "sunset";
   is_private: boolean;
+  followers?: FollowerInterface[];
   followers_count: number;
   following_count: number;
   recipes_count: number;

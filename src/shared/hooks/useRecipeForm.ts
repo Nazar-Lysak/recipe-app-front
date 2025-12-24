@@ -67,16 +67,14 @@ export const createRecipeFormStateFromData = (
     time: recipeData.time || null,
     category: recipeData.category?.id || "",
     image: recipeData.image || null,
-    ingredients:
-      recipeData.ingredients?.map((name: string) => ({
-        id: nanoid(),
-        name,
-      })) || [{ id: nanoid(), name: "" }],
-    steps:
-      recipeData.steps?.map((text: string) => ({
-        id: nanoid(),
-        text,
-      })) || [{ id: nanoid(), text: "" }],
+    ingredients: recipeData.ingredients?.map((name: string) => ({
+      id: nanoid(),
+      name,
+    })) || [{ id: nanoid(), name: "" }],
+    steps: recipeData.steps?.map((text: string) => ({
+      id: nanoid(),
+      text,
+    })) || [{ id: nanoid(), text: "" }],
   };
 };
 

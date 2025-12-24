@@ -55,6 +55,7 @@ export const useFollow = ({ userId, token }: UseFollowProps) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user", userId] });
       queryClient.invalidateQueries({ queryKey: ["isFollowing", userId] });
+      queryClient.invalidateQueries({ queryKey: ["all-profiles"] });
     },
   });
 };

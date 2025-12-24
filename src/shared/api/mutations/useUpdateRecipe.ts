@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateRecipe } from '../put-data';
-import { useSession } from '../../../context/useSession';
-import type { RecipeFormState } from '../../hooks/useRecipeForm';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateRecipe } from "../put-data";
+import { useSession } from "../../../context/useSession";
+import type { RecipeFormState } from "../../hooks/useRecipeForm";
 
 export const useUpdateRecipe = (recipeId: string) => {
   const queryClient = useQueryClient();
@@ -10,7 +10,7 @@ export const useUpdateRecipe = (recipeId: string) => {
   return useMutation({
     mutationFn: async (formState: RecipeFormState) => {
       if (!token) {
-        throw new Error('No authentication token');
+        throw new Error("No authentication token");
       }
 
       const preparedData = {
@@ -26,8 +26,8 @@ export const useUpdateRecipe = (recipeId: string) => {
       return updateRecipe(recipeId, preparedData, token);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['recipes'] });
-      queryClient.invalidateQueries({ queryKey: ['recipe', recipeId] });
+      queryClient.invalidateQueries({ queryKey: ["recipes"] });
+      queryClient.invalidateQueries({ queryKey: ["recipe", recipeId] });
     },
   });
 };

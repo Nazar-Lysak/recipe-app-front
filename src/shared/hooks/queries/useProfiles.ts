@@ -1,16 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 
 interface UseProfilesParams {
-  top: boolean;
+  top?: boolean;
   limit?: number;
   offset?: number;
+  date?: boolean;
 }
 
-export const useProfiles = ({ top, limit, offset }: UseProfilesParams) => {
+export const useProfiles = ({
+  top,
+  limit,
+  offset,
+  date,
+}: UseProfilesParams) => {
   return useQuery({
     queryKey: ["all-profiles"],
     queryFn: async () => {
       const useParams = new URLSearchParams();
+
+      if (date) {
+        useParams.append("date", "true");
+      }
       if (top) {
         useParams.append("top", "true");
       }

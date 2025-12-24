@@ -105,7 +105,6 @@ const CreateRecipeForm = ({ formState, dispatch }: CreateRecipeFormProps) => {
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
     createRecipeMutation.mutate(formState);
-    console.log(formState);
   };
 
   return (

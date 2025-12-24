@@ -1,0 +1,54 @@
+@use "@/styles/variables" as *;
+
+.userListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.userLink {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.avatar {
+  height: 63px;
+  width: 63px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.username {
+  font-family: $font-primary;
+  font-weight: 400;
+  font-size: 12px;
+  color: $shade-300;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email {
+  font-family: $font-secondary;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.07;
+  color: $shade-900;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
