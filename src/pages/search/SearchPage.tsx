@@ -8,6 +8,7 @@ import { useRecipes } from "../../shared/hooks/queries/useRecipes";
 import RecipesGrid from "../../shared/components/recipes-grid/RecipesGrid";
 import InputText from "../../shared/ui/input-text/InputText";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
+import style from "./SearchPage.module.scss";
 const tabContentVariants = {
   initial: (direction: number) => ({
     opacity: 0,
@@ -59,7 +60,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className={style.searchPage}>
       <Tabs
         tabs={[
           { value: "recipes", label: "Рецепти" },
