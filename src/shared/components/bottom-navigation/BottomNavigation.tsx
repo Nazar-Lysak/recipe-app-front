@@ -7,6 +7,7 @@ import ProfileIcon from "../../../assets/img/svg/ProfileIcon";
 import ButtonIcon from "../../ui/button-icon/ButtonIcon";
 import style from "./BottomNavigation.module.scss";
 import { Link, useLocation } from "react-router";
+import ChatIcon from "../../../assets/img/svg/ChatIcon";
 
 const BottomNavigation: FC = () => {
   const location = useLocation();
@@ -23,7 +24,7 @@ const BottomNavigation: FC = () => {
         delay: 0.75,
         duration: 0.3,
       }}
-      className={style.wrapper}
+      className={style.bottomNavigation}
     >
       <motion.nav className={style.nav}>
         <Link to="/home">
@@ -60,6 +61,15 @@ const BottomNavigation: FC = () => {
             tabIndex={-1}
           >
             <ProfileIcon />
+          </ButtonIcon>
+        </Link>
+        <Link to="/chat">
+          <ButtonIcon
+            variant="whiteIcon"
+            active={isActive("/chat")}
+            tabIndex={-1}
+          >
+            <ChatIcon />
           </ButtonIcon>
         </Link>
       </motion.nav>

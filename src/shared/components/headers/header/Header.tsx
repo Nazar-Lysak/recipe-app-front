@@ -49,6 +49,7 @@ const Header: FC = () => {
     "/recipe-review/": t("recipeReview"),
     "/leave-review/": t("leaveReview"),
     "/edit-recipe/": t("editRecipe"),
+    "/chat": t("chat"),
   };
 
   const getCurrentRoute = () => {

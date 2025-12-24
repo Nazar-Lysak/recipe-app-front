@@ -55,6 +55,7 @@ const LeaveReviewPage = lazy(
   () => import("../../pages/leave-review/LeaveReviewPage"),
 );
 const NotFoundPage = lazy(() => import("../../pages/not-found/NotFoundPage"));
+const ChatPage = lazy(() => import("../../pages/chat/ChatPage"));
 
 export const routes: RouteObject[] = [
   {
@@ -98,6 +99,7 @@ export const routes: RouteObject[] = [
               { path: "theme-settings", Component: ThemePage },
               { path: "language-selection", Component: LanguageSettings },
               { path: "community", Component: CommunityPage },
+              { path: "chat", Component: ChatPage },
               { path: "categories", Component: CategoryPage },
               {
                 path: "categories/:categoryId",
