@@ -54,6 +54,9 @@ const RecipeReviewPage = lazy(
 const LeaveReviewPage = lazy(
   () => import("../../pages/leave-review/LeaveReviewPage"),
 );
+const NotFoundPage = lazy(
+  () => import("../../pages/not-found/NotFoundPage"),
+);
 
 export const routes: RouteObject[] = [
   {
@@ -135,6 +138,10 @@ export const routes: RouteObject[] = [
                 Component: SearchPage,
               },
             ],
+          },
+          {
+            path: "*",
+            Component: NotFoundPage,
           },
         ],
       },

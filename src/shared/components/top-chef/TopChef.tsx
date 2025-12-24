@@ -4,11 +4,11 @@ import style from "./TopChef.module.scss";
 import { useProfiles } from "../../hooks/queries/useProfiles";
 
 const TopChef = () => {
-  const { t } = useTranslation("recipe");
+  const { t } = useTranslation("chef");
   const allProfiles = useProfiles({ top: true, limit: 4, offset: 0 });
 
   return (
-    <>
+    <div className={style.topChefComponent}>
       <h2 className={style.title}>{t("topChefs")}</h2>
       <div className={style.chefs}>
         {allProfiles.data?.profiles.map((profile: any, i: number) => {
@@ -21,7 +21,12 @@ const TopChef = () => {
           );
         })}
       </div>
-    </>
+        <div className={style.viewAllContainer}>
+          <Link to="/top-chefs" className={style.viewAllLink}>
+          {t("viewAllChefs")}
+        </Link>
+        </div>      
+    </div>
   );
 };
 

@@ -29,5 +29,9 @@
   "delete": "Delete",
   "clear": "Clear",
   "publish": "Publish",
-  "goToHome": "Go to Home Page"
+  "goToHome": "Go to Home Page",
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Oops! The page you're looking for doesn't exist. It might have been moved or deleted."
+  }
 }

@@ -39,3 +39,24 @@
   text-align: center;
   color: $shade-900;
 }
+
+.viewAllContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+
+  .viewAllLink {
+    font-family: $font-primary;
+    text-decoration: underline !important;
+    font-weight: 500;
+    font-size: 14px;
+    color: $shade-900;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $shade-900;
+    }
+  }
+  
+}
