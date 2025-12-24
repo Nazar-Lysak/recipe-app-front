@@ -111,7 +111,11 @@ const CommunityPage = () => {
       />
 
       <AnimatePresence mode="wait" custom={direction}>
-        <motion.div key={activeCategory} custom={direction} {...tabContentAnimation}>
+        <motion.div
+          key={activeCategory}
+          custom={direction}
+          {...tabContentAnimation}
+        >
           {allRecipes.length > 0 && (
             <div>
               {allRecipes.map((recipe: any) => (

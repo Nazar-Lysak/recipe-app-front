@@ -1,5 +1,9 @@
 @use "@/styles/variables" as *;
 
+.topChefComponent {
+  display: block;
+}
+
 .title {
   font-family: $font-primary;
   font-weight: 500;
@@ -58,5 +62,4 @@
       color: $shade-900;
     }
   }
-  
 }

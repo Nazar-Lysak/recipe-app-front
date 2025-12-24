@@ -93,9 +93,8 @@ const SearchPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      {users.isLoading || recipes.isLoading &&  (
-        <PagePrealoader variant="transparent" />
-      )}
+      {users.isLoading ||
+        (recipes.isLoading && <PagePrealoader variant="transparent" />)}
     </div>
   );
 };

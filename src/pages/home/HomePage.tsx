@@ -5,9 +5,9 @@ import TopChef from "../../shared/components/top-chef/TopChef";
 const HomePage = () => {
   return (
     <>
-      <NewestRecipesGallery />
-      <TopChef />
       <MyRecipesGallery />
+      <TopChef />
+      <NewestRecipesGallery />
     </>
   );
 };

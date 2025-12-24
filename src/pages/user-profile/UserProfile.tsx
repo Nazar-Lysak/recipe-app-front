@@ -83,7 +83,11 @@ const UserProfile = () => {
 
       {recipes.data.recipesCount > 0 && (
         <>
-          <Tabs tabs={tabs} activeTab={activeTab} onTabChange={handleActiveTab} />
+          <Tabs
+            tabs={tabs}
+            activeTab={activeTab}
+            onTabChange={handleActiveTab}
+          />
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={activeTab}

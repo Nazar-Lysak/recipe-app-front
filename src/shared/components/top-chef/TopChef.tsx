@@ -21,11 +21,11 @@ const TopChef = () => {
           );
         })}
       </div>
-        <div className={style.viewAllContainer}>
-          <Link to="/top-chefs" className={style.viewAllLink}>
+      <div className={style.viewAllContainer}>
+        <Link to="/top-chefs" className={style.viewAllLink}>
           {t("viewAllChefs")}
         </Link>
-        </div>      
+      </div>
     </div>
   );
 };
