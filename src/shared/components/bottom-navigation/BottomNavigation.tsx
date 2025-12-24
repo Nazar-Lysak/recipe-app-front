@@ -4,74 +4,48 @@ import CategoriesIcon from "../../../assets/img/svg/CategoriesIcon";
 import CommunityIcon from "../../../assets/img/svg/CommunityIcon";
 import HomeIcon from "../../../assets/img/svg/HomeIcon";
 import ProfileIcon from "../../../assets/img/svg/ProfileIcon";
+import ChatIcon from "../../../assets/img/svg/ChatIcon";
 import ButtonIcon from "../../ui/button-icon/ButtonIcon";
 import style from "./BottomNavigation.module.scss";
 import { Link, useLocation } from "react-router";
-import ChatIcon from "../../../assets/img/svg/ChatIcon";
+
+const NAVIGATION_ITEMS = [
+  { path: "/home", icon: HomeIcon, label: "Home" },
+  { path: "/community", icon: CommunityIcon, label: "Community" },
+  { path: "/categories", icon: CategoriesIcon, label: "Categories" },
+  { path: "/profile", icon: ProfileIcon, label: "Profile" },
+  { path: "/chat", icon: ChatIcon, label: "Chat" },
+] as const;
+
+const navigationAnimation = {
+  initial: { y: 120, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  transition: {
+    type: "spring" as const,
+    stiffness: 100,
+    damping: 35,
+    delay: 0.75,
+    duration: 0.3,
+  },
+};
 
 const BottomNavigation: FC = () => {
   const location = useLocation();
-  const isActive = (path: string) => location.pathname.startsWith(path);
 
   return (
-    <motion.div
-      initial={{ y: 120, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 35,
-        delay: 0.75,
-        duration: 0.3,
-      }}
-      className={style.bottomNavigation}
-    >
+    <motion.div {...navigationAnimation} className={style.bottomNavigation}>
       <motion.nav className={style.nav}>
-        <Link to="/home">
-          <ButtonIcon
-            variant="whiteIcon"
-            active={isActive("/home")}
-            tabIndex={-1}
-          >
-            <HomeIcon />
-          </ButtonIcon>
-        </Link>
-        <Link to="/community">
-          <ButtonIcon
-            variant="whiteIcon"
-            active={isActive("/community")}
-            tabIndex={-1}
-          >
-            <CommunityIcon />
-          </ButtonIcon>
-        </Link>
-        <Link to="/categories">
-          <ButtonIcon
-            variant="whiteIcon"
-            active={isActive("/categories")}
-            tabIndex={-1}
-          >
-            <CategoriesIcon />
-          </ButtonIcon>
-        </Link>
-        <Link to="/profile">
-          <ButtonIcon
-            variant="whiteIcon"
-            active={isActive("/profile")}
-            tabIndex={-1}
-          >
-            <ProfileIcon />
-          </ButtonIcon>
-        </Link>
-        <Link to="/chat">
-          <ButtonIcon
-            variant="whiteIcon"
-            active={isActive("/chat")}
-            tabIndex={-1}
-          >
-            <ChatIcon />
-          </ButtonIcon>
-        </Link>
+        {NAVIGATION_ITEMS.map(({ path, icon: Icon, label }) => (
+          <Link key={path} to={path} aria-label={label}>
+            <ButtonIcon
+              variant="whiteIcon"
+              active={location.pathname.startsWith(path)}
+              tabIndex={-1}
+            >
+              <Icon />
+            </ButtonIcon>
+          </Link>
+        ))}
       </motion.nav>
     </motion.div>
   );
