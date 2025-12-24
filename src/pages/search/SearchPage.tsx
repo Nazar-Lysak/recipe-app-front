@@ -42,22 +42,20 @@ const SearchPage = () => {
     (searchParams.get("tab") as TabType) || "recipes",
   );
 
-  const direction = activeTab === "recipes" ? -1 : 1;
-
-  const users = useProfiles({ date: true });
-  const recipes = useRecipes({ activeCategory: "1" });
-
   useEffect(() => {
     const tabFromUrl = (searchParams.get("tab") as TabType) || "recipes";
     setActiveTab(tabFromUrl);
   }, [searchParams]);
 
+  const direction = activeTab === "recipes" ? -1 : 1;
+
+  const users = useProfiles({ date: true });
+  const recipes = useRecipes({ activeCategory: "1" });
+
   const handleActiveTab = (activeTab: TabType) => {
     setActiveTab(activeTab);
     setSearchParams({ tab: activeTab });
   };
-
-  console.log(users.data);
 
   return (
     <div>

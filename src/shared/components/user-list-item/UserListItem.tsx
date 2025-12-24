@@ -5,7 +5,6 @@ import type { FollowerInterface } from "../../types/UI.types";
 import style from "./UserListItem.module.scss";
 import { useSession } from "../../../context/useSession";
 import { useFollow } from "../../hooks/mutations/useFollow";
-import { use } from "react";
 import { useUnfollow } from "../../hooks/mutations/useUnfollow";
 
 interface UserListItemProps {
