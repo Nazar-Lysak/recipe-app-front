@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateRecipe } from "../put-data";
+import { updateRecipe } from "../../api/put-data";
 import { useSession } from "../../../context/useSession";
-import type { RecipeFormState } from "../../hooks/useRecipeForm";
+import type { RecipeFormState } from "../useRecipeForm";
 
 export const useUpdateRecipe = (recipeId: string) => {
   const queryClient = useQueryClient();
