@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useSearchParams } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import Tabs from "../../shared/ui/tabs/Tabs";
@@ -7,6 +7,7 @@ import UserListItem from "../../shared/components/user-list-item/UserListItem";
 import { useRecipes } from "../../shared/hooks/queries/useRecipes";
 import RecipesGrid from "../../shared/components/recipes-grid/RecipesGrid";
 import InputText from "../../shared/ui/input-text/InputText";
+import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 const tabContentVariants = {
   initial: (direction: number) => ({
     opacity: 0,
@@ -92,6 +93,9 @@ const SearchPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      {users.isLoading || recipes.isLoading &&  (
+        <PagePrealoader variant="transparent" />
+      )}
     </div>
   );
 };
