@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import style from "./ChatMessagePage.module.scss";
 import Button from "../../shared/ui/button/Button";
+import ButtonIcon from "../../shared/ui/button-icon/ButtonIcon";
 
 interface Message {
   id: number;
@@ -274,16 +275,6 @@ const ChatMessagePage = () => {
     }
   };
 
-  useEffect(() => {
-    if (messagesContainerRef.current) {
-      setTimeout(() => {
-        if (messagesContainerRef.current) {
-          messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
-        }
-      }, 100);
-    }
-  }, [messages]);
-
   return (
     <div className={style.chatMessagePage}>
       {/* Header */}
@@ -335,9 +326,10 @@ const ChatMessagePage = () => {
           onKeyDown={handleKeyDown}
           className={style.messageInput}
         />
-        <Button onClick={handleSendMessage} disabled={!newMessage.trim()}>
-          Send
-        </Button>
+        
+        <ButtonIcon onClick={handleSendMessage} disabled={!newMessage.trim()}>
+          S
+        </ButtonIcon>
       </motion.div>
     </div>
   );
