@@ -1,62 +1,43 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import { useParams } from "react-router";
 import DateObject from "react-date-object";
 import style from "./ChatMessagePage.module.scss";
 import ButtonIcon from "../../shared/ui/button-icon/ButtonIcon";
-import { useParams } from "react-router";
 import { useSession } from "../../context/useSession";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import { useChatMessages } from "../../shared/hooks/queries/useChatMessages";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { use, useEffect, useState } from "react";
+import { useSendMessage } from "../../shared/hooks/mutations/useSendMessage";
+import { useMarkMessagesAsRead } from "../../shared/hooks/mutations/useMarkMessagesAsRead";
 import ChatIcon from "../../assets/img/svg/ChatIcon";
-
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ChatMessagePage = () => {
   const { chatId } = useParams();
   const { token, user } = useSession();
   const chatMessages = useChatMessages(chatId!, token!);
-  const queryClient = useQueryClient();
   const [newMessage, setNewMessage] = useState("");
   const { pathname } = useLocation();
 
   const partisapent = chatMessages?.data?.chats?.chatWith;
   const chatMessagesData = chatMessages?.data?.chats?.messages;
 
-  const mutateMessage = useMutation({
-    mutationFn: async (content: string) => {
-      const response = await axios.post(
-        `${BASE_URL}/messages/${chatId}`,
-        { content },
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        },
-      );
-      return response.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["chatMessages", chatId] });
-      setNewMessage("");
-    },
-  });
+  const mutateMessage = useSendMessage(chatId!, token!);
+  const mutateMarkMessageAsRead = useMarkMessagesAsRead();
 
   const handleSendMessage = () => {
     const trimmedMessage = newMessage.trim();
     if (trimmedMessage) {
       mutateMessage.mutate(trimmedMessage);
+      setNewMessage("");
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
+  useEffect(() => {
+    if (chatId && token && chatMessagesData?.length) {
+      mutateMarkMessageAsRead.mutate({ chatId, token });
     }
-  };
+  }, [chatMessagesData?.length]);
 
   useEffect(() => {
     if (pathname.includes("/chat/")) {
@@ -69,6 +50,13 @@ const ChatMessagePage = () => {
       return;
     }
   }, [pathname, chatMessagesData]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
 
   if (chatMessages.isLoading) {
     return <PagePrealoader variant="transparent" />;

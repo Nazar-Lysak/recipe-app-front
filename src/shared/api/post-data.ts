@@ -145,3 +145,20 @@ export const createRecipe = async (data: CreateRecipeData, token: string) => {
   );
   return response.data;
 };
+
+export const sendMessage = async (
+  chatId: string,
+  content: string,
+  token: string,
+) => {
+  const response = await axios.post(
+    `${BASE_URL}${API_URL.messages.send(chatId)}`,
+    { content },
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    },
+  );
+  return response.data;
+};

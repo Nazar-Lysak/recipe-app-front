@@ -46,7 +46,6 @@ const ChatPage = () => {
     (searchParams.get("tab") as TabType) || "Chats",
   );
   const direction = activeTab === "Chats" ? -1 : 1;
-
   const chatsQuery = useChats(token!);
 
   const handleActiveTab = (activeTab: TabType) => {

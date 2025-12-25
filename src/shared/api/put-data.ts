@@ -49,3 +49,16 @@ export const updateRecipe = async (
   );
   return response.data;
 };
+
+export const markMessagesAsRead = async (chatId: string, token: string) => {
+  const response = await axios.put(
+    `${BASE_URL}${API_URL.messages.markAsRead(chatId)}`,
+    {},
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    },
+  );
+  return response.data;
+};

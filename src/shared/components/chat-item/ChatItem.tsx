@@ -1,23 +1,38 @@
 import DateObject from "react-date-object";
 import { Link } from "react-router";
 import style from "./ChatItem.module.scss";
+import { useSession } from "../../../context/useSession";
+import type { MessageInterface } from "../../types/UI.types";
 
 interface ChatItemProps {
-  chat: any;
+  chat: {
+    id: string;
+    chatWith: {
+      id: string;
+      username: string;
+      profile: {
+        avatar: string | null;
+      };
+    };
+    messages: MessageInterface[];
+  };
 }
 
 const ChatItem = ({ chat }: ChatItemProps) => {
+  const { user } = useSession();
   const { chatWith, messages } = chat;
 
   const lastMessage = messages[messages.length - 1];
-  const unreadCount = messages.reduce((count: number, message: any) => {
-    return !message.isRead ? count + 1 : count;
-  }, 0);
+  const unreadCount = messages
+    .filter((message: MessageInterface) => user?.id !== message.sender.id)
+    .reduce((count: number, message: MessageInterface) => {
+      return !message.isRead ? count + 1 : count;
+    }, 0);
 
   return (
     <Link to={`/chat/${chat.id}`} className={style.chatItem}>
       <div className={style.avatar}>
-        <img src={chatWith.profile.avatar} alt={chatWith.username} />
+        <img src={chatWith.profile.avatar || ""} alt={chatWith.username} />
       </div>
 
       <div className={style.content}>

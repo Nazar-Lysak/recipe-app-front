@@ -32,6 +32,10 @@ const API_URL = {
   chats: {
     byId: (chatId: string) => `/chats/${chatId}`,
   },
+  messages: {
+    send: (chatId: string) => `/messages/${chatId}`,
+    markAsRead: (chatId: string) => `/messages/${chatId}`,
+  },
 } as const;
 
 export default API_URL;

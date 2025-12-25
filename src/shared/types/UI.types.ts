@@ -94,3 +94,17 @@ export interface LanguageOption {
   value: Language;
   label: string;
 }
+
+export interface MessageInterface {
+  id: string;
+  sender: {
+    id: string;
+    username: string;
+    profile: {
+      avatar: string;
+    };
+  };
+  content: string;
+  createdAt: string;
+  isRead: boolean;
+}
