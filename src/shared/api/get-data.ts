@@ -19,17 +19,21 @@ interface RecipesResponse {
 
 interface ChatMessagesResponse {
   chats: {
-    chatWith: {
-      id: string;
-      username: string;
-      email: string;
-      profile: {
-        id: string;
-        avatar: string | null;
-        firstName: string;
-        lastName: string;
-      } | undefined;
-    } | undefined;
+    chatWith:
+      | {
+          id: string;
+          username: string;
+          email: string;
+          profile:
+            | {
+                id: string;
+                avatar: string | null;
+                firstName: string;
+                lastName: string;
+              }
+            | undefined;
+        }
+      | undefined;
     participants: UserInterface[];
     messages: {
       id: string;
@@ -115,7 +119,10 @@ export const getIsFollowing = async (
   return response.data.isFollowing;
 };
 
-export const getChatMessages = async (chatId: string, token: string):Promise<ChatMessagesResponse> => {
+export const getChatMessages = async (
+  chatId: string,
+  token: string,
+): Promise<ChatMessagesResponse> => {
   const response = await axios.get(`${BASE_URL}${API_URL.chats.byId(chatId)}`, {
     headers: {
       Authorization: `Token ${token}`,

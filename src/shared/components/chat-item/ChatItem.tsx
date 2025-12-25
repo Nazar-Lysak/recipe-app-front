@@ -24,14 +24,19 @@ const ChatItem = ({ chat }: ChatItemProps) => {
         <div className={style.header}>
           <h3 className={style.name}>{chatWith.username}</h3>
           <span className={style.time}>
-            {lastMessage?.createdAt && new DateObject(lastMessage.createdAt).format("DD MMM YYYY, HH:mm")}
+            {lastMessage?.createdAt &&
+              new DateObject(lastMessage.createdAt).format(
+                "DD MMM YYYY, HH:mm",
+              )}
           </span>
         </div>
         <div className={style.messageRow}>
           <p className={style.lastMessage}>
             {lastMessage ? lastMessage.content : "Немає повідомлень ще."}
           </p>
-          {unreadCount > 0 && <span className={style.unreadBadge}>{unreadCount}</span>}
+          {unreadCount > 0 && (
+            <span className={style.unreadBadge}>{unreadCount}</span>
+          )}
         </div>
       </div>
     </Link>

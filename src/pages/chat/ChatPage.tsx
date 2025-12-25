@@ -38,7 +38,6 @@ const tabContentAnimation = {
 
 type TabType = "Chats" | "Users";
 
-
 const ChatPage = () => {
   const { token } = useSession();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -54,14 +53,6 @@ const ChatPage = () => {
     setActiveTab(activeTab);
     setSearchParams({ tab: activeTab });
   };
-
-
-
-
-
-
-
-  
 
   return (
     <div className={style.chatPage}>
