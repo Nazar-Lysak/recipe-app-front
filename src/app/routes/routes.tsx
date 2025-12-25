@@ -4,6 +4,7 @@ import PageTransition from "../../shared/components/page-transition/PageTransiti
 import ProtectedRoutes from "../../shared/components/protected-route/ProtectedRoute";
 import GuestRoute from "../../shared/components/guest-route/GuestRoute";
 import RootLayout from "../../shared/components/root-layout/RootLayout";
+import ChatMessage from "../../pages/chat-message/ChatMessagePage";
 
 const LoginPage = lazy(() => import("../../pages/auth/LoginPage"));
 const SignupPage = lazy(() => import("../../pages/auth/SignupPage"));
@@ -56,6 +57,9 @@ const LeaveReviewPage = lazy(
 );
 const NotFoundPage = lazy(() => import("../../pages/not-found/NotFoundPage"));
 const ChatPage = lazy(() => import("../../pages/chat/ChatPage"));
+const ChatMessagePage = lazy(
+  () => import("../../pages/chat-message/ChatMessagePage"),
+);
 
 export const routes: RouteObject[] = [
   {
@@ -100,6 +104,7 @@ export const routes: RouteObject[] = [
               { path: "language-selection", Component: LanguageSettings },
               { path: "community", Component: CommunityPage },
               { path: "chat", Component: ChatPage },
+              { path: "chat/:chatId", Component: ChatMessagePage },
               { path: "categories", Component: CategoryPage },
               {
                 path: "categories/:categoryId",

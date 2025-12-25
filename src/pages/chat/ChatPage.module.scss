@@ -1,7 +1,8 @@
-@import "../../styles/variables.scss";
+@use "@/styles/variables" as *;
 
 .chatPage {
   display: block;
+  height: 100vh;
 
   img {
     width: 40px;
