@@ -17,8 +17,30 @@ interface RecipesResponse {
   recipesList: RecipeInterface[];
 }
 
+interface ChatMessagesResponse {
+  chats: {
+    chatWith: {
+      id: string;
+      username: string;
+      email: string;
+      profile: {
+        id: string;
+        avatar: string | null;
+        firstName: string;
+        lastName: string;
+      } | undefined;
+    } | undefined;
+    participants: UserInterface[];
+    messages: {
+      id: string;
+      senderId: string;
+      content: string;
+      timestamp: string;
+    }[];
+  };
+}
+
 export const getAllCategories = async (): Promise<CategoriesResponse> => {
-  //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.get<CategoriesResponse>(
     `${BASE_URL}${API_URL.categories.list}`,
   );
@@ -28,12 +50,11 @@ export const getAllCategories = async (): Promise<CategoriesResponse> => {
 export const getProfileData = async (
   token: string,
 ): Promise<FullUserDataInterface> => {
-  //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.get<FullUserDataInterface>(
     `${BASE_URL}${API_URL.profile.current}`,
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Token ${token}`,
       },
     },
   );
@@ -45,7 +66,7 @@ export const getCurrentUser = async (token: string): Promise<UserInterface> => {
     `${BASE_URL}${API_URL.user.current}`,
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Token ${token}`,
       },
     },
   );
@@ -55,7 +76,6 @@ export const getCurrentUser = async (token: string): Promise<UserInterface> => {
 export const getRecipesByCategory = async (
   categoryId: string,
 ): Promise<RecipesResponse> => {
-  //await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 секунди затримка
   const response = await axios.get<RecipesResponse>(
     `${BASE_URL}${API_URL.recipes.byCategory}?category=${categoryId}`,
   );
@@ -93,4 +113,22 @@ export const getIsFollowing = async (
     },
   );
   return response.data.isFollowing;
+};
+
+export const getChatMessages = async (chatId: string, token: string):Promise<ChatMessagesResponse> => {
+  const response = await axios.get(`${BASE_URL}${API_URL.chats.byId(chatId)}`, {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export const getChats = async (token: string) => {
+  const response = await axios.get(`${BASE_URL}/chats/`, {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
+  return response.data;
 };

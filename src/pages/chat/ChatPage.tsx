@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
 import { useSession } from "../../context/useSession";
+import { useChats } from "../../shared/hooks/queries/useChats";
 
 import style from "./ChatPage.module.scss";
 import Tabs from "../../shared/ui/tabs/Tabs";
@@ -48,20 +48,7 @@ const ChatPage = () => {
   );
   const direction = activeTab === "Chats" ? -1 : 1;
 
-  const chatsQuery = useQuery({
-    queryKey: ["chats"],
-    queryFn: async () => {
-      const response = await fetch("http://localhost:3000/chats/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    },
-  });
+  const chatsQuery = useChats(token!);
 
   const handleActiveTab = (activeTab: TabType) => {
     setActiveTab(activeTab);

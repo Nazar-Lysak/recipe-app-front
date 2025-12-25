@@ -29,6 +29,9 @@ const API_URL = {
   reviews: {
     create: (recipeId: string) => `/reviews/create/${recipeId}`,
   },
+  chats: {
+    byId: (chatId: string) => `/chats/${chatId}`,
+  },
 } as const;
 
 export default API_URL;
