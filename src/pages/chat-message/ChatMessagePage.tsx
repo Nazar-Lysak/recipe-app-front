@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import style from "./ChatMessagePage.module.scss";
-//import Avatar from '../../shared/ui/avatar/Avatar';
 import Button from "../../shared/ui/button/Button";
 
 interface Message {
@@ -11,14 +11,14 @@ interface Message {
 }
 
 const ChatMessagePage = () => {
+  console.log("ChatMessagePage rendered - UPDATED v3");
   const currentUserId = 1;
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const [isHeaderCompact, setIsHeaderCompact] = useState(false);
 
   // Dummy data
   const chatPartner = {
     id: 2,
-    name: "Maria Johnson",
+    name: "Maria Johnson TES",
     username: "mariaj",
     avatar_url: "https://i.pravatar.cc/150?img=5",
   };
@@ -62,7 +62,191 @@ const ChatMessagePage = () => {
       content: "Some cumin and a bit of paprika. It gave it a nice kick!",
       timestamp: "10:38",
     },
+    {
+      id: 7,
+      senderId: 2,
+      content: "I love paprika! Did you serve it with anything special?",
+      timestamp: "10:40",
+    },
+    {
+      id: 8,
+      senderId: 1,
+      content:
+        "Yes! I made a side of roasted vegetables. The combination was perfect.",
+      timestamp: "10:42",
+    },
+    {
+      id: 9,
+      senderId: 2,
+      content: "That sounds amazing! Can you send me your roasted veggies recipe?",
+      timestamp: "10:43",
+    },
+    {
+      id: 10,
+      senderId: 1,
+      content: "Sure! I'll share it with you right now.",
+      timestamp: "10:45",
+    },
+    {
+      id: 11,
+      senderId: 2,
+      content: "Thank you so much! I can't wait to try it.",
+      timestamp: "10:46",
+    },
+    {
+      id: 12,
+      senderId: 1,
+      content: "You're welcome! Let me know how it turns out.",
+      timestamp: "10:48",
+    },
+    {
+      id: 13,
+      senderId: 2,
+      content:
+        "Will do! By the way, have you tried that new Italian restaurant downtown?",
+      timestamp: "10:50",
+    },
+    {
+      id: 14,
+      senderId: 1,
+      content: "Not yet! Is it good?",
+      timestamp: "10:52",
+    },
+    {
+      id: 15,
+      senderId: 2,
+      content: "It's excellent! They have the best carbonara I've ever tasted.",
+      timestamp: "10:53",
+    },
+    {
+      id: 16,
+      senderId: 1,
+      content: "That sounds wonderful! We should go together sometime.",
+      timestamp: "10:55",
+    },
+    {
+      id: 17,
+      senderId: 2,
+      content: "Absolutely! How about next weekend?",
+      timestamp: "10:57",
+    },
+    {
+      id: 18,
+      senderId: 1,
+      content: "Perfect! Saturday evening works for me.",
+      timestamp: "10:58",
+    },
+    {
+      id: 19,
+      senderId: 2,
+      content: "Great! I'll make a reservation for 7 PM.",
+      timestamp: "11:00",
+    },
+    {
+      id: 20,
+      senderId: 1,
+      content: "Sounds like a plan! I'm really looking forward to it.",
+      timestamp: "11:02",
+    },
+    {
+      id: 21,
+      senderId: 2,
+      content: "Me too! Oh, and I wanted to ask - do you have any dessert recipes?",
+      timestamp: "11:05",
+    },
+    {
+      id: 22,
+      senderId: 1,
+      content: "Yes! I have an amazing chocolate lava cake recipe.",
+      timestamp: "11:07",
+    },
+    {
+      id: 23,
+      senderId: 2,
+      content: "Oh my, that's my favorite! Can you share it?",
+      timestamp: "11:08",
+    },
+    {
+      id: 24,
+      senderId: 1,
+      content: "Of course! It's surprisingly easy to make too.",
+      timestamp: "11:10",
+    },
+    {
+      id: 25,
+      senderId: 2,
+      content: "Even better! I've always been intimidated by baking.",
+      timestamp: "11:12",
+    },
+    {
+      id: 26,
+      senderId: 1,
+      content: "Don't worry, this one is foolproof. The key is the timing.",
+      timestamp: "11:14",
+    },
+    {
+      id: 27,
+      senderId: 2,
+      content: "I'll definitely try it this weekend. Any tips?",
+      timestamp: "11:16",
+    },
+    {
+      id: 28,
+      senderId: 1,
+      content: "Use good quality chocolate and don't overbake. 12 minutes max!",
+      timestamp: "11:18",
+    },
+    {
+      id: 29,
+      senderId: 2,
+      content: "Got it! I'll set a timer. What chocolate do you recommend?",
+      timestamp: "11:20",
+    },
+    {
+      id: 30,
+      senderId: 1,
+      content: "I usually use dark chocolate with 70% cocoa. It's not too sweet.",
+      timestamp: "11:22",
+    },
+    {
+      id: 31,
+      senderId: 2,
+      content: "Perfect! I have some Belgian chocolate at home.",
+      timestamp: "11:24",
+    },
+    {
+      id: 32,
+      senderId: 1,
+      content: "That'll work great! Belgian chocolate is amazing.",
+      timestamp: "11:26",
+    },
+    {
+      id: 33,
+      senderId: 2,
+      content: "I'm getting excited already! Should I serve it with anything?",
+      timestamp: "11:28",
+    },
+    {
+      id: 34,
+      senderId: 1,
+      content: "Vanilla ice cream on top is classic. Or fresh berries!",
+      timestamp: "11:30",
+    },
+    {
+      id: 35,
+      senderId: 2,
+      content: "Mmm, I love the ice cream idea. Hot and cold together!",
+      timestamp: "11:32",
+    },
+    {
+      id: 36,
+      senderId: 1,
+      content: "Exactly! The contrast is incredible. Let me know how it goes!",
+      timestamp: "11:34",
+    },
   ]);
+
+ 
 
   const [newMessage, setNewMessage] = useState("");
 
@@ -83,7 +267,7 @@ const ChatMessagePage = () => {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -91,26 +275,23 @@ const ChatMessagePage = () => {
   };
 
   useEffect(() => {
-    const container = messagesContainerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      if (container.scrollTop > 50) {
-        setIsHeaderCompact(true);
-      } else {
-        setIsHeaderCompact(false);
-      }
-    };
-
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, []);
+    if (messagesContainerRef.current) {
+      setTimeout(() => {
+        if (messagesContainerRef.current) {
+          messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+        }
+      }, 100);
+    }
+  }, [messages]);
 
   return (
     <div className={style.chatMessagePage}>
       {/* Header */}
-      <div
-        className={`${style.header} ${isHeaderCompact ? style.compact : ""}`}
+      <motion.div
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.4, ease: "easeInOut" }}
+        className={style.header}
       >
         <div className={style.userInfo}>
           <img src={chatPartner.avatar_url} alt={chatPartner.name} />
@@ -119,7 +300,7 @@ const ChatMessagePage = () => {
             <p className={style.userStatus}>@{chatPartner.username}</p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Messages */}
       <div className={style.messagesContainer} ref={messagesContainerRef}>
@@ -140,19 +321,24 @@ const ChatMessagePage = () => {
         </div>
       </div>
 
-      <div className={style.inputContainer}>
+      <motion.div 
+        className={style.inputContainer}
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.4, ease: "easeInOut" }}
+      >
         <input
           type="text"
           placeholder="Type a message..."
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyDown}
           className={style.messageInput}
         />
         <Button onClick={handleSendMessage} disabled={!newMessage.trim()}>
           Send
         </Button>
-      </div>
+      </motion.div>
     </div>
   );
 };
