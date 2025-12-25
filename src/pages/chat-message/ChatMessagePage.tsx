@@ -1,24 +1,53 @@
 import { motion } from "framer-motion";
+import DateObject from "react-date-object";
 import style from "./ChatMessagePage.module.scss";
 import ButtonIcon from "../../shared/ui/button-icon/ButtonIcon";
 import { useParams } from "react-router";
 import { useSession } from "../../context/useSession";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import { useChatMessages } from "../../shared/hooks/queries/useChatMessages";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { useState } from "react";
+import ChatIcon from "../../assets/img/svg/ChatIcon";
+
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ChatMessagePage = () => {
 
   const { chatId } = useParams();
-  const { token } = useSession();
+  const { token, user } = useSession();
   const chatMessages = useChatMessages(chatId!, token!);
+  const queryClient = useQueryClient();
+  const [newMessage, setNewMessage] = useState("");
   
   const partisapent = chatMessages?.data?.chats?.chatWith;
   const chatMessagesData = chatMessages?.data?.chats?.messages;
+  
+  const mutateMessage = useMutation({
+    mutationFn: async (content: string) => {
+      const response = await axios.post(
+        `${BASE_URL}/messages/${chatId}`,
+        { content },
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["chatMessages", chatId] });
+      setNewMessage("");
+    },
+  });
 
   const handleSendMessage = () => {
-    const trimmedMessage = 'test'
-
-    console.log(trimmedMessage)
+    const trimmedMessage = newMessage.trim();
+    if (trimmedMessage) {
+      mutateMessage.mutate(trimmedMessage);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -30,9 +59,12 @@ const ChatMessagePage = () => {
 
   if(chatMessages.isLoading){
     return <PagePrealoader variant="transparent" />;
-  }
+  } 
 
-  console.log(partisapent)
+
+
+
+  
   return (
     <div className={style.chatMessagePage}>
       {/* Header */}
@@ -46,7 +78,7 @@ const ChatMessagePage = () => {
           <img src={partisapent?.profile?.avatar || ""} alt={partisapent?.username || ""} />
           <div className={style.userDetails}>
             <h3 className={style.userName}>@{partisapent?.username}</h3>
-            <p className={style.userStatus}>@{partisapent?.email}</p>
+            <p className={style.userStatus}>{partisapent?.email}</p>
           </div>
         </div>
       </motion.div>
@@ -54,39 +86,22 @@ const ChatMessagePage = () => {
       {/* Messages */}
       <div className={style.messagesContainer}>
         <div className={style.messagesList}>
-          {
-            chatMessagesData?.length === 0 && (
-              <p>Поки немає повідомлень. Почніть розмову!</p>
-            )
-          }
-          {
-            chatMessagesData?.map((message: any) => (
-              <div
-                key={message.id}
-                className={`${style.messageWrapper} ${
-                  message.senderId === partisapent?.id ? style.other : style.own
-                }`}
-              >
-                <div className={style.message}>
-                  <p className={style.messageContent}>{message.content}</p>
-                  <span className={style.messageTime}>{message.timestamp}</span>
-                </div>
-              </div>
-            ))
-          }
-          {/* {messages.map((message) => (
+          {chatMessagesData?.length === 0 && (
+            <p>Поки немає повідомлень. Почніть розмову!</p>
+          )}
+          {chatMessagesData?.map((message: any) => (
             <div
               key={message.id}
               className={`${style.messageWrapper} ${
-                message.senderId === currentUserId ? style.own : style.other
+                user?.id !== message?.sender?.id ? style.other : style.own
               }`}
             >
               <div className={style.message}>
                 <p className={style.messageContent}>{message.content}</p>
-                <span className={style.messageTime}>{message.timestamp}</span>
+                <span className={style.messageTime}>{new DateObject(message.createdAt).format("DD MMM YYYY, HH:mm")}</span>
               </div>
             </div>
-          ))} */}
+          ))}
         </div>
       </div>
 
@@ -99,14 +114,14 @@ const ChatMessagePage = () => {
         <input
           type="text"
           placeholder="Type a message..."
-          // value={newMessage}
-          // onChange={(e) => setNewMessage(e.target.value)}
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           className={style.messageInput}
         />
         
-        <ButtonIcon onClick={handleSendMessage} disabled={false}>
-          S
+        <ButtonIcon onClick={handleSendMessage} disabled={!newMessage.trim() || mutateMessage.isPending} >
+          <ChatIcon />
         </ButtonIcon>
       </motion.div>
     </div>

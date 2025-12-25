@@ -55,6 +55,14 @@ const ChatPage = () => {
     setSearchParams({ tab: activeTab });
   };
 
+
+
+
+
+
+
+  
+
   return (
     <div className={style.chatPage}>
       <Tabs
