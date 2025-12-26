@@ -31,6 +31,7 @@ const API_URL = {
   },
   chats: {
     byId: (chatId: string) => `/chats/${chatId}`,
+    create: (userId: string) => `/chats/${userId}`,
   },
   messages: {
     send: (chatId: string) => `/messages/${chatId}`,

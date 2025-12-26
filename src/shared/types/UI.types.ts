@@ -79,6 +79,7 @@ export interface FullUserDataInterface {
   created_at: string;
   updated_at: string;
   liked_recipes: string[];
+  user?: UserInterface | undefined;
 }
 
 export type Theme = "light" | "dark" | "ocean" | "sunset";

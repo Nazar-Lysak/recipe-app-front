@@ -11,6 +11,7 @@ import { useChatMessages } from "../../shared/hooks/queries/useChatMessages";
 import { useSendMessage } from "../../shared/hooks/mutations/useSendMessage";
 import { useMarkMessagesAsRead } from "../../shared/hooks/mutations/useMarkMessagesAsRead";
 import ChatIcon from "../../assets/img/svg/ChatIcon";
+import SendMessageIcon from "../../assets/img/svg/SendMessageIcon";
 
 const ChatMessagePage = () => {
   const { chatId } = useParams();
@@ -128,7 +129,7 @@ const ChatMessagePage = () => {
           onClick={handleSendMessage}
           disabled={!newMessage.trim() || mutateMessage.isPending}
         >
-          <ChatIcon />
+          <SendMessageIcon />
         </ButtonIcon>
       </motion.div>
     </div>

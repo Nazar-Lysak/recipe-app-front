@@ -2,12 +2,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSearchParams } from "react-router";
 import { useSession } from "../../context/useSession";
 import { useChats } from "../../shared/hooks/queries/useChats";
+import { useCreateChat } from "../../shared/hooks/mutations/useCreateChat";
 
 import style from "./ChatPage.module.scss";
 import Tabs from "../../shared/ui/tabs/Tabs";
 import { useState } from "react";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import ChatItem from "../../shared/components/chat-item/ChatItem";
+import { useProfiles } from "../../shared/hooks/queries/useProfiles";
+import InputText from "../../shared/ui/input-text/InputText";
+import ChatCreateItem from "../../shared/components/chat-create-item/ChatCreateItem";
 
 const tabContentVariants = {
   initial: (direction: number) => ({
@@ -47,10 +51,16 @@ const ChatPage = () => {
   );
   const direction = activeTab === "Chats" ? -1 : 1;
   const chatsQuery = useChats(token!);
+  const usersQuery = useProfiles({ date: true });
+  const mutationCreateChat = useCreateChat(token!);
 
   const handleActiveTab = (activeTab: TabType) => {
     setActiveTab(activeTab);
     setSearchParams({ tab: activeTab });
+  };
+
+  const handleCreateChat = (userId: string) => {
+    mutationCreateChat.mutate(userId);
   };
 
   return (
@@ -83,7 +93,16 @@ const ChatPage = () => {
             {...tabContentAnimation}
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
-            Users
+            <InputText placeholder="Find user" />
+            <div>
+              {usersQuery.data?.profiles.map((profile: any) => (
+                <ChatCreateItem
+                  key={profile.id}
+                  profile={profile}
+                  handleCreateChat={handleCreateChat}
+                />
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

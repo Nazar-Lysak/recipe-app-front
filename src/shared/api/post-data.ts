@@ -162,3 +162,16 @@ export const sendMessage = async (
   );
   return response.data;
 };
+
+export const createChat = async (userId: string, token: string) => {
+  const response = await axios.post(
+    `${BASE_URL}${API_URL.chats.create(userId)}`,
+    {},
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    },
+  );
+  return response.data;
+};
