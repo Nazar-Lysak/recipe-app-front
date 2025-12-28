@@ -19,14 +19,14 @@ const onboardingSteps: OnboardingStep[] = [
     title: "Отримайте натхнення",
     description:
       "Отримуйте натхнення з нашими щоденними рекомендаціями рецептів.",
-    image: "/src/assets/img/onboarding/onboarding-1.jpg",
+    image: "/assets/img/onboarding/onboarding-1.jpg",
     buttonText: "Продовжити",
   },
   {
     id: 2,
     title: "Підвищуйте свої навички",
     description: "Вивчайте основні кулінарні техніки у власному темпі.",
-    image: "/src/assets/img/onboarding/onboarding-2.jpg",
+    image: "/assets/img/onboarding/onboarding-2.jpg",
     buttonText: "Продовжити",
   },
   {
@@ -34,7 +34,7 @@ const onboardingSteps: OnboardingStep[] = [
     title: "Ласкаво просимо",
     description:
       "Знайдіть найкращі рецепти, які може запропонувати світ, а також чудову спільноту для підвищення ваших кулінарних навичок",
-    image: "/src/assets/img/onboarding/onboarding-3.jpg",
+    image: "/assets/img/onboarding/onboarding-3.jpg",
     buttonText: "Я новачок",
     secondaryButton: "Я вже тут був",
   },
