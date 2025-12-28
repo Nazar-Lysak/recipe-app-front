@@ -12,9 +12,6 @@ const NotFoundPage = () => {
       <div className={style.content}>
         <h1 className={style.title}>{t("notFound.title")}</h1>
         <SadSmile />
-        {/* <div className={style.imageContainer}>
-          <div className={style.errorCode}>404</div>
-        </div> */}
         <h2 className={style.errorCode}>404</h2>
         <div className={style.textContent}>
           <p className={style.description}>{t("notFound.description")}</p>
