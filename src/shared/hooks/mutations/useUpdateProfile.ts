@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 interface UseUpdateProfileProps {
   token: string;
   onSuccess?: () => void;
@@ -30,7 +32,7 @@ export const useUpdateProfile = ({
   return useMutation({
     mutationFn: async (data: UpdateProfileData) => {
       const response = await axios.put(
-        `http://localhost:3000/user/current`,
+        `${BASE_URL}/user/current`,
         data,
         {
           headers: {

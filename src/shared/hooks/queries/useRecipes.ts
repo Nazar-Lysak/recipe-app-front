@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 interface UseRecipesProps {
   activeCategory?: string;
   limit?: number;
@@ -50,7 +52,7 @@ export const useRecipes = ({
       }
 
       const response = await fetch(
-        `http://localhost:3000/recipe?${params.toString()}`,
+        `${BASE_URL}/recipe?${params.toString()}`,
       );
 
       if (!response.ok) {

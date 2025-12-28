@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 interface UseProfilesParams {
   top?: boolean;
   limit?: number;
@@ -34,7 +36,7 @@ export const useProfiles = ({
       }
 
       const response = await fetch(
-        `http://localhost:3000/user/profile?${useParams.toString()}`,
+        `${BASE_URL}/user/profile?${useParams.toString()}`,
       );
 
       if (!response.ok) {

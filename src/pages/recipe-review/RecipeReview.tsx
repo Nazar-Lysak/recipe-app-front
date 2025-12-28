@@ -7,6 +7,9 @@ import Comment from "../../shared/components/comment/Comment";
 
 import style from "../PageStyles.module.scss";
 import { useQuery } from "@tanstack/react-query";
+
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const RecipeReviewPage = () => {
   const { recipeId } = useParams();
 
@@ -18,7 +21,7 @@ const RecipeReviewPage = () => {
     queryKey: ["recipe-reviews", recipeId],
     queryFn: async () => {
       const response = await fetch(
-        `http://localhost:3000/reviews/recipe-reviews/${recipeId}`,
+        `${BASE_URL}/reviews/recipe-reviews/${recipeId}`,
       );
       return response.json();
     },

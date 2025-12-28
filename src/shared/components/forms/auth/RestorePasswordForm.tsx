@@ -11,6 +11,8 @@ import CheckIcon from "../../../../assets/img/svg/CheckIcon";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 interface PasswordInterface {
   pass1: string;
   pass2: string;
@@ -30,7 +32,7 @@ const RestorePasswordForm = () => {
     { token: string; password: string }
   >({
     mutationFn: async (data: { token: string; password: string }) => {
-      return axios.post("http://localhost:3000/user/restore-password", data);
+      return axios.post(`${BASE_URL}/user/restore-password`, data);
     },
     onSuccess: (_) => {},
     onError: (error) => {
