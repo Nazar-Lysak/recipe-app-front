@@ -31,15 +31,11 @@ export const useUpdateProfile = ({
 }: UseUpdateProfileProps) => {
   return useMutation({
     mutationFn: async (data: UpdateProfileData) => {
-      const response = await axios.put(
-        `${BASE_URL}/user/current`,
-        data,
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
+      const response = await axios.put(`${BASE_URL}/user/current`, data, {
+        headers: {
+          Authorization: `Token ${token}`,
         },
-      );
+      });
       return response.data;
     },
     onSuccess: () => {

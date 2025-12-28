@@ -2,7 +2,8 @@
   padding: 0 15px;
   max-height: 100svh;
   overflow: auto;
-  // overflow: hidden;
+  max-width: 991px;
+  margin: 0 auto;
 }
 
 .wrapperAuthenticated {

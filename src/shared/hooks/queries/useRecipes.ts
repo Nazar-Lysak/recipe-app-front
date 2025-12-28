@@ -51,9 +51,7 @@ export const useRecipes = ({
         params.append("uniqueAuthors", "true");
       }
 
-      const response = await fetch(
-        `${BASE_URL}/recipe?${params.toString()}`,
-      );
+      const response = await fetch(`${BASE_URL}/recipe?${params.toString()}`);
 
       if (!response.ok) {
         throw new Error("Failed to fetch recipes");

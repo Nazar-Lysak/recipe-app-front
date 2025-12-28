@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import RecipeCardExpanded from "../../shared/components/recipe-card-expanded/RecipeCardExpanded";
 import { useRecipes } from "../../shared/hooks/queries/useRecipes";
+import style from "./CommunityPage.module.scss";
 
 const tabContentVariants = {
   initial: (direction: number) => ({
@@ -103,7 +104,7 @@ const CommunityPage = () => {
   const direction = activeCategory === "1" ? -1 : 1;
 
   return (
-    <div>
+    <div className={style.CommunityPage}>
       <MenuTop
         elements={elements}
         handleCategoryClick={handleCategoryClick}
@@ -115,14 +116,11 @@ const CommunityPage = () => {
           key={activeCategory}
           custom={direction}
           {...tabContentAnimation}
+          className={style.tabContent}
         >
-          {allRecipes.length > 0 && (
-            <div>
-              {allRecipes.map((recipe: any) => (
-                <RecipeCardExpanded key={recipe.id} recipe={recipe} />
-              ))}
-            </div>
-          )}
+          {allRecipes.map((recipe: any) => (
+            <RecipeCardExpanded key={recipe.id} recipe={recipe} />
+          ))}
 
           <div ref={observerTarget} style={{ height: "20px" }} />
 

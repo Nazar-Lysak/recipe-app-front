@@ -19,7 +19,7 @@ const MyRecipesGallery = () => {
   });
 
   return (
-    <div className={style.wrapper}>
+    <div className={style.MyRecipesGallery}>
       <h2 className={style.title}>{t("yourRecipes")}</h2>
       {recipes.isLoading && <p>{t("loading")}</p>}
       {recipes.isError && <p>{t("error")}</p>}
@@ -31,7 +31,15 @@ const MyRecipesGallery = () => {
         </div>
       )}
       {recipes.data && recipes.data.recipesList.length > 0 && (
-        <Swiper slidesPerView={2.3} spaceBetween={15}>
+        <Swiper
+          slidesPerView={2.3}
+          spaceBetween={15}
+          breakpoints={{
+            768: {
+              slidesPerView: 3,
+            },
+          }}
+        >
           <SwiperSlide className={style.swiperSlide}>
             <Link to="/create-recipe" className={style.createRecipeCard}>
               <div className={style.createRecipeContent}>

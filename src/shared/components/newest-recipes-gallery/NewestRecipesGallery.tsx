@@ -21,7 +21,15 @@ const NewestRecipesGallery = () => {
       {recipes.isLoading && <p>{t("loading")}</p>}
       {recipes.isError && <p>{t("error")}</p>}
       {recipes.data && recipes.data.recipesList.length > 0 && (
-        <Swiper slidesPerView={1.2} spaceBetween={24}>
+        <Swiper
+          slidesPerView={1.2}
+          spaceBetween={24}
+          breakpoints={{
+            768: {
+              slidesPerView: 3,
+            },
+          }}
+        >
           {recipes.data.recipesList.map((recipe: RecipeInterface) => (
             <SwiperSlide key={recipe.id} className={style.swiperSlide}>
               <Link to={`/recipe/${recipe.id}`}>
