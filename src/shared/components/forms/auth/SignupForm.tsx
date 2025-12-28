@@ -20,7 +20,7 @@ const SignupForm = () => {
 
   const signupMutation = useMutation({
     mutationFn: signup,
-    onSuccess: (data) => {
+    onSuccess: (_) => {
       // console.log("Signup success:", data);
       // Тут можна зберегти токен і перенаправити користувача
       // navigate("/");
