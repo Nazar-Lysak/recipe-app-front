@@ -6,7 +6,7 @@ import { useCreateChat } from "../../shared/hooks/mutations/useCreateChat";
 
 import style from "./ChatPage.module.scss";
 import Tabs from "../../shared/ui/tabs/Tabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PagePrealoader from "../../shared/ui/page-prealoader/PagePrealoader";
 import ChatItem from "../../shared/components/chat-item/ChatItem";
 import { useProfiles } from "../../shared/hooks/queries/useProfiles";
@@ -49,10 +49,24 @@ const ChatPage = () => {
   const [activeTab, setActiveTab] = useState<TabType>(
     (searchParams.get("tab") as TabType) || "Chats",
   );
+  const [searchUserQuery, setSearchUserQuery] = useState<string>("");
+  const [debouncedUserQuery, setDebouncedUserQuery] = useState<string>("");
+
   const direction = activeTab === "Chats" ? -1 : 1;
   const chatsQuery = useChats(token!);
-  const usersQuery = useProfiles({ date: true });
+  const usersQuery = useProfiles({ 
+    date: true, 
+    query: debouncedUserQuery.length >= 2 ? debouncedUserQuery : undefined 
+  });
   const mutationCreateChat = useCreateChat(token!);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedUserQuery(searchUserQuery);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchUserQuery]);
 
   const handleActiveTab = (activeTab: TabType) => {
     setActiveTab(activeTab);
@@ -61,6 +75,10 @@ const ChatPage = () => {
 
   const handleCreateChat = (userId: string) => {
     mutationCreateChat.mutate(userId);
+  };
+
+  const handleFindUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchUserQuery(e.target.value);
   };
 
   return (
@@ -93,7 +111,11 @@ const ChatPage = () => {
             {...tabContentAnimation}
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
-            <InputText placeholder="Find user" />
+            <InputText 
+              placeholder="Find user" 
+              onChange={handleFindUser}
+              value={searchUserQuery}
+            />
             <div>
               {usersQuery.data?.profiles.map((profile: any) => (
                 <ChatCreateItem

@@ -40,15 +40,18 @@ type TabType = "recipes" | "users";
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const initialTab = (searchParams.get("tab") as TabType) || "recipes";
+  const initialQuery = searchParams.get("query") || "";
+  
   const [searchRecipeQuery, setSearchRecipeQuery] = useState<string>(
-    searchParams.get("query") || "",
+    initialTab === "recipes" ? initialQuery : "",
   );
-  const [searchUserQuery, setSearchUserQuery] = useState<string>("");
+  const [searchUserQuery, setSearchUserQuery] = useState<string>(
+    initialTab === "users" ? initialQuery : "",
+  );
   const [debouncedRecipeQuery, setDebouncedRecipeQuery] = useState<string>(searchRecipeQuery);
   const [debouncedUserQuery, setDebouncedUserQuery] = useState<string>(searchUserQuery);
-  const [activeTab, setActiveTab] = useState<TabType>(
-    (searchParams.get("tab") as TabType) || "recipes",
-  );
+  const [activeTab, setActiveTab] = useState<TabType>(initialTab);
 
   useEffect(() => {
     const tabFromUrl = (searchParams.get("tab") as TabType) || "recipes";
@@ -84,7 +87,7 @@ const SearchPage = () => {
 
   const handleActiveTab = (activeTab: TabType) => {
     setActiveTab(activeTab);
-    setSearchParams({ tab: activeTab });
+    setSearchParams({ tab: activeTab, query: activeTab === "recipes" ? searchRecipeQuery : searchUserQuery });
   };
 
   const handleFindString = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,6 +97,7 @@ const SearchPage = () => {
 
   const handleFindUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchUserQuery(e.target.value);
+    setSearchParams({ query: e.target.value, tab: activeTab });
   };
 
   return (
