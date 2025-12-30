@@ -40,10 +40,12 @@ type TabType = "recipes" | "users";
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState<string>(
+  const [searchRecipeQuery, setSearchRecipeQuery] = useState<string>(
     searchParams.get("query") || "",
   );
-  const [debouncedQuery, setDebouncedQuery] = useState<string>(searchQuery);
+  const [searchUserQuery, setSearchUserQuery] = useState<string>("");
+  const [debouncedRecipeQuery, setDebouncedRecipeQuery] = useState<string>(searchRecipeQuery);
+  const [debouncedUserQuery, setDebouncedUserQuery] = useState<string>(searchUserQuery);
   const [activeTab, setActiveTab] = useState<TabType>(
     (searchParams.get("tab") as TabType) || "recipes",
   );
@@ -55,16 +57,30 @@ const SearchPage = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedQuery(searchQuery);
+      setDebouncedRecipeQuery(searchRecipeQuery);
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [searchQuery]);
+  }, [searchRecipeQuery]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedUserQuery(searchUserQuery);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchUserQuery]);
 
   const direction = activeTab === "recipes" ? -1 : 1;
 
-  const users = useProfiles({ date: true });
-  const recipes = useRecipes({ activeCategory: "1", searchString: debouncedQuery });
+  const users = useProfiles({ 
+    date: true, 
+    query: debouncedUserQuery.length >= 2 ? debouncedUserQuery : undefined 
+  });
+  const recipes = useRecipes({ 
+    activeCategory: "1", 
+    searchString: debouncedRecipeQuery.length >= 2 ? debouncedRecipeQuery : undefined 
+  });
 
   const handleActiveTab = (activeTab: TabType) => {
     setActiveTab(activeTab);
@@ -72,9 +88,13 @@ const SearchPage = () => {
   };
 
   const handleFindString = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+    setSearchRecipeQuery(e.target.value);
     setSearchParams({ query: e.target.value, tab: activeTab });
-  }
+  };
+
+  const handleFindUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchUserQuery(e.target.value);
+  };
 
   return (
     <div className={style.searchPage}>
@@ -97,7 +117,7 @@ const SearchPage = () => {
             <InputText 
               placeholder="Пошук рецептів" 
               onChange={e => handleFindString(e)} 
-              value={searchQuery}
+              value={searchRecipeQuery}
             />
             {recipes.data && recipes.data.recipesList.length === 0 && (
               <p>Рецепти не знайдені</p>
@@ -111,7 +131,14 @@ const SearchPage = () => {
             {...tabContentAnimation}
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
-            <InputText placeholder="Пошук користувачів" />
+            <InputText 
+              placeholder="Пошук користувачів" 
+              onChange={handleFindUser}
+              value={searchUserQuery}
+            />
+            {users.data && users.data.profiles.length === 0 && (
+              <p>Користувачі не знайдені</p>
+            )}
             {users.data?.profiles?.map((user: any) => (
               <UserListItem key={user.id} profile={user} />
             ))}

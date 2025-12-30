@@ -7,6 +7,7 @@ interface UseProfilesParams {
   limit?: number;
   offset?: number;
   date?: boolean;
+  query?: string;
 }
 
 export const useProfiles = ({
@@ -14,11 +15,16 @@ export const useProfiles = ({
   limit,
   offset,
   date,
+  query,
 }: UseProfilesParams) => {
   return useQuery({
-    queryKey: ["all-profiles"],
+    queryKey: ["all-profiles", query, top, limit, offset, date],
     queryFn: async () => {
       const useParams = new URLSearchParams();
+
+      if( query ) {
+        useParams.append("search", query);
+      }
 
       if (date) {
         useParams.append("date", "true");
