@@ -9,6 +9,7 @@ interface UseRecipesProps {
   username?: string;
   uniqueAuthors?: boolean;
   likedBy?: string;
+  searchString?: string;
 }
 
 export const useRecipes = ({
@@ -18,9 +19,10 @@ export const useRecipes = ({
   username,
   uniqueAuthors,
   likedBy,
+  searchString,
 }: UseRecipesProps) => {
   return useQuery({
-    queryKey: ["recipes", activeCategory, offset, username, likedBy],
+    queryKey: ["recipes", activeCategory, offset, username, likedBy, searchString],
     queryFn: async () => {
       const params = new URLSearchParams();
 
@@ -49,6 +51,10 @@ export const useRecipes = ({
 
       if (uniqueAuthors) {
         params.append("uniqueAuthors", "true");
+      }
+
+      if (searchString) {
+        params.append("search", searchString);
       }
 
       const response = await fetch(`${BASE_URL}/recipe?${params.toString()}`);

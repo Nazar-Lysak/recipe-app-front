@@ -40,6 +40,10 @@ type TabType = "recipes" | "users";
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState<string>(
+    searchParams.get("query") || "",
+  );
+  const [debouncedQuery, setDebouncedQuery] = useState<string>(searchQuery);
   const [activeTab, setActiveTab] = useState<TabType>(
     (searchParams.get("tab") as TabType) || "recipes",
   );
@@ -49,15 +53,28 @@ const SearchPage = () => {
     setActiveTab(tabFromUrl);
   }, [searchParams]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   const direction = activeTab === "recipes" ? -1 : 1;
 
   const users = useProfiles({ date: true });
-  const recipes = useRecipes({ activeCategory: "1" });
+  const recipes = useRecipes({ activeCategory: "1", searchString: debouncedQuery });
 
   const handleActiveTab = (activeTab: TabType) => {
     setActiveTab(activeTab);
     setSearchParams({ tab: activeTab });
   };
+
+  const handleFindString = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setSearchParams({ query: e.target.value, tab: activeTab });
+  }
 
   return (
     <div className={style.searchPage}>
@@ -77,7 +94,14 @@ const SearchPage = () => {
             {...tabContentAnimation}
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
-            <InputText placeholder="Пошук рецептів" />
+            <InputText 
+              placeholder="Пошук рецептів" 
+              onChange={e => handleFindString(e)} 
+              value={searchQuery}
+            />
+            {recipes.data && recipes.data.recipesList.length === 0 && (
+              <p>Рецепти не знайдені</p>
+            )}
             <RecipesGrid recipes={recipes.data?.recipesList || []} />
           </motion.div>
         ) : (
